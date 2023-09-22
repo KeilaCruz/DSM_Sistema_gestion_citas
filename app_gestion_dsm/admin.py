@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Paciente
+from .models import Paciente,Cita
 
 # Register your models here.
 admin.site.register(Paciente)
-# Register your models here.
+admin.site.register(Cita)

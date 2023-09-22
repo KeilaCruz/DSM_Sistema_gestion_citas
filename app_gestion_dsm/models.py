@@ -24,4 +24,15 @@ class Paciente(models.Model):
     numero_personas_vive = models.PositiveIntegerField(default="")
     
     def __str__(self):
-        return self.CURP
+        return self.CURP    
+
+class Cita(models.Model):
+    idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    fecha_cita = models.DateField(default="")
+    hora_cita = models.TimeField(default="")
+    #idEspecialidad = models.ForeignKey(Especialidad,default="")
+    estado = models.BooleanField(default=False)
+    #idUsuario quien registro la cita
+    
+    def __str__(self):
+        return self.estado
