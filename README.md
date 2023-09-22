@@ -16,3 +16,18 @@
  # Ejecutar el codigo creado
 14. python manage.py migrate NOMBRE_DELA_APP
 15. python manage.py createsuperuser
+16. pip install coreapi
+
+# Comando para el Vite
+1. La versión de Node debe ser mayor a la 16, se verifica con el comando node --version
+2. Iniciamos con npm create vite
+3. Coloca nombre al projecto
+4. Selecciona React
+5. Selecciona JavaScript
+6. Cd “nombre del proyecto”
+7. Npm install
+8. Npm run dev
+9. Instalar todos estos módulos
+10. npm i react-router-dom react-hot-toast axios react-hook-form
+11. npm install prop-types
+
