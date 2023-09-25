@@ -35,7 +35,7 @@ class Cita(models.Model):
     estado = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.estado
+        return self.idPaciente
 
 
 class Especialidad(models.Model):
@@ -71,6 +71,12 @@ class HistoriaNutricion(models.Model):
      consume_alcohol = models.BooleanField(default=False)
      consume_tabaco = models.BooleanField(default=False)
      consume_droga = models.BooleanField(default=False)
+     numero_gestas = models.PositiveIntegerField(default="")
+     numero_partos_cesarea = models.PositiveIntegerField(default="")
+     numero_abortos = models.PositiveIntegerField(default="")
+     actualmente_lactando = models.BooleanField(default=False)
+     FUM = models.DateField(default="")
+     presenta_menopausia = models.BooleanField(default="")
      frecuencia_cereales = models.CharField(max_length=5,default="")
      frecuencia_frutas = models.CharField(max_length=5,default="")
      frecuencia_verduras = models.CharField(max_length=5,default="")
@@ -88,5 +94,6 @@ class HistoriaNutricion(models.Model):
      litro_consume_cafe = models.DecimalField(max_digits=4,decimal_places=2,default="")
      alimentos_causan_malestar = models.TextField(default="")
      tipo_grasa_preparar_alimentos = models.CharField(max_length=18,default="")
-     
+     diagnostico_nutricio = models.TextField(default="")
+     tratamiento_nutricional = models.TextField(default="")
      
