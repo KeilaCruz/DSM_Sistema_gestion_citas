@@ -5,4 +5,4 @@ const pacienteAPI = axios.create({
 })
 
 export const getAllPacientes = () => pacienteAPI.get('/')
-export const regitrarPaciente = (paciente) => pacienteAPI.post('/', paciente)
+export const registrarPaciente = (paciente) => pacienteAPI.post('/', paciente)

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllPacientes } from '../api/Pacientes.api'
-
+import {PacienteCard} from './PacienteCard'
 export function GetAllPacientes() {
     const [pacientes, setPacientes] = useState([])
 
@@ -15,11 +15,7 @@ export function GetAllPacientes() {
     return (
         <>
             {pacientes.map(paciente => (
-                <div key={paciente.id}>
-                    <h1>{paciente.id}</h1>
-                    <p>{paciente.nombre}</p>
-                    <p>{paciente.apePaterno}</p>
-                </div>
+                <PacienteCard paciente={paciente} key={paciente.id}/>
             ))}
         </>
     )

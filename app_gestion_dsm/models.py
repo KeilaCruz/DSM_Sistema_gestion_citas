@@ -19,9 +19,9 @@ class Paciente(models.Model):
     derecho_habiencia = models.CharField(max_length=9, default="")
     unidad_salud = models.CharField(max_length=150, default="")
     ultima_visita_medico = models.DateField(null=True,default=None)
-    programa_gobierno_federal = models.BooleanField(default=False)
-    programa_gobierno_estatal = models.BooleanField(default=False)
-    programa_gobierno_municipal = models.BooleanField(default=False)
+    #programa_gobierno_federal = models.BooleanField(default=False)
+    #programa_gobierno_estatal = models.BooleanField(default=False)
+    #programa_gobierno_municipal = models.BooleanField(default=False)
     numero_personas_vive = models.PositiveIntegerField(default="")
 
     def __str__(self):
