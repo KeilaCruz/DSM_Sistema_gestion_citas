@@ -1,9 +1,12 @@
 import { useForm } from 'react-hook-form'
-import {registrarPaciente} from '../api/Pacientes.api'
+import {registrarPaciente, eliminarPaciente} from '../api/Pacientes.api'
+import { useParams } from 'react-router-dom'
 
 export function AddPaciente() {
     const { register, handleSubmit} = useForm()
-
+    const param = useParams();
+    const idPaciente = param.id
+    console.log(idPaciente)
     const onSubmit = handleSubmit(async(data) => { 
         data.edad = parseInt(data.edad)
         data.numero_exterior = parseInt(data.numero_exterior)
@@ -48,6 +51,14 @@ export function AddPaciente() {
                 <input type="number" placeholder="Cuantas personas vive con usted" {...register("numero_personas_vive", {required:true})}/>
                 <button>Guardar</button>
             </form>
+            <button onClick={async ()=>{
+                const confirm = window.confirm("Estas seguro de eliminar")
+                if(confirm){
+                    const res = await eliminarPaciente(idPaciente)
+                    console.log(res)
+                }
+            }}>
+                Eliminar</button>
         </div>
     )
 }

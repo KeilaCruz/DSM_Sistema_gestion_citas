@@ -6,3 +6,4 @@ const pacienteAPI = axios.create({
 
 export const getAllPacientes = () => pacienteAPI.get('/')
 export const registrarPaciente = (paciente) => pacienteAPI.post('/', paciente)
+export const eliminarPaciente = (idPaciente) => pacienteAPI.delete(`/${idPaciente}`)

@@ -32,9 +32,9 @@ class Cita(models.Model):
     idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     fecha_cita = models.DateField(null=True,default=None)
     hora_cita = models.TimeField(default="")
-    # idEspecialidad = models.ForeignKey(Especialidad,default="")
-    estado = models.BooleanField(default=False)
-
+    especialidad = models.CharField(max_length=12,default="")
+    #estado = models.BooleanField(default=False)
+    #idUsuario
     def __str__(self):
         return self.idPaciente
 
