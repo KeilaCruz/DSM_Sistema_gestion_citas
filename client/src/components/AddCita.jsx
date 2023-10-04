@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form"
-import { agregarCita } from "../api/Cita.api"
+import { addCita } from "../api/Cita.api"
 
 export function AddCita() {
     const { register, handleSubmit } = useForm()
     const onSubmit = handleSubmit(async (data) => {
-        const res = await agregarCita(data);
+        const res = await addCita(data);
         data.idPaciente = parseInt(data.idPaciente)
         console.log(data)
         console.log(res)
