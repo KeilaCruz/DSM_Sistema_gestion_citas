@@ -1,6 +1,6 @@
 import { AddHistorialNutricion } from "../components/AddHistorialNutricion";
 
-export function HistorialNutricionPage() {
+export function HistoriaNutricionForm() {
     return (
         <>
             <AddHistorialNutricion />
