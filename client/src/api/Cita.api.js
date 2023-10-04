@@ -5,3 +5,4 @@ const citaAPI = axios.create({
 })
 export const getAllCitas = () => citaAPI.get('/')
 export const addCita = (cita) => citaAPI.post('/',cita)
+export const deleteCita = (idCita) => citaAPI.delete(`${idCita}`) 

@@ -1,11 +1,16 @@
 import { useForm } from "react-hook-form"
+import { addHistoriaNutricion } from "../api/Nutricion.api"
 
 export function AddHistorialNutricion() {
     const { register, handleSubmit } = useForm()
-
+    const onSubmit = handleSubmit(async (data) => {
+        const res = await addHistoriaNutricion(data);
+        console.log(data)
+        console.log(res)
+    })
     return (
         <>
-            <form>
+            <form onSubmit={onSubmit}>
                 <textarea placeholder="Motivo de consulta" {...register("motivo_consulta", { required: true })}></textarea>
                 <label>AHF</label>
                 <label>Diabetes</label>
@@ -87,7 +92,7 @@ export function AddHistorialNutricion() {
                     <input type="radio" id="consume-farmaco-no" name="option-consume-farmaco" value={false} {...register("consume_farmaco_alergia", { required: true })} />
                 </label>
                 <input type="text" placeholder="¿Cuál" {...register("cual_alergia_farmaco", { required: true })} />
-                <input type="date" placeholder="¿Desde cuándo?" {...register("desde_cuando_farmaco", { required: true })} />
+                <input type="text" placeholder="¿Desde cuándo?" {...register("desde_cuando_farmaco", { required: true })} />
                 <label>Realiza actividad fisica</label>
                 <label for="actividad-fisica-si">Si
                     <input type="radio" id="actividad-fisica-si" name="option-actividad-fisica" value={true} {...register("realiza_actividad_fisica", { required: true })} />
@@ -130,10 +135,10 @@ export function AddHistorialNutricion() {
                 </label>
                 <input type="date" placeholder="Ultima menstruación" {...register("fecha_ultima_menstruacion")} />
                 <label>Presenta menoupasia</label>
-                <label for="menoupasia-si">Si
+                <label for="menopausia-si">Si
                     <input type="radio" id="menopausia-si" name="option-menopausia" value={true} {...register("presenta_menoupasia")} />
                 </label>
-                <label for="menoupasia-no">No
+                <label for="menopausia-no">No
                     <input type="radio" id="menopausia-no" name="option-menopausia" value={false} {...register("presenta_menoupasia")} />
                 </label>
                 <input type="text" placeholder="Frecuencia de cereales" {...register("frecuencia_cereales", { required: true })} />
@@ -143,10 +148,10 @@ export function AddHistorialNutricion() {
                 <input type="text" placeholder="Frecuencia de carne roja" {...register("frecuencia_carne_roja", { required: true })} />
                 <input type="text" placeholder="Frecuencia de pollo" {...register("frecuencia_pollo", { required: true })} />
                 <input type="text" placeholder="Frecuencia de lacteos" {...register("frecuencia_lacteos", { required: true })} />
-                <input type="text" placeholder="Frecuencia de lacteos" {...register("frecuencia_leguminosas", { required: true })} />
-                <input type="text" placeholder="Frecuencia de lacteos" {...register("frecuencia_azucar", { required: true })} />
-                <input type="text" placeholder="Frecuencia de lacteos" {...register("frecuencia_grasas", { required: true })} />
-                <input type="text" placeholder="Frecuencia de lacteos" {...register("frecuencia_pescado", { required: true })} />
+                <input type="text" placeholder="Frecuencia de leguminosas" {...register("frecuencia_leguminosas", { required: true })} />
+                <input type="text" placeholder="Frecuencia de azucar" {...register("frecuencia_azucar", { required: true })} />
+                <input type="text" placeholder="Frecuencia de grasas" {...register("frecuencia_grasas", { required: true })} />
+                <input type="text" placeholder="Frecuencia de pescado" {...register("frecuencia_pescado", { required: true })} />
                 <input type="number" placeholder="¿Cuantas veces come?" {...register("cuantas_veces_come", { required: true })} />
                 <input type="text" placeholder="¿Quién prepara los alimentos?" {...register("quien_prepara_alimentos", { required: true })} />
                 <input type="number" placeholder="Litros de agua que consume" step="0.0" {...register("litro_consume_agua", { required: true })} />
@@ -156,6 +161,7 @@ export function AddHistorialNutricion() {
                 <input type="text" placeholder="Tipo de grasa para prepara alimentos" {...register("tipo_grasa_preparar_alimentos", { required: true })} />
                 <textarea placeholder="Diagnostico nutricional" {...register("diagnostico_nutricio", { required: true })} ></textarea>
                 <textarea placeholder="Tratamiento nutricional" {...register("tratamiento_nutricional", { required: true })} ></textarea>
+                <button>Guardar</button>
             </form>
         </>
     )
