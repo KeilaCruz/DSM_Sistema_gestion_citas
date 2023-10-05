@@ -31,19 +31,20 @@ class Paciente(models.Model):
 class Rol(models.Model):
     nombre_rol = models.CharField(max_length=30, default="")
     descripcion = models.TextField(default="")
+    def __str__(self):
+        return self.nombre_rol
     
 class Usuario(models.Model):
     email = models.EmailField(max_length=60, default="")
     password = models.CharField(max_length=60, default="")
-    rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
-
-class Especialista(models.Model):
     nombre = models.CharField(max_length=50, default="")
     ape_paterno = models.CharField(max_length=30, default="")
     ape_materno = models.CharField(max_length=30, default="")
-    telefono =models.SmallIntegerField(default="")
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
+    rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.email
+
+    
 class Hoja_evaluacion_clinica(models.Model):
     fecha_revision = models.DateField(default=datetime.date.today)
     tension_arterial = models.PositiveSmallIntegerField(default="")
@@ -56,42 +57,31 @@ class Hoja_evaluacion_clinica(models.Model):
     peso = models.DecimalField(max_digits=5, decimal_places=2, default="")
     talla = models.DecimalField(max_digits=5, decimal_places=2, default="")
     cintura = models.DecimalField(max_digits=5, decimal_places=2, default="")
-    especialista = models.CharField(max_length=50, default="")
     nota_medica = models.TextField(default="")
-    archivo_medico = models.FileField(upload_to='archivos_medicos/', null=True, blank=True)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    especialista = models.ForeignKey(Especialista, on_delete=models.CASCADE)
-    especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
-    
-    
-    def __str__(self):
-        return 'Hoja de evaluacion clinica de ' + self.paciente.nombre + ' ' + self.paciente.apePaterno + ' ' + self.paciente.apeMaterno
-    
-   
-
-class Usuario(models.Model):
-    email = models.EmailField(max_length=60, default="")
-    password = models.CharField(max_length=60, default="")
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
+    """ archivo_medico = models.FileField(upload_to='archivos_medicos/', null=True, blank=True)    """
+    def __str__(self):
+        return self.fecha_revision
     
-
-    
-        
 class Nota_Enfermeria(models.Model):
     
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
     
     sexo = models.CharField(max_length=20, default="")
     fecha = models.DateField(default=datetime.date.today)
     
     madre_viva = models.BooleanField(default=False)
-    madre_finada = models.CharField(max_length=50, default="")
+    madre_finada = models.CharField(max_length=50, default="", null=True, blank=True)
     padre_vivo = models.BooleanField(default=False)
-    padre_finado = models.CharField(max_length=50, default="")
+    padre_finado = models.CharField(max_length=50, default="", null=True, blank=True)
     hermano_vivo = models.BooleanField(default=False)
-    hermano_finado = models.CharField(max_length=50, default="")
+    hermano_finado = models.CharField(max_length=50, default="", null=True, blank=True)
     hijos_vivos = models.BooleanField(default=False)
-    hijos_finados = models.CharField(max_length=50, default="")
+    hijos_finados = models.CharField(max_length=50, default="", null=True, blank=True)
     
     agudeza_visual = models.CharField(max_length=50, default="")
     hiper_tension=models.CharField(max_length=50, default="")
@@ -123,14 +113,14 @@ class Nota_Enfermeria(models.Model):
     
     edad_menarca = models.PositiveSmallIntegerField(default="", null=True, blank=True)
     frecuencia_duracion =models.PositiveSmallIntegerField(default="", null=True, blank=True)
-    ultima_menstruacion = models.DateField(default=datetime.date.today, null=True, blank=True)
+    ultima_menstruacion = models.CharField(max_length=50, default="", null=True, blank=True)
     num_embarazos = models.PositiveSmallIntegerField(default="", null=True, blank=True)
     num_partos = models.PositiveSmallIntegerField(default="", null=True, blank=True)
     num_cesareas = models.PositiveSmallIntegerField(default="", null=True, blank=True)
     num_abortos = models.PositiveSmallIntegerField(default="", null=True, blank=True)
-    ultimo_parto = models.DateField(default=datetime.date.today, null=True, blank=True)
-    ultimo_aborto = models.DateField(default=datetime.date.today, null=True, blank=True)
-    planificacion_familiar = models.BooleanField(default=False, null=True, blank=True)
+    ultimo_parto = models.CharField(max_length=50, default="", null=True, blank=True)
+    ultimo_aborto = models.CharField(max_length=50, default="", null=True, blank=True)
+    planificacion_familiar = models.BooleanField(default=False)
     metodo_planificacion = models.CharField(max_length=50, default="", null=True, blank=True)
     
     traumatismos = models.CharField(max_length=70, default="")
@@ -168,3 +158,6 @@ class Nota_Enfermeria(models.Model):
     antidoping = models.CharField(max_length=50, default="")
     examen_orina = models.CharField(max_length=50, default="")
     diagnostico = models.TextField(default="")
+    
+    def __str__(self):
+        return self.fecha
