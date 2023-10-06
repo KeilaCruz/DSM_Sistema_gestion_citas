@@ -1,13 +1,22 @@
 from rest_framework import serializers
-from .models import Paciente, Cita, HistoriaNutricion
-from .models import Paciente, Hoja_evaluacion_clinica, Rol, Usuario, Nota_Enfermeria, Prueba
+from .models import Paciente,  Cita, HistoriaNutricion, Hoja_evaluacion_clinica, Rol, Usuario, Nota_Enfermeria, Prueba
 
 
 class PacienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paciente
         fields = "__all__"
-        
+
+
+class CitaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cita
+        fields = "__all__"
+
+class HistoriaNutricionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HistoriaNutricion
+        fields = "__all__"
 class HojaClinicaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hoja_evaluacion_clinica
@@ -23,8 +32,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
         model = Usuario
         fields = "__all__"
         
-
-        
+  
 class NotaEnfermeriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nota_Enfermeria
