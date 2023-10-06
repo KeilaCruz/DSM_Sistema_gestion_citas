@@ -5,3 +5,4 @@ from .models import Paciente,Cita, HistoriaNutricion
 admin.site.register(Paciente)
 admin.site.register(Cita)
 admin.site.register(HistoriaNutricion)
+admin.site.register(Hoja_evaluacion_clinica)
