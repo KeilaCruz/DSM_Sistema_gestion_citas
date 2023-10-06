@@ -6,6 +6,7 @@ import {CrearUsuario} from './pages/CrearUsuario';
 import { CrearRol } from "./pages/CrearRol";
 import { CrearHojaEvaluacion } from "./pages/CrearHojaEvaluacion";
 import { CrearNotaEnfermeria } from "./pages/CrearNotaEnfermeria";
+import { CrearPrueba } from "./pages/CrearPrueba";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -21,6 +22,7 @@ function App(){
         <Route path="/roles" element={<CrearRol />} />
         <Route path="/hoja-evaluacion" element={<CrearHojaEvaluacion />} />
         <Route path="/nota-enfermeria" element={<CrearNotaEnfermeria />} />
+        <Route path="/prueba" element={<CrearPrueba />} />
         {/* <Route path="/tasks-create" element={<TaskFormPage />} />
         <Route path="/tasks/:id" element={<TaskFormPage />} /> */}
       </Routes> 

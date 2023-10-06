@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Paciente, Hoja_evaluacion_clinica, Rol, Usuario, Nota_Enfermeria
+from .models import Paciente, Hoja_evaluacion_clinica, Rol, Usuario, Nota_Enfermeria, Prueba
 
 
 class PacienteSerializer(serializers.ModelSerializer):
@@ -27,4 +27,9 @@ class UsuarioSerializer(serializers.ModelSerializer):
 class NotaEnfermeriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nota_Enfermeria
+        fields = "__all__"
+        
+class PruebaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Prueba
         fields = "__all__"

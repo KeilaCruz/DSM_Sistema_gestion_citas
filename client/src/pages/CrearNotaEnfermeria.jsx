@@ -155,12 +155,12 @@ export function CrearNotaEnfermeria() {
         </select>
         {errors.paciente && <span>Este campo es requerido</span>}
 
-        <input
-          type="text"
-          placeholder="Sexo"
-          {...register("sexo", { required: true })}
-          className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
-        />
+        <label htmlFor="sexo">Sexo:</label>
+        <select id="sexo" name="sexo" {...register("sexo", { required: true })}>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
         {errors.sexo && <span>Este campo es requerido</span>}
 
         <input
@@ -172,10 +172,30 @@ export function CrearNotaEnfermeria() {
         {errors.fecha && <span>Este campo es requerido</span>}
 
         <label>¿Madre viva?</label>
-        <input
-          type="checkbox"
-          {...register("madre_viva", { required: true })}
-        />
+        <label htmlFor="madre-viva">
+          Si
+          <input
+            type="radio"
+            id="madre-viva"
+            name="opcion-madre"
+            value={true}
+            {...register("madre_viva", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
+        {errors.madre_viva && <span>Este campo es requerido</span>}
+
+        <label htmlFor="madre-muerta">
+          No
+          <input
+            type="radio"
+            id="madre-muerta"
+            name="opcion-madre"
+            value={false}
+            {...register("madre_viva", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
         {errors.madre_viva && <span>Este campo es requerido</span>}
 
         <input
@@ -186,24 +206,64 @@ export function CrearNotaEnfermeria() {
         />
 
         <label>¿Padre vivo?</label>
-        <input
-          type="checkbox"
-          {...register("padre_vivo", { required: true })}
-        />
+        <label htmlFor="padre-vivo">
+          Si
+          <input
+            type="radio"
+            id="padre-vivo"
+            name="opcion-padre"
+            value={true}
+            {...register("padre_vivo", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
+        {errors.padre_vivo && <span>Este campo es requerido</span>}
+
+        <label htmlFor="padre-muerto">
+          No
+          <input
+            type="radio"
+            id="padre-muerto"
+            name="opcion-padre"
+            value={false}
+            {...register("padre_vivo", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
         {errors.padre_vivo && <span>Este campo es requerido</span>}
 
         <input
           type="text"
           placeholder="¿Cómo fallecio?"
-          {...register("padre finado", { required: false })}
+          {...register("padre_finado", { required: false })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
 
         <label>¿Hermano vivo?</label>
-        <input
-          type="checkbox"
-          {...register("hermano_vivo", { required: true })}
-        />
+        <label htmlFor="hernao-vivo">
+          Si
+          <input
+            type="radio"
+            id="hermano-vivo"
+            name="opcion-hermano"
+            value={true}
+            {...register("hermano_vivo", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
+        {errors.hermano_vivo && <span>Este campo es requerido</span>}
+
+        <label htmlFor="hermano-muerto">
+          No
+          <input
+            type="radio"
+            id="hermano-muerto"
+            name="opcion-hermano"
+            value={false}
+            {...register("hermano_vivo", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
         {errors.hermano_vivo && <span>Este campo es requerido</span>}
 
         <input
@@ -214,10 +274,30 @@ export function CrearNotaEnfermeria() {
         />
 
         <label>¿Hijos vivos?</label>
-        <input
-          type="checkbox"
-          {...register("hijos_vivos", { required: true })}
-        />
+        <label htmlFor="hijos-vivos">
+          Si
+          <input
+            type="radio"
+            id="hijos-vivos"
+            name="opcion-hijos"
+            value={true}
+            {...register("hijos_vivos", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
+        {errors.hijos_vivos && <span>Este campo es requerido</span>}
+
+        <label htmlFor="hijos-muertos">
+          No
+          <input
+            type="radio"
+            id="hijos-muertos"
+            name="opcion-hijos"
+            value={false}
+            {...register("hijos_vivos", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
         {errors.hijos_vivos && <span>Este campo es requerido</span>}
 
         <input
@@ -249,6 +329,7 @@ export function CrearNotaEnfermeria() {
           {...register("diabetes_mellitus", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
+        {errors.diabetes_mellitus && <span>Este campo es requerido</span>}
 
         <input
           type="text"
@@ -256,6 +337,7 @@ export function CrearNotaEnfermeria() {
           {...register("obesidad", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
+        {errors.obesidad && <span>Este campo es requerido</span>}
 
         <input
           type="text"
@@ -333,25 +415,65 @@ export function CrearNotaEnfermeria() {
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
 
-        <label>¿Practica ejercicio?</label>
-        <input
-          type="checkbox"
-          {...register("practica_ejercicio", { required: true })}
-        />
+        <label>¿Practicas ejercicio?</label>
+        <label htmlFor="ejercicio-si">
+          Si
+          <input
+            type="radio"
+            id="ejercicio-si"
+            name="opcion-ejercicio"
+            value={true}
+            {...register("practica_ejercicio", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
+        {errors.practica_ejercicio && <span>Este campo es requerido</span>}
+
+        <label htmlFor="ejercico-no">
+          No
+          <input
+            type="radio"
+            id="ejercicio-no"
+            name="opcion-ejercicio"
+            value={false}
+            {...register("practica_ejercicio", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
         {errors.practica_ejercicio && <span>Este campo es requerido</span>}
 
         <input
           type="text"
           placeholder="¿Cual ejercicio?"
-          {...register("trabajo_actual", { required: false })}
+          {...register("ejercicio_cual", { required: false })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
 
-        <label>Tabaquismo</label>
-        <input
-          type="checkbox"
-          {...register("tabaquismo", { required: true })}
-        />
+        <label>¿Practica Tabaquismo?</label>
+        <label htmlFor="tabaquismo-si">
+          Si
+          <input
+            type="radio"
+            id="tabaquismo-si"
+            name="opcion-tabaco"
+            value={true}
+            {...register("tabaquismo", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
+        {errors.tabaquismo && <span>Este campo es requerido</span>}
+
+        <label htmlFor="tabaquismo-no">
+          No
+          <input
+            type="radio"
+            id="tabaquismo-no"
+            name="opcion-tabaco"
+            value={false}
+            {...register("tabaquismo", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
         {errors.tabaquismo && <span>Este campo es requerido</span>}
 
         <input
@@ -368,11 +490,31 @@ export function CrearNotaEnfermeria() {
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
 
-        <label>Alcoholismo</label>
-        <input
-          type="checkbox"
-          {...register("alcoholismo", { required: true })}
-        />
+        <label>¿Es Alcoholico?</label>
+        <label htmlFor="toma-si">
+          Si
+          <input
+            type="radio"
+            id="toma-si"
+            name="opcion-alcoholismo"
+            value={true}
+            {...register("alcoholismo", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
+        {errors.alcoholismo && <span>Este campo es requerido</span>}
+
+        <label htmlFor="toma-no">
+          No
+          <input
+            type="radio"
+            id="toma-no"
+            name="opcion-alcoholismo"
+            value={false}
+            {...register("alcoholismo", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
         {errors.alcoholismo && <span>Este campo es requerido</span>}
 
         <input
@@ -472,11 +614,32 @@ export function CrearNotaEnfermeria() {
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
 
-        <label>Planificación Familiar</label>
-        <input
-          type="checkbox"
-          {...register("planificacion_familiar", { required: false })}
-        />
+<label>Planificación familiar</label>
+        <label htmlFor="plan-si">
+          Si
+          <input
+            type="radio"
+            id="plan-si"
+            name="opcion-planificacion"
+            value={true}
+            {...register("planificacion_familiar", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
+        {errors.planificacion_familiar && <span>Este campo es requerido</span>}
+
+        <label htmlFor="plan-no">
+          No
+          <input
+            type="radio"
+            id="plan-no"
+            name="opcion-planificacion"
+            value={false}
+            {...register("planificacion_familiar", { required: true })}
+            className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+          />
+        </label>
+        {errors.planificacion_familiar && <span>Este campo es requerido</span>}
 
         <input
           type="text"

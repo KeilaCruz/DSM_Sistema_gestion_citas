@@ -65,6 +65,15 @@ class Hoja_evaluacion_clinica(models.Model):
     def __str__(self):
         return self.fecha_revision
     
+    
+class Prueba(models.Model):
+    checkbox = models.BooleanField(default=False)
+    checkbox2 = models.BooleanField(default=False, null=True, blank=True)
+    texto = models.CharField(max_length=50, default="")
+    texto2 = models.CharField(max_length=50, default="", null=True, blank=True)
+    numero=  models.PositiveIntegerField(default=0)
+    numero2=  models.PositiveIntegerField(default=0)
+    
 class Nota_Enfermeria(models.Model):
     
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
