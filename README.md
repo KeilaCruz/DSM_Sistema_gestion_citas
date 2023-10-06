@@ -16,10 +16,3 @@
  # Ejecutar el codigo creado
 14. python manage.py migrate NOMBRE_DELA_APP
 15. python manage.py createsuperuser
-
-#Configurar front-end
-1. npm create vite
-2. cd client
-3. npm install
-4. npm run dev
-5. npm i react-router-dom react-hot-toast axios react-hook-form
