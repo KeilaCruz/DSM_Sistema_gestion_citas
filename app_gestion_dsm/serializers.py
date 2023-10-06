@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from .models import Paciente, Cita, HistoriaNutricion
 from .models import Paciente, Hoja_evaluacion_clinica, Rol, Usuario, Nota_Enfermeria, Prueba
 
 
