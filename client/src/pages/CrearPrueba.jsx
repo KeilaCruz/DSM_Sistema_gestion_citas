@@ -56,8 +56,8 @@ export function CrearPrueba() {
         const { data } = await getPruebas(params.id);
         setValue("texto", data.texto);
         setValue("texto2", data.texto2);
-        setValue("checkbox", data.checkbox);
-        setValue("checkbox2", data.checkbox2);
+        setValue("opcion-diabetes", data.checkbox);
+        setValue("opcion-diabetes", data.checkbox);      
         setValue("numero", data.numero);
         setValue("numero2", data.numero2);
 

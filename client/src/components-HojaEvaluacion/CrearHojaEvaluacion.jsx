@@ -89,7 +89,7 @@ export function CrearHojaEvaluacion() {
         },
       });
     }
-    navigate("/hojaEvaluacion-create"); // Navega a la lista de Hoja de evaluaciones
+    navigate("/hojaEvaluacion"); // Navega a la lista de Hoja de evaluaciones
   });
 
   useEffect(() => {
@@ -108,9 +108,25 @@ export function CrearHojaEvaluacion() {
             setValue("talla", data.talla);
             setValue("cintura", data.cintura);
             setValue("nota_medica", data.nota_medica);
-            setValue("paciente", data.paciente);
-            setValue("usuario", data.usuario);
-            setValue("rol", data.rol);
+
+            const pacienteResponse = await fetch(
+              `http://127.0.0.1:8000/Pacientes/api/v1/pacientes/${data.paciente}`
+            );
+            const pacienteData = await pacienteResponse.json();
+            setValue("paciente", pacienteData.id);
+
+            const usuarioResponse = await fetch(
+              `http://127.0.0.1:8000/Pacientes/api/v1/usuarios/${data.usuario}`
+            );
+            const usuarioData = await usuarioResponse.json();
+            setValue("usuario", usuarioData.id);
+
+            const rolResponse = await fetch(
+              `http://127.0.0.1:8000/Pacientes/api/v1/roles/${data.rol}`
+            );
+            const rolData = await rolResponse.json();
+            setValue("rol", rolData.id);
+
             
           }
         }
@@ -289,7 +305,7 @@ export function CrearHojaEvaluacion() {
               const accepted = window.confirm("¿Estás seguro?");
               if (accepted) {
                 await deleteHojaEvaluaciones(params.id);
-                navigate("/hojaEvaluacion-create");
+                navigate("/");
                 toast.success("Rol eliminado exitosamente", {
                   duration: 4000,
                   style: {

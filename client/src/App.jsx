@@ -2,7 +2,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import {Toaster} from 'react-hot-toast';
 import {Login} from './pages/Login';
-import { CrearNotaEnfermeria } from "./components-ExamenMedico/CrearNotaEnfermeria";
 import { CrearPrueba } from "./pages/CrearPrueba";
 import { PruebaPage } from "./pages/PruebaPage";
 import { CrearRol } from "./components-Rol/CrearRol";
@@ -11,6 +10,8 @@ import { CrearUsuario } from "./components-Usuario/CrearUsuario";
 import { UsuarioPage } from "./pages/UsuarioPage";
 import { CrearHojaEvaluacion } from "./components-HojaEvaluacion/CrearHojaEvaluacion";
 import { HojaEvaluacionPage } from "./pages/HojaEvaluacionPage";
+import { CrearNotaEnfermeria } from "./components-ExamenMedico/CrearExamenMedico";
+import {ExamenMedicoPage} from "./pages/ExamenMedicoPage";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -22,8 +23,7 @@ function App(){
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/singup" element={<CrearUsuario />} />
-        <Route path="/nota-enfermeria" element={<CrearNotaEnfermeria />} />
+        
 
         <Route path="/prueba-create" element={<CrearPrueba />} />
         <Route path="/prueba" element={<PruebaPage />} />
@@ -40,6 +40,10 @@ function App(){
         <Route path="/hojaEvaluacion-create" element={<CrearHojaEvaluacion />} />
         <Route path="/hojaEvaluacion" element={<HojaEvaluacionPage />} />
         <Route path="/hojaEvaluacion-create/:id" element={<CrearHojaEvaluacion />} />
+
+        <Route path="/examenMedico-create" element={<CrearNotaEnfermeria />} />
+        <Route path="/examenMedico" element={<ExamenMedicoPage />} />
+        <Route path="/examenMedico-create/:id" element={<CrearNotaEnfermeria />} />
 
 
 

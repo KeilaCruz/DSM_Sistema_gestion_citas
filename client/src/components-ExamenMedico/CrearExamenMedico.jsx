@@ -14,6 +14,7 @@ import { getAllUsuarios } from "../api/usuario.api";
 import { getAllRoles } from "../api/rol.api";
 
 export function CrearNotaEnfermeria() {
+
   const [pacientes, setPacientes] = useState([]);
   const [selectedPacientes, setSelectedPacientes] = useState("");
 
@@ -64,9 +65,9 @@ export function CrearNotaEnfermeria() {
     // Función para manejar el envío del formulario
 
     if (params.id) {
-      // Si hay un ID en los parámetros (modo edición), actualiza la nota de enfermeria
+      // Si hay un ID en los parámetros (modo edición), actualiza el examen médico
       await updateNotasEnfermeria(params.id, data);
-      toast.success("Hoja de evaluación actualizado exitosamente", {
+      toast.success("Examen médico actualizado exitosamente", {
         // Muestra una notificación de éxito
         duration: 4000,
         style: {
@@ -79,7 +80,7 @@ export function CrearNotaEnfermeria() {
     } else {
       // Si no hay un ID en los parámetros (modo creación), crea una nueva Hoja de evaluación
       await createNotasEnfermeria(data);
-      toast.success("Hoja de evaluación creado exitosamente", {
+      toast.success("Examen médico creado exitosamente", {
         // Muestra una notificación de éxito
         duration: 4000,
         style: {
@@ -90,19 +91,116 @@ export function CrearNotaEnfermeria() {
         },
       });
     }
-    navigate("/nota-enfermeria"); // Navega a la página de registro
+    navigate("/examenMedico"); // Navega a la página principal de examen médico
   });
 
-  /* useEffect(() => {
-        async function loadTask() {
+  useEffect(() => {
+        async function loadNotasEnfermeria() {
           if (params.id) {
-            const { data } = await getTask(params.id);
-            setValue("title", data.title);
-            setValue("description", data.description);
+            const { data } = await getNotasEnfermeria(params.id);
+
+            const pacienteResponse = await fetch(
+              `http://127.0.0.1:8000/Pacientes/api/v1/pacientes/${data.paciente}`
+            );
+            const pacienteData = await pacienteResponse.json();
+            setValue("paciente", pacienteData.id);
+
+            const usuarioResponse = await fetch(
+              `http://127.0.0.1:8000/Pacientes/api/v1/usuarios/${data.usuario}`
+            );
+            const usuarioData = await usuarioResponse.json();
+            setValue("usuario", usuarioData.id);
+
+            const rolResponse = await fetch(
+              `http://127.0.0.1:8000/Pacientes/api/v1/roles/${data.rol}`
+            );
+            const rolData = await rolResponse.json();
+            setValue("rol", rolData.id);
+
+            setValue("sexo", data.sexo);
+            setValue("fecha", data.fecha);
+            setValue("madre_viva", data.madre_viva);
+            setValue("madre_finada", data.madre_finada);
+            setValue("padre_vivo", data.padre_vivo);
+            setValue("padre_finado", data.padre_finado);
+            setValue("hermano_vivo", data.hermano_vivo);
+            setValue("hermano_finado", data.hermano_finado);
+            setValue("hijos_vivos", data.hijos_vivos);
+            setValue("hijos_finados", data.hijos_finados);
+            setValue("agudeza_visual", data.agudeza_visual);
+            setValue("hiper_tension", data.hiper_tension);
+            setValue("diabetes_mellitus", data.diabetes_mellitus);
+            setValue("obesidad", data.obesidad);
+            setValue("asma", data.asma);
+            setValue("epilepsia", data.epilepsia);
+            setValue("lupus", data.lupus);
+            setValue("nefropatias", data.nefropatias);
+            setValue("artropatias", data.artropatias);
+            setValue("otras_enfermedades", data.otras_enfermedades);
+            setValue("observaciones_enfermedades", data.observaciones_enfermedades);
+            setValue("lugar_nacimiento", data.lugar_nacimiento);
+            setValue("fecha_nacimiento", data.fecha_nacimiento);
+            setValue("escolaridad", data.escolaridad);
+            setValue("trabajo_actual", data.trabajo_actual);
+            setValue("practica_ejercicio", data.practica_ejercicio);
+            setValue("ejercicio_cual", data.ejercicio_cual);
+            setValue("tabaquismo", data.tabaquismo);
+            setValue("tabaquismo_edad", data.tabaquismo_edad);
+            setValue("tabaquismo_cantidad", data.tabaquismo_cantidad);
+            setValue("alcoholismo", data.alcoholismo);
+            setValue("alcoholismo_edad", data.alcoholismo_edad);
+            setValue("inmunizaciones", data.inmunizaciones);
+            setValue("habitos_higienicos", data.habitos_higienicos);
+            setValue("habitos_alimenticios", data.habitos_alimenticios);
+            setValue("especifique_habitos", data.especifique_habitos);
+            setValue("edad_menarca", data.edad_menarca);
+            setValue("frecuencia_duracion", data.frecuencia_duracion);
+            setValue("ultima_menstruacion", data.ultima_menstruacion);
+            setValue("num_embarazos", data.num_embarazos);
+            setValue("num_partos", data.num_partos);
+            setValue("num_cesareas", data.num_cesareas);
+            setValue("num_abortos", data.num_abortos);
+            setValue("ultimo_parto", data.ultimo_parto);
+            setValue("ultimo_aborto", data.ultimo_aborto);
+            setValue("planificacion_familiar", data.planificacion_familiar);
+            setValue("metodo_planificacion", data.metodo_planificacion);
+            setValue("traumatismos", data.traumatismos);
+            setValue("quirurgicos", data.quirurgicos);
+            setValue("transfusiones", data.transfusiones);
+            setValue("grupo_sanguineo", data.grupo_sanguineo);
+            setValue("factor_rh", data.factor_rh);
+            setValue("alergias", data.alergias);
+            setValue("infecciones", data.infecciones);
+            setValue("dengue_paludismo", data.dengue_paludismo);
+            setValue("tatuajes", data.tatuajes);
+            setValue("tension_arterial", data.tension_arterial);
+            setValue("frecuencia_cardiaca", data.frecuencia_cardiaca);
+            setValue("talla", data.talla);
+            setValue("imc", data.imc);
+            setValue("circunferencia_abd", data.circunferencia_abd);
+            setValue("circunferencia_cadera", data.circunferencia_cadera);
+            setValue("observaciones_antropometria", data.observaciones_antropometria);
+            setValue("EF_cabeza", data.EF_cabeza);
+            setValue("EF_cuello", data.EF_cuello);
+            setValue("EF_torax", data.EF_torax);
+            setValue("EF_abdomen", data.EF_abdomen);
+            setValue("EF_EXT_sup", data.EF_EXT_sup);
+            setValue("EF_EXT_inf", data.EF_EXT_inf);
+            setValue("EF_EXT_rodillas", data.EF_EXT_rodillas);
+            setValue("EF_EXT_pelvis", data.EF_EXT_pelvis);
+            setValue("EF_EXT_pies", data.EF_EXT_pies);
+            setValue("biometria_hematica", data.biometria_hematica);
+            setValue("quimica_sanguinea", data.quimica_sanguinea);
+            setValue("vdrl", data.vdrl);
+            setValue("prueba_vih", data.prueba_vih);
+            setValue("antidoping", data.antidoping);
+            setValue("examen_orina", data.examen_orina);
+            setValue("diagnostico", data.diagnostico);          
+            
           }
         }
-        loadTask();
-      }, []); */
+        loadNotasEnfermeria();
+      }, []);
 
   return (
     <div className="max-w-xl mx-auto">
@@ -882,7 +980,7 @@ export function CrearNotaEnfermeria() {
               const accepted = window.confirm("¿Estás seguro?");
               if (accepted) {
                 await deleteNotasEnfermeria(params.id);
-                navigate("/");
+                navigate("/examenMedico");
                 toast.success("Rol eliminado exitosamente", {
                   duration: 4000,
                   style: {
