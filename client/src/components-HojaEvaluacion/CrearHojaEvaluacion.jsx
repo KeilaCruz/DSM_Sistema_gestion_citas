@@ -89,24 +89,37 @@ export function CrearHojaEvaluacion() {
         },
       });
     }
-    navigate("/hoja-evaluacion"); // Navega a la página de registro
+    navigate("/hojaEvaluacion-create"); // Navega a la lista de Hoja de evaluaciones
   });
 
-  /* useEffect(() => {
-        async function loadTask() {
+  useEffect(() => {
+        async function loadHojaEvaluacion() {
           if (params.id) {
-            const { data } = await getTask(params.id);
-            setValue("title", data.title);
-            setValue("description", data.description);
+            const { data } = await getHojaEvaluaciones(params.id);
+            setValue("fecha_revision", data.fecha_revision);
+            setValue("tension_arterial", data.tension_arterial);
+            setValue("frecuencia_cardiaca", data.frecuencia_cardiaca);
+            setValue("frecuencia_respiratoria", data.frecuencia_respiratoria);
+            setValue("temperatura", data.temperatura);
+            setValue("imc", data.imc);
+            setValue("saturacion_oxigeno", data.saturacion_oxigeno);
+            setValue("glucosa", data.glucosa);
+            setValue("peso", data.peso);
+            setValue("talla", data.talla);
+            setValue("cintura", data.cintura);
+            setValue("nota_medica", data.nota_medica);
+            setValue("paciente", data.paciente);
+            setValue("usuario", data.usuario);
+            setValue("rol", data.rol);
+            
           }
         }
-        loadTask();
-      }, []); */
+        loadHojaEvaluacion();
+      }, []);
 
   return (
     <div className="max-w-xl mx-auto">
       <form onSubmit={onSubmit}
-       /* encType="multipart/form-data" */
        >
 
         <input
@@ -276,7 +289,7 @@ export function CrearHojaEvaluacion() {
               const accepted = window.confirm("¿Estás seguro?");
               if (accepted) {
                 await deleteHojaEvaluaciones(params.id);
-                navigate("/");
+                navigate("/hojaEvaluacion-create");
                 toast.success("Rol eliminado exitosamente", {
                   duration: 4000,
                   style: {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAllRoles, getRoles, createRoles, updateRoles, deleteRoles } from "../api/rol.api";
+import { createRoles, deleteRoles, updateRoles, getAllRoles, getRoles } from "../api/rol.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
@@ -50,19 +50,19 @@ export function CrearRol() {
         },
       });
     }
-    navigate("/roles"); // Navega a la página de registro
+    navigate("/rol"); // Navega a la página de registro
   });
 
-  /* useEffect(() => {
-        async function loadTask() {
+  useEffect(() => {
+        async function loadRoles() {
           if (params.id) {
-            const { data } = await getTask(params.id);
-            setValue("title", data.title);
-            setValue("description", data.description);
+            const { data } = await getRoles(params.id);
+            setValue("nombre_rol", data.nombre_rol);
+            setValue("descripcion", data.descripcion);
           }
         }
-        loadTask();
-      }, []); */
+        loadRoles();
+      }, []);
 
   return (
     <div className="max-w-xl mx-auto">
@@ -100,7 +100,7 @@ export function CrearRol() {
               const accepted = window.confirm("¿Estás seguro?");
               if (accepted) {
                 await deleteRoles(params.id);
-                navigate("/");
+                navigate("/rol");
                 toast.success("Rol eliminado exitosamente", {
                   duration: 4000,
                   style: {

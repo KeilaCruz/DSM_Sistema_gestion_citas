@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createPruebas, deletePruebas, updatePruebas } from "../api/prueba.api";
+import { createPruebas, deletePruebas, updatePruebas, getAllPruebas, getPruebas } from "../api/prueba.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 export function CrearPrueba() {
-
 
   const {
     register,
@@ -24,7 +23,7 @@ export function CrearPrueba() {
     if (params.id) {
       // Si hay un ID en los parámetros (modo edición), actualiza el rol
       await updatePruebas(params.id, data);
-      toast.success("Rol actualizado exitosamente", {
+      toast.success("Pruebas actualizado exitosamente", {
         // Muestra una notificación de éxito
         duration: 4000,
         style: {
@@ -35,7 +34,7 @@ export function CrearPrueba() {
         },
       });
     } else {
-      // Si no hay un ID en los parámetros (modo creación), crea un nuevo Rol
+      // Si no hay un ID en los parámetros (modo creación), crea una nueva prueba
       await createPruebas(data);
       toast.success("Usuario creado exitosamente", {
         // Muestra una notificación de éxito
@@ -48,14 +47,29 @@ export function CrearPrueba() {
         },
       });
     }
-    navigate("/prueba"); // Navega a la página de registro
+    navigate("/prueba");
   });
 
+  useEffect(() => {
+    async function loadPruebas() {
+      if (params.id) {
+        const { data } = await getPruebas(params.id);
+        setValue("texto", data.texto);
+        setValue("texto2", data.texto2);
+        setValue("checkbox", data.checkbox);
+        setValue("checkbox2", data.checkbox2);
+        setValue("numero", data.numero);
+        setValue("numero2", data.numero2);
 
-
+      }
+    }
+    loadPruebas();
+  }, []);
 
 
   return (
+
+    
     <div className="max-w-xl mx-auto">
       <form onSubmit={onSubmit}>
 
@@ -88,6 +102,7 @@ export function CrearPrueba() {
 
         <input
           type="checkbox"
+          id="miCheckbox"
           {...register("checkbox2", { required: false })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
@@ -102,14 +117,13 @@ export function CrearPrueba() {
         />
         {errors.texto && <span>Este campo es requerido</span>}
 
-        <input
-          type="text"
-          placeholder="texto de prueba"
-          id="texto-prueba"
-          {...register("texto2", { required: false })}
-          className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
-        />
-        {errors.texto2 && <span>Este campo es requerido</span>}
+       
+          <input
+            type="text"
+            placeholder="texto de prueba"
+          
+            {...register("texto2", { required: false })}
+          />      
 
         <input
           type="number"
@@ -140,7 +154,7 @@ export function CrearPrueba() {
               const accepted = window.confirm("¿Estás seguro?");
               if (accepted) {
                 await deletePruebas(params.id);
-                navigate("/");
+                navigate("/prueba");
                 toast.success("Rol eliminado exitosamente", {
                   duration: 4000,
                   style: {

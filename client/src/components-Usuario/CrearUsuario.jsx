@@ -11,7 +11,6 @@ import { toast } from "react-hot-toast";
 import { getAllRoles } from "../api/rol.api";
 
 export function CrearUsuario() {
-  
   const [roles, setRoles] = useState([]);
   const [selectedRole, setSelectedRole] = useState("");
 
@@ -73,19 +72,28 @@ export function CrearUsuario() {
         },
       });
     }
-    navigate("/singup"); // Navega a la página de registro
+    navigate("/usuario"); // Navega a la página de registro
   });
 
-  /* useEffect(() => {
-        async function loadTask() {
-          if (params.id) {
-            const { data } = await getTask(params.id);
-            setValue("title", data.title);
-            setValue("description", data.description);
-          }
-        }
-        loadTask();
-      }, []); */
+  useEffect(() => {
+    async function loadUsuarios() {
+      if (params.id) {
+        const { data } = await getUsuarios(params.id);
+        setValue("email", data.email);
+        setValue("password", data.password);
+        setValue("nombre", data.nombre);
+        setValue("ape_paterno", data.ape_paterno);
+        setValue("ape_materno", data.ape_materno);
+        
+        const rolResponse = await fetch(
+          `http://127.0.0.1:8000/Pacientes/api/v1/roles/${data.rol}`
+        );
+        const rolData = await rolResponse.json();
+        setValue("rol", rolData.id);
+      }
+    }
+    loadUsuarios();
+  }, []);
 
   return (
     <div className="max-w-xl mx-auto">
@@ -161,7 +169,7 @@ export function CrearUsuario() {
               const accepted = window.confirm("¿Estás seguro?");
               if (accepted) {
                 await deleteUsuarios(params.id);
-                navigate("/");
+                navigate("/usuario");
                 toast.success("Usuario eliminado exitosamente", {
                   duration: 4000,
                   style: {
