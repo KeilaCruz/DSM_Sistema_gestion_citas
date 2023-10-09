@@ -1,6 +1,28 @@
 from django.db import models
 
 
+class Rol(models.Model):
+    idRol = models.BigAutoField(primary_key=True)
+    nombre_rol = models.CharField(max_length=30, default="")
+    descripcion = models.TextField(default="")
+
+    def __str__(self):
+        return self.idRol
+
+
+class Usuario(models.Model):
+    idUsuario = models.BigAutoField(primary_key=True)
+    email = models.EmailField(max_length=60, default="")
+    password = models.CharField(max_length=60, default="")
+    nombre = models.CharField(max_length=50, default="")
+    ape_paterno = models.CharField(max_length=30, default="")
+    ape_materno = models.CharField(max_length=30, default="")
+    idRol = models.ForeignKey(Rol, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.idUsuario
+
+
 # Create your models here.
 class Paciente(models.Model):
     nombre = models.CharField(max_length=45, default="")
@@ -195,31 +217,77 @@ class FichaPsicologicaAdulto(models.Model):
     def __str__(self):
         return self.expedienteFicha
 
+
 class FichaPsicologicaNiño(models.Model):
     expedienteFicha = models.CharField(primary_key=True)
-    idPaciente = models.ForeignKey(Paciente,on_delete=models.CASCADE)
-    
-
-class Rol(models.Model):
-    idRol = models.BigAutoField(primary_key=True)
-    nombre_rol = models.CharField(max_length=30, default="")
-    descripcion = models.TextField(default="")
+    idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+    fecha_registro = models.DateField()
+    años = models.PositiveIntegerField(default="")
+    meses = models.PositiveIntegerField(default="")
+    fecha_nacimiento = models.DateField(default="")
+    lugar_nacimiento = models.CharField(max_length=50, default="")
+    grado_escolar = models.PositiveIntegerField(default="")
+    nombre_escuela = models.CharField(max_length=60, default="")
+    ubicacion_escuela = models.CharField(max_length=60, default="")
+    lugar_ocupa_familia = models.CharField(max_length=40, default="")
+    informacion_hermanos = models.TextField(default="")
+    nombre_padre = models.CharField(max_length=40, default="")
+    edad_padre = models.PositiveIntegerField(default="")
+    escolaridad_padre = models.CharField(max_length=30, default="")
+    ocupacion_padre = models.CharField(max_length=30, default="")
+    nombre_madre = models.CharField(max_length=40, default="")
+    edad_madre = models.PositiveIntegerField(default="")
+    escolaridad_madre = models.CharField(max_length=30, default="")
+    ocupacion_madre = models.CharField(max_length=30, default="")
+    estado_civil_padres = models.CharField(max_length=40, default="")
+    años_estado_civil = models.PositiveIntegerField(default="")
+    nombre_tutor = models.CharField(max_length=40, default="", null=True)
+    edad_tutor = models.PositiveIntegerField(default="", null=True)
+    ocupacion_tutor = models.CharField(max_length=30, default="", null=True)
+    motivos_niño_cargo_tutor = models.CharField(max_length=80, default="", null=True)
+    desde_cuando_tutor = models.CharField(max_length=10, default="", null=True)
+    descripcion_viven_con_niño = models.TextField(default="")
+    motivo_consulta = models.TextField(default="")
+    canalizado_por = models.CharField(max_length=40, default="")
+    consulta_otro_profesional = models.CharField(max_length=40, default="", null=True)
+    diagnostico_otorgado = models.TextField(default="")
+    toma_medicamento = models.BooleanField(default=False)
+    motivo = models.CharField(max_length=50, default="", null=True)
+    nombre_medicamento = models.CharField(max_length=40, default="", null=True)
+    dosis_medicamento = models.CharField(max_length=10, default="", null=True)
+    realizado_estudio = models.CharField(max_length=40, default="", null=True)
+    numero_embarazos_madre = models.PositiveIntegerField(default="")
+    tiempo_gestacion = models.PositiveIntegerField(default="")
+    problemas_durante_embarazo = models.TextField(default="", null=True)
+    medicamentos_embarazo = models.BooleanField(default=False)
+    motivo_medicamento_embarazo = models.CharField(max_length=60, default="", null=True)
+    nombre_medicamento_embarazo = models.CharField(max_length=40, default="", null=True)
+    dosis_medicamento_embarazo = models.CharField(max_length=40, default="", null=True)
+    tipo_parto = models.CharField(max_length=10, default="")
+    duracion_parto = models.CharField(max_length=10, default="")
+    complicaciones_parto = models.CharField(max_length=50, default="", null=True)
+    peso_nacer = models.DecimalField(max_digits=5, decimal_places=2, default="")
+    talla_nacer = models.DecimalField(max_digits=5, decimal_places=2, default="")
+    alimentacion_seno_materno = models.BooleanField(default=False)
+    tiempo_alimentacion_seno = models.CharField(max_length=10, default="", null=True)
+    edad_sosten_cefalico = models.PositiveIntegerField(default="")
+    edad_balbuceo = models.PositiveIntegerField(default="")
+    edad_sentarse = models.PositiveIntegerField(default="")
+    edad_ponerse_pie = models.PositiveIntegerField(default="")
+    edad_camino = models.PositiveIntegerField(default="")
+    controla_esfinter = models.BooleanField(default=False)
+    edad_control_esfinter = models.PositiveIntegerField(default="")
+    enfermedades_primer_año_vida = models.TextField(default="")
+    enfermedades_posteriores = models.TextField(default="")
+    antecedentes_padecimiento_actual = models.CharField(max_length=100, default="")
+    salud_fisica_actual = models.TextField(default="")
+    edad_ingreso_escolar = models.PositiveIntegerField(default="")
+    nivel_ingreso = models.CharField(max_length=10, default="")
+    conducta_ingreso = models.CharField(max_length=50, default="")
 
     def __str__(self):
-        return self.idRol
-
-
-class Usuario(models.Model):
-    idUsuario = models.BigAutoField(primary_key=True)
-    email = models.EmailField(max_length=60, default="")
-    password = models.CharField(max_length=60, default="")
-    nombre = models.CharField(max_length=50, default="")
-    ape_paterno = models.CharField(max_length=30, default="")
-    ape_materno = models.CharField(max_length=30, default="")
-    idRol = models.ForeignKey(Rol, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.idUsuario
+        return self.expedienteFicha
 
 
 class HojaEvaluacionClinica(models.Model):
@@ -351,3 +419,13 @@ class ExamenMedico(models.Model):
 
     def __str__(self):
         return self.idExamenMedico
+
+class Evento(models.Model):
+    idEvento = models.BigAutoField(primary_key=True)
+    idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+    fecha = models.DateField()
+    hora = models.TimeField(default="")
+    lugar = models.CharField(max_length=60,default="")
+    
+    def __str__(self):
+        return self.idEvento
