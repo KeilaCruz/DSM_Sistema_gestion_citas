@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 
@@ -133,7 +134,7 @@ class HistoriaNutricion(models.Model):
 
 
 class FichaPsicologicaAdulto(models.Model):
-    expedienteFicha = models.CharField(primary_key=True)
+    expedienteFicha = models.CharField(max_length=20,primary_key=True)
     idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
     fecha_registro = models.DateField()
@@ -219,7 +220,7 @@ class FichaPsicologicaAdulto(models.Model):
 
 
 class FichaPsicologicaNiño(models.Model):
-    expedienteFicha = models.CharField(primary_key=True)
+    expedienteFicha = models.CharField(max_length=20,primary_key=True)
     idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
     fecha_registro = models.DateField()
@@ -420,12 +421,13 @@ class ExamenMedico(models.Model):
     def __str__(self):
         return self.idExamenMedico
 
+
 class Evento(models.Model):
     idEvento = models.BigAutoField(primary_key=True)
     idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
     fecha = models.DateField()
     hora = models.TimeField(default="")
-    lugar = models.CharField(max_length=60,default="")
-    
+    lugar = models.CharField(max_length=60, default="")
+
     def __str__(self):
         return self.idEvento

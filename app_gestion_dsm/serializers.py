@@ -1,5 +1,18 @@
 from rest_framework import serializers
-from .models import Paciente,  Cita, HistoriaNutricion, Hoja_evaluacion_clinica, Rol, Usuario, Nota_Enfermeria, Prueba
+from .models import Rol, Usuario, Paciente, Cita, HistoriaNutricion, FichaPsicologicaAdulto, FichaPsicologicaNiño, HojaEvaluacionClinica, ExamenMedico, Evento
+
+
+
+class RolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rol
+        fields = "__all__"
+
+
+class UsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = "__all__"
 
 
 class PacienteSerializer(serializers.ModelSerializer):
@@ -13,33 +26,35 @@ class CitaSerializer(serializers.ModelSerializer):
         model = Cita
         fields = "__all__"
 
+
 class HistoriaNutricionSerializer(serializers.ModelSerializer):
     class Meta:
         model = HistoriaNutricion
         fields = "__all__"
 
-class HojaClinicaSerializer(serializers.ModelSerializer):
+class FichaPsicoAdultoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Hoja_evaluacion_clinica
+        model = FichaPsicologicaAdulto
         fields = "__all__"
 
-class RolSerializer(serializers.ModelSerializer):
+class FichaPsicoNiñoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Rol
+        model = FichaPsicologicaNiño
         fields = "__all__"
-        
-class UsuarioSerializer(serializers.ModelSerializer):
+
+class HojaClinicaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
+        model = HojaEvaluacionClinica
         fields = "__all__"
-        
-  
-class NotaEnfermeriaSerializer(serializers.ModelSerializer):
+
+
+class ExamenMedicoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Nota_Enfermeria
+        model = ExamenMedico
         fields = "__all__"
-        
-class PruebaSerializer(serializers.ModelSerializer):
+
+
+class EventoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Prueba
+        model = Evento
         fields = "__all__"

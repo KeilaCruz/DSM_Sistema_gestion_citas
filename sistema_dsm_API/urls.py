@@ -19,7 +19,14 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("Roles/", include("app_gestion_dsm.urls")),
+    path("Usuarios/", include("app_gestion_dsm.urls")),
     path("Pacientes/", include("app_gestion_dsm.urls")),
-    path("Citas/",include("app_gestion_dsm.urls")), 
-    path("HistoriaNutricion/",include("app_gestion_dsm.urls"))
+    path("Citas/", include("app_gestion_dsm.urls")),
+    path("HistoriaNutricion/", include("app_gestion_dsm.urls")),
+    path("FichaPsiAdulto/", include("app_gestion_dsm.urls")),
+    path("FichaPsiNiño/", include("app_gestion_dsm.urls")),
+    path("HojaEvaluacionClinica/", include("app_gestion_dsm.urls")),
+    path("ExamenMedico/",include("app_gestion_dsm.urls")),
+    path("Evento/", include("app_gestion_dsm.urls"))
 ]
