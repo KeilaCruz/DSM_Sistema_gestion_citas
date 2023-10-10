@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllHistorialNutricion } from "../api/Nutricion.api"
+import { getAllHistorialNutricion } from "../../api/Nutricion.api"
 import { HistoriaCard } from "./HistoriaCard"
 
 export function GetAllHistoriaNutricion() {

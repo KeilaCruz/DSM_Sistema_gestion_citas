@@ -151,7 +151,7 @@ class FichaPsicologicaAdulto(models.Model):
     recibido_orientacion_psicologica = models.BooleanField(default=False)
     motivos_orientacion = models.TextField(default="", null=True)
     tiempo_orientacion = models.CharField(max_length=30, default="", null=True)
-    historia_acutual_paciente = models.TextField(default="")
+    historia_actual_paciente = models.TextField(default="")
     historia_desarrollo = models.TextField(default="")
     primeros_cuatro_años = models.TextField(default="")
     historia_escolar_kinder = models.TextField(default="")

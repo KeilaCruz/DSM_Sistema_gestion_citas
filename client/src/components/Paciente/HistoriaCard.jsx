@@ -1,4 +1,4 @@
-import { deleteHistoriaNutricion } from "../api/Nutricion.api"
+import { deleteHistoriaNutricion } from "../../api/Nutricion.api"
 
 export function HistoriaCard({HistoriaNutricion}) {
     const handleDelete = async (idHistoria) =>{

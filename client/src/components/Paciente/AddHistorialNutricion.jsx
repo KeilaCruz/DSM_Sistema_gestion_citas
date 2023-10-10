@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { addHistoriaNutricion } from "../api/Nutricion.api"
+import { addHistoriaNutricion } from "../../api/Nutricion.api"
 
 export function AddHistorialNutricion() {
     const { register, handleSubmit } = useForm()

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { addCita } from "../api/Cita.api"
+import { addCita } from "../../api/Cita.api"
 
 export function AddCita() {
     const { register, handleSubmit } = useForm()

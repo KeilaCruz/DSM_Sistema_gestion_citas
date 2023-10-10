@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getAllPacientes } from '../api/Pacientes.api'
+import { getAllPacientes } from '../../api/Pacientes.api'
 import {PacienteCard} from './PacienteCard'
 export function GetAllPacientes() {
     const [pacientes, setPacientes] = useState([])

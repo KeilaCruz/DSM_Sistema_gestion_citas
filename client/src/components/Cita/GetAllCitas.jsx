@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAllCitas } from "../api/Cita.api";
+import { getAllCitas } from "../../api/Cita.api";
 import { CitaCard } from "./CitaCard";
 
 export function GetAllCitas() {

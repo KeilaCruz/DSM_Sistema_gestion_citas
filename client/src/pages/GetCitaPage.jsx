@@ -1,4 +1,4 @@
-import { GetAllCitas } from "../components/GetAllCitas";
+import { GetAllCitas } from "../components/Cita/GetAllCitas";
 
 
 export function GetCitaPage() {

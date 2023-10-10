@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { registrarPaciente, eliminarPaciente, updatePaciente, getPaciente } from '../api/Pacientes.api'
+import { addPaciente, deletePaciente, updatePaciente, getPaciente } from '../../api/Pacientes.api'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 
@@ -44,7 +44,7 @@ export function AddPaciente() {
             navigate("/get-pacientes")
 
         } else {
-            const res = await registrarPaciente(data)
+            const res = await addPaciente(data)
             console.log(res)
             navigate("/get-pacientes")
         }
@@ -83,7 +83,7 @@ export function AddPaciente() {
             {idPaciente && <button onClick={async () => {
                 const confirm = window.confirm("Estas seguro de eliminar")
                 if (confirm) {
-                    const res = await eliminarPaciente(idPaciente)
+                    const res = await deletePaciente(idPaciente)
                     console.log(res)
                     navigate("/get-pacientes")
                 }

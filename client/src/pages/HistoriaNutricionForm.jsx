@@ -1,4 +1,4 @@
-import { AddHistorialNutricion } from "../components/AddHistorialNutricion";
+import { AddHistorialNutricion } from "../components/Paciente/AddHistorialNutricion";
 
 export function HistoriaNutricionForm() {
     return (

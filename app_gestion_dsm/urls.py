@@ -11,7 +11,7 @@ router.register(r"citas", views.CitaView, "citas")
 router.register(r"historiaNutricion", views.HistoriaNutricionView,"historiaNutricion")
 router.register(r"hojaClinica", views.HojaClinicaView, "hojaClinica")
 router.register(r"fichaPsicoAdulto", views.FichaPsiAdultoView, "fichaPsicoAdulto")
-router.register(r"fichaPsiNiño",views.FichaPsiNiñoView,"fichaPsiNiño")
+router.register(r"fichaPsicoNiño",views.FichaPsiNiñoView,"fichaPsiNiño")
 router.register(r"examenMedico", views.ExamenMedicoView, "examenMedico")
 router.register(r"eventos", views.EventoView, "eventos")
 

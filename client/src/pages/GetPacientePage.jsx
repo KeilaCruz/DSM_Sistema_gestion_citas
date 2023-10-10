@@ -1,4 +1,4 @@
-import { GetAllPacientes } from "../components/GetAllPacientes";
+import { GetAllPacientes } from "../components/Paciente/GetAllPacientes";
 
 export function GetPacientePage() {
   return (
