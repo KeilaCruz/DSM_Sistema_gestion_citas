@@ -12,6 +12,8 @@ import { CrearHojaEvaluacion } from "./components-HojaEvaluacion/CrearHojaEvalua
 import { HojaEvaluacionPage } from "./pages/HojaEvaluacionPage";
 import { CrearNotaEnfermeria } from "./components-ExamenMedico/CrearExamenMedico";
 import {ExamenMedicoPage} from "./pages/ExamenMedicoPage";
+import { CrearEvento } from "./components-Evento/CrearEvento";
+import { EventoPage } from "./pages/EventoPage";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -44,6 +46,10 @@ function App(){
         <Route path="/examenMedico-create" element={<CrearNotaEnfermeria />} />
         <Route path="/examenMedico" element={<ExamenMedicoPage />} />
         <Route path="/examenMedico-create/:id" element={<CrearNotaEnfermeria />} />
+
+        <Route path="/evento-create" element={<CrearEvento />} />
+        <Route path="/evento" element={<EventoPage />} />
+        <Route path="/evento-create/:id" element={<CrearEvento />} />
 
 
 

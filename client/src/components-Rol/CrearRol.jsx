@@ -39,7 +39,7 @@ export function CrearRol() {
     } else {
       // Si no hay un ID en los parámetros (modo creación), crea un nuevo Rol
       await createRoles(data);
-      toast.success("Usuario creado exitosamente", {
+      toast.success("Rol creado exitosamente", {
         // Muestra una notificación de éxito
         duration: 4000,
         style: {

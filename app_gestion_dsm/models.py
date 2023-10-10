@@ -174,6 +174,7 @@ class Nota_Enfermeria(models.Model):
 class Evento(models.Model):
     idEvento = models.BigAutoField(primary_key=True)
     idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+    nom_evento = models.CharField(max_length=60, default="")
     fecha = models.DateField()
     hora = models.TimeField(default="")
     lugar = models.CharField(max_length=60, default="")
