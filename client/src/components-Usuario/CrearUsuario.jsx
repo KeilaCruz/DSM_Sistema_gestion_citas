@@ -86,7 +86,7 @@ export function CrearUsuario() {
         setValue("ape_materno", data.ape_materno);
         
         const rolResponse = await fetch(
-          `http://127.0.0.1:8000/Pacientes/api/v1/roles/${data.rol}`
+          `http://127.0.0.1:8000/SaludPublica/api/v1/roles/${data.rol}`
         );
         const rolData = await rolResponse.json();
         setValue("rol", rolData.id);

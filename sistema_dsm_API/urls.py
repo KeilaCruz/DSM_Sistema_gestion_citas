@@ -22,7 +22,7 @@ from sistema_dsm_API import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("Pacientes/", include("app_gestion_dsm.urls")),
+    path("SaludPublica/", include("app_gestion_dsm.urls")),
 ]
 
 """ if settings.DEBUG:

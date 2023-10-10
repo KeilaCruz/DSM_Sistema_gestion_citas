@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const pruebasApi =axios.create({
-    baseURL: 'http://127.0.0.1:8000/Pacientes/api/v1/pruebas/',
+    baseURL: 'http://127.0.0.1:8000/SaludPublica/api/v1/pruebas/',
 });
 
 export const getAllPruebas = () => pruebasApi.get("/");

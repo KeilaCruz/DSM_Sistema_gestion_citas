@@ -14,7 +14,7 @@ export function HojaEvaluacionCard({ evaluacion }) {
 
   useEffect(() => {
     // Obtener el nombre del Paciente
-    fetch(`http://127.0.0.1:8000/Pacientes/api/v1/pacientes/${evaluacion.paciente}/`)
+    fetch(`http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${evaluacion.paciente}/`)
       .then((response) => response.json())
       .then((data) =>(
         setPacienteNombre(data.nombre),
@@ -23,12 +23,12 @@ export function HojaEvaluacionCard({ evaluacion }) {
         ) );
   
     // Obtener el nombre del Rol
-    fetch(`http://127.0.0.1:8000/Pacientes/api/v1/roles/${evaluacion.rol}/`)
+    fetch(`http://127.0.0.1:8000/SaludPublica/api/v1/roles/${evaluacion.rol}/`)
       .then((response) => response.json())
       .then((data) => setRolNombre(data.nombre_rol));
   
     // Obtener el nombre del Usuario
-    fetch(`http://127.0.0.1:8000/Pacientes/api/v1/usuarios/${evaluacion.usuario}/`)
+    fetch(`http://127.0.0.1:8000/SaludPublica/api/v1/usuarios/${evaluacion.usuario}/`)
       .then((response) => response.json())
       .then((data) => (
         setUsuarioNombre(data.nombre)

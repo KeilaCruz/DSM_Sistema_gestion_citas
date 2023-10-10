@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const rolApi =axios.create({
-    baseURL: 'http://127.0.0.1:8000/Pacientes/api/v1/roles/',
+    baseURL: 'http://127.0.0.1:8000/SaludPublica/api/v1/roles/',
 });
 
 export const getAllRoles = () => rolApi.get("/");

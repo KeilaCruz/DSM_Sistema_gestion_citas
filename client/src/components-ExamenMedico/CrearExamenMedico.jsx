@@ -100,19 +100,19 @@ export function CrearNotaEnfermeria() {
             const { data } = await getNotasEnfermeria(params.id);
 
             const pacienteResponse = await fetch(
-              `http://127.0.0.1:8000/Pacientes/api/v1/pacientes/${data.paciente}`
+              `http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${data.paciente}`
             );
             const pacienteData = await pacienteResponse.json();
             setValue("paciente", pacienteData.id);
 
             const usuarioResponse = await fetch(
-              `http://127.0.0.1:8000/Pacientes/api/v1/usuarios/${data.usuario}`
+              `http://127.0.0.1:8000/SaludPublica/api/v1/usuarios/${data.usuario}`
             );
             const usuarioData = await usuarioResponse.json();
             setValue("usuario", usuarioData.id);
 
             const rolResponse = await fetch(
-              `http://127.0.0.1:8000/Pacientes/api/v1/roles/${data.rol}`
+              `http://127.0.0.1:8000/SaludPublica/api/v1/roles/${data.rol}`
             );
             const rolData = await rolResponse.json();
             setValue("rol", rolData.id);

@@ -170,3 +170,13 @@ class Nota_Enfermeria(models.Model):
     
     def __str__(self):
         return self.fecha
+    
+class Evento(models.Model):
+    idEvento = models.BigAutoField(primary_key=True)
+    idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+    fecha = models.DateField()
+    hora = models.TimeField(default="")
+    lugar = models.CharField(max_length=60, default="")
+
+    def __str__(self):
+        return self.idEvento

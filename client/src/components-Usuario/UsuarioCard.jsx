@@ -8,7 +8,7 @@ export function UsuarioCard({usuario}) {
 
   useEffect(() => {  
     // Obtener el nombre del Rol
-    fetch(`http://127.0.0.1:8000/Pacientes/api/v1/roles/${usuario.rol}/`)
+    fetch(`http://127.0.0.1:8000/SaludPublica/api/v1/roles/${usuario.rol}/`)
       .then((response) => response.json())
       .then((data) => setRolNombre(data.nombre_rol));
   
