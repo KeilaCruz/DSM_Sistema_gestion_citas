@@ -5,7 +5,7 @@ const rolApi =axios.create({
 });
 
 export const getAllRoles = () => rolApi.get("/");
-export const getRoles = (id) => rolApi.get(`/${id}/`);
+export const getRoles = (idRol) => rolApi.get(`/${idRol}/`);
 export const createRoles = (rol) => rolApi.post("/", rol);
-export const deleteRoles = (id) => rolApi.delete(`/${id}`);
-export const updateRoles = (id, rol) =>rolApi.put(`/${id}/`, rol);
+export const deleteRoles = (idRol) => rolApi.delete(`/${idRol}`);
+export const updateRoles = (idRol, rol) =>rolApi.put(`/${idRol}/`, rol);

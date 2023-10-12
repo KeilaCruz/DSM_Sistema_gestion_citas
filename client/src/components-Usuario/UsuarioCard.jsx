@@ -8,7 +8,7 @@ export function UsuarioCard({usuario}) {
 
   useEffect(() => {  
     // Obtener el nombre del Rol
-    fetch(`http://127.0.0.1:8000/SaludPublica/api/v1/roles/${usuario.rol}/`)
+    fetch(`http://127.0.0.1:8000/SaludPublica/api/v1/roles/${usuario.idRol}/`)
       .then((response) => response.json())
       .then((data) => setRolNombre(data.nombre_rol));
   
@@ -20,7 +20,7 @@ export function UsuarioCard({usuario}) {
     <div 
     className="bg-zinc-800 p-3 hover:bg-zinc-700 cursor-po"
     onClick={() =>{
-      navigate(`/usuario-create/${usuario.id}`);
+      navigate(`/usuario-create/${usuario.idUsuario}`);
     }}>
       <h1 className="font-bold uppercase">Usuario: {`${usuario.nombre} ${usuario.ape_paterno} ${usuario.ape_materno}`}</h1>    
       <h1 className="font-bold uppercase">Rol: {rolNombre}</h1>      

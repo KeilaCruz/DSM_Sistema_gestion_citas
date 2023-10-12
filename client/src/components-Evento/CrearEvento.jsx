@@ -8,7 +8,7 @@ import { getAllUsuarios } from "../api/usuario.api";
 
 export function CrearEvento() {
 
-    const [usuarios, setUsuarios] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
   const [selectedUsuarios, setSelectedUsuarios] = useState("");
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export function CrearEvento() {
                 `http://127.0.0.1:8000/SaludPublica/api/v1/usuarios/${data.idUsuario}`
               );
               const usuarioData = await usuarioResponse.json();
-              setValue("idUsuario", usuarioData.id);
+              setValue("idUsuario", usuarioData.idUsuario);
 
             setValue("fecha", data.fecha);
             setValue("hora", data.hora);
@@ -101,7 +101,7 @@ export function CrearEvento() {
         >
           <option value="">Selecciona un Especialista</option>
           {usuarios.map((usuario) => (
-            <option key={usuario.id} value={usuario.id}>
+            <option key={usuario.idUsuario} value={usuario.idUsuario}>
               {`${usuario.nombre} ${usuario.ape_paterno} ${usuario.ape_materno}`}
             </option>
           ))}
@@ -142,6 +142,14 @@ export function CrearEvento() {
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
         {errors.lugar && <span>Este campo es requerido</span>}
+
+        <textarea
+          placeholder="Notas"
+          name="notas"
+          {...register("notas", { required: false })}
+          className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
+        ></textarea>
+        {errors.notas && <span>Este campo es requerido</span>}
 
         
 

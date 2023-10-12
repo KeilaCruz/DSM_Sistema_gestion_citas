@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Paciente, Hoja_evaluacion_clinica, Rol, Usuario, Nota_Enfermeria, Prueba, Evento
+from .models import Rol, Usuario, Paciente, Cita, HistoriaNutricion, FichaPsicologicaAdulto, FichaPsicologicaNiño, HojaEvaluacionClinica, ExamenMedico, Evento
 
 
 class PacienteSerializer(serializers.ModelSerializer):
@@ -9,7 +9,7 @@ class PacienteSerializer(serializers.ModelSerializer):
         
 class HojaClinicaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Hoja_evaluacion_clinica
+        model = HojaEvaluacionClinica
         fields = "__all__"
 
 class RolSerializer(serializers.ModelSerializer):
@@ -24,17 +24,35 @@ class UsuarioSerializer(serializers.ModelSerializer):
         
 
         
-class NotaEnfermeriaSerializer(serializers.ModelSerializer):
+class ExamenMedicoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Nota_Enfermeria
+        model = ExamenMedico
         fields = "__all__"
         
-class PruebaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Prueba
-        fields = "__all__"
         
 class EventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
         fields = "__all__"
+        
+class CitaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cita
+        fields = "__all__"
+        
+class HistoriaNutricionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HistoriaNutricion
+        fields = "__all__"
+        
+class FichaPsiAdultoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FichaPsicologicaAdulto
+        fields = "__all__"
+        
+class FichaPsiNiñoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FichaPsicologicaNiño
+        fields = "__all__"
+        
+

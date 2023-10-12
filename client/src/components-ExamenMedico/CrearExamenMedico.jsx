@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  createNotasEnfermeria,
-  updateNotasEnfermeria,
-  deleteNotasEnfermeria,
-  getAllNotasEnfermeria,
-  getNotasEnfermeria,
-} from "../api/notaEnfermeria.api";
+import { getAllExamenMedico, getExamenMedico, createExamenMedico, deleteExamenMedico, updateExamenMedcio } from "../api/examenMedico.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { getAllPacientes } from "../api/paciente.api";
 import { getAllUsuarios } from "../api/usuario.api";
 import { getAllRoles } from "../api/rol.api";
 
-export function CrearNotaEnfermeria() {
+export function CrearExamenMedico() {
 
   const [pacientes, setPacientes] = useState([]);
   const [selectedPacientes, setSelectedPacientes] = useState("");
@@ -66,7 +60,7 @@ export function CrearNotaEnfermeria() {
 
     if (params.id) {
       // Si hay un ID en los parámetros (modo edición), actualiza el examen médico
-      await updateNotasEnfermeria(params.id, data);
+      await updateExamenMedcio(params.id, data);
       toast.success("Examen médico actualizado exitosamente", {
         // Muestra una notificación de éxito
         duration: 4000,
@@ -79,7 +73,7 @@ export function CrearNotaEnfermeria() {
       });
     } else {
       // Si no hay un ID en los parámetros (modo creación), crea una nueva Hoja de evaluación
-      await createNotasEnfermeria(data);
+      await createExamenMedico(data);
       toast.success("Examen médico creado exitosamente", {
         // Muestra una notificación de éxito
         duration: 4000,
@@ -95,27 +89,21 @@ export function CrearNotaEnfermeria() {
   });
 
   useEffect(() => {
-        async function loadNotasEnfermeria() {
+        async function loadExamenMedico() {
           if (params.id) {
-            const { data } = await getNotasEnfermeria(params.id);
+            const { data } = await getExamenMedico(params.id);
 
             const pacienteResponse = await fetch(
-              `http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${data.paciente}`
+              `http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${data.idPaciente}`
             );
             const pacienteData = await pacienteResponse.json();
-            setValue("paciente", pacienteData.id);
+            setValue("idPaciente", pacienteData.CURP);
 
             const usuarioResponse = await fetch(
-              `http://127.0.0.1:8000/SaludPublica/api/v1/usuarios/${data.usuario}`
+              `http://127.0.0.1:8000/SaludPublica/api/v1/usuarios/${data.idUsuario}`
             );
             const usuarioData = await usuarioResponse.json();
-            setValue("usuario", usuarioData.id);
-
-            const rolResponse = await fetch(
-              `http://127.0.0.1:8000/SaludPublica/api/v1/roles/${data.rol}`
-            );
-            const rolData = await rolResponse.json();
-            setValue("rol", rolData.id);
+            setValue("idUsuario", usuarioData.idUsuario);
 
             setValue("sexo", data.sexo);
             setValue("fecha", data.fecha);
@@ -199,7 +187,7 @@ export function CrearNotaEnfermeria() {
             
           }
         }
-        loadNotasEnfermeria();
+        loadExamenMedico();
       }, []);
 
   return (
@@ -207,51 +195,35 @@ export function CrearNotaEnfermeria() {
       <form onSubmit={onSubmit}>
         <select
           value={selectedUsuarios}
-          name="usuario"
-          {...register("usuario", { required: true })}
+          name="idUsuario"
+          {...register("idUsuario", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
           onChange={(e) => setSelectedUsuarios(e.target.value)}
         >
           <option value="">Selecciona un Especialista</option>
           {usuarios.map((usuario) => (
-            <option key={usuario.id} value={usuario.id}>
+            <option key={usuario.idUsuario} value={usuario.idUsuario}>
               {`${usuario.nombre} ${usuario.ape_paterno} ${usuario.ape_materno}`}
             </option>
           ))}
         </select>
-        {errors.usuario && <span>Este campo es requerido</span>}
-
-        <select
-          value={selectedRoles}
-          name="rol"
-          {...register("rol", { required: true })}
-          className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
-          onChange={(e) => setSelectedRoles(e.target.value)}
-        >
-          <option value="">Selecciona un Rol</option>
-          {roles.map((rol) => (
-            <option key={rol.id} value={rol.id}>
-              {rol.nombre_rol}
-            </option>
-          ))}
-        </select>
-        {errors.rol && <span>Este campo es requerido</span>}
+        {errors.idUsuario && <span>Este campo es requerido</span>}
 
         <select
           value={selectedPacientes}
-          name="paciente"
-          {...register("paciente", { required: true })}
+          name="idPaciente"
+          {...register("idPaciente", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
           onChange={(e) => setSelectedPacientes(e.target.value)}
         >
           <option value="">Selecciona un Paciente</option>
           {pacientes.map((paciente) => (
-            <option key={paciente.id} value={paciente.id}>
+            <option key={paciente.CURP} value={paciente.CURP}>
               {`${paciente.nombre} ${paciente.apePaterno} ${paciente.apeMaterno}`}
             </option>
           ))}
         </select>
-        {errors.paciente && <span>Este campo es requerido</span>}
+        {errors.idPaciente && <span>Este campo es requerido</span>}
 
         <label htmlFor="sexo">Sexo:</label>
         <select id="sexo" name="sexo" {...register("sexo", { required: true })}>
@@ -577,12 +549,14 @@ export function CrearNotaEnfermeria() {
         <input
           type="number"
           placeholder="¿Desde cuando? (Edad aprox)"
+          defaultValue={0}
           {...register("tabaquismo_edad", { required: false })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
 
         <input
           type="number"
+          defaultValue={0}
           placeholder="¿Cuantos al día u ocasional?"
           {...register("tabaquismo_cantidad", { required: false })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
@@ -617,6 +591,7 @@ export function CrearNotaEnfermeria() {
 
         <input
           type="number"
+          defaultValue={0}
           placeholder="¿Desde cuando? (Edad aprox)"
           {...register("alcoholismo_edad", { required: false })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
@@ -979,7 +954,7 @@ export function CrearNotaEnfermeria() {
             onClick={async () => {
               const accepted = window.confirm("¿Estás seguro?");
               if (accepted) {
-                await deleteNotasEnfermeria(params.id);
+                await deleteExamenMedico(params.id);
                 navigate("/examenMedico");
                 toast.success("Rol eliminado exitosamente", {
                   duration: 4000,

@@ -17,7 +17,7 @@ export function RolList() {
   return (
   <div className="grid grid-cols-3 gap-3">
     {roles.map(rol => (
-        <RolCard key={rol.id} rol={rol} />
+        <RolCard key={rol.idRol} rol={rol} />
     ))}
   </div>
   );

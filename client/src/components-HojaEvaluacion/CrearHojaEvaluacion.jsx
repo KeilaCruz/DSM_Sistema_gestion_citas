@@ -4,19 +4,17 @@ import { createHojaEvaluaciones, deleteHojaEvaluaciones, updateHojaEvaluaciones,
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { getAllPacientes } from "../api/paciente.api";
-import { getAllUsuarios } from "../api/usuario.api";
-import { getAllRoles } from "../api/rol.api";
+import { getAllCitas } from "../api/cita.api";
 
 export function CrearHojaEvaluacion() {
 
   const [pacientes, setPacientes] = useState([]);
   const [selectedPacientes, setSelectedPacientes] = useState("");
 
-  const [usuarios, setUsuarios] = useState([]);
-  const [selectedUsuarios, setSelectedUsuarios] = useState("");
+  const[citas, setCitas] = useState([]);
+  const[selectedCitas, setSelectedCitas] = useState("");
 
-  const [roles, setRoles] = useState([]);
-  const [selectedRoles, setSelectedRoles] = useState("");
+  
  
   useEffect(() => {
     // Hacer la solicitud para obtener la lista desde la API
@@ -28,20 +26,12 @@ export function CrearHojaEvaluacion() {
         console.error("Error al obtener la lista de Pacientes:", error);
       });
 
-      getAllUsuarios()
+      getAllCitas()
       .then((response) => {
-        setUsuarios(response.data);
+        setCitas(response.data);
       })
       .catch((error) => {
-        console.error("Error al obtener la lista de Usuarios:", error);
-      });
-
-      getAllRoles()
-      .then((response) => {
-        setRoles(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener la lista de Roles:", error);
+        console.error("Error al obtener la lista de Citas:", error);
       }); 
   }, []);
 
@@ -96,6 +86,7 @@ export function CrearHojaEvaluacion() {
         async function loadHojaEvaluacion() {
           if (params.id) {
             const { data } = await getHojaEvaluaciones(params.id);
+
             setValue("fecha_revision", data.fecha_revision);
             setValue("tension_arterial", data.tension_arterial);
             setValue("frecuencia_cardiaca", data.frecuencia_cardiaca);
@@ -110,22 +101,16 @@ export function CrearHojaEvaluacion() {
             setValue("nota_medica", data.nota_medica);
 
             const pacienteResponse = await fetch(
-              `http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${data.paciente}`
+              `http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${data.idPaciente}`
             );
             const pacienteData = await pacienteResponse.json();
-            setValue("paciente", pacienteData.id);
+            setValue("idPaciente", pacienteData.CURP);
 
-            const usuarioResponse = await fetch(
-              `http://127.0.0.1:8000/SaludPublica/api/v1/usuarios/${data.usuario}`
+            const citaResponse = await fetch(
+              `http://localhost:8000/SaludPublica/api/v1/citas/${data.idCita}`
             );
-            const usuarioData = await usuarioResponse.json();
-            setValue("usuario", usuarioData.id);
-
-            const rolResponse = await fetch(
-              `http://127.0.0.1:8000/SaludPublica/api/v1/roles/${data.rol}`
-            );
-            const rolData = await rolResponse.json();
-            setValue("rol", rolData.id);
+            const citaData = await citaResponse.json();
+            setValue("idCita", citaData.idCita);
 
             
           }
@@ -242,53 +227,37 @@ export function CrearHojaEvaluacion() {
 
 
         
-        <select
+<select
           value={selectedPacientes}
-          name="paciente"
-          {...register("paciente", { required: true })}
+          name="idPaciente"
+          {...register("idPaciente", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
           onChange={(e) => setSelectedPacientes(e.target.value)}
         >
           <option value="">Selecciona un Paciente</option>
           {pacientes.map((paciente) => (
-            <option key={paciente.id} value={paciente.id}>
+            <option key={paciente.CURP} value={paciente.CURP}>
               {`${paciente.nombre} ${paciente.apePaterno} ${paciente.apeMaterno}`}
             </option>
           ))}
         </select>
-        {errors.paciente && <span>Este campo es requerido</span>}
+        {errors.idPaciente && <span>Este campo es requerido</span>}
 
         <select
-          value={selectedUsuarios}
-          name="usuario"
-          {...register("usuario", { required: true })}
-          className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
-          onChange={(e) => setSelectedUsuarios(e.target.value)}
-        >
-          <option value="">Selecciona un Especialista</option>
-          {usuarios.map((usuario) => (
-            <option key={usuario.id} value={usuario.id}>
-              {`${usuario.nombre} ${usuario.ape_paterno} ${usuario.ape_materno}`}
-            </option>
-          ))}
-        </select>
-        {errors.usuario && <span>Este campo es requerido</span>}
-
-        <select
-          value={selectedRoles}
-          name="rol"
-          {...register("rol", { required: true })}
+          value={selectedCitas}
+          name="idCita"
+          {...register("idCita", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
           onChange={(e) => setSelectedRoles(e.target.value)}
         >
-          <option value="">Selecciona un Rol</option>
-          {roles.map((rol) => (
-            <option key={rol.id} value={rol.id}>
-              {rol.nombre_rol}
+          <option value="">Selecciona una cita</option>
+          {citas.map((cita) => (
+            <option key={cita.idCita} value={cita.idCita}>
+              {cita.idCita}
             </option>
           ))}
         </select>
-        {errors.rol && <span>Este campo es requerido</span>} 
+        {errors.idCita && <span>Este campo es requerido</span>} 
 
         
        

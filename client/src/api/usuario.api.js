@@ -5,7 +5,7 @@ const usuarioApi =axios.create({
 });
 
 export const getAllUsuarios = () => usuarioApi.get("/");
-export const getUsuarios = (id) => usuarioApi.get(`/${id}/`);
+export const getUsuarios = (idUsuario) => usuarioApi.get(`/${idUsuario}/`);
 export const createUsuarios = (usuario)=> usuarioApi.post("/", usuario);
-export const deleteUsuarios = (id) => usuarioApi.delete(`/${id}`);
-export const updateUsuarios = (id, usuario) =>usuarioApi.put(`/${id}/`, usuario);
+export const deleteUsuarios = (idUsuario) => usuarioApi.delete(`/${idUsuario}`);
+export const updateUsuarios = (idUsuario, usuario) =>usuarioApi.put(`/${idUsuario}/`, usuario);

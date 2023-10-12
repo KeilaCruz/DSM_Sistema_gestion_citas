@@ -5,7 +5,7 @@ const eventoApi =axios.create({
 });
 
 export const getAllEventos = () => eventoApi.get("/");
-export const getEventos = (id) => eventoApi.get(`/${id}/`);
+export const getEventos = (idEvento) => eventoApi.get(`/${idEvento}/`);
 export const createEventos = (evento) => eventoApi.post("/", evento);
-export const deleteEventos = (id) => eventoApi.delete(`/${id}`);
-export const updateEventos = (id, evento) =>eventoApi.put(`/${id}/`, evento);
+export const deleteEventos = (idEvento) => eventoApi.delete(`/${idEvento}`);
+export const updateEventos = (idEvento, evento) =>eventoApi.put(`/${idEvento}/`, evento);

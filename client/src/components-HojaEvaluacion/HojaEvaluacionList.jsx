@@ -17,7 +17,7 @@ export function HojaEvaluacionList() {
   return (
   <div className="grid grid-cols-3 gap-3">
     {evaluaciones.map(evaluacion => (
-        <HojaEvaluacionCard key={evaluacion.id} evaluacion={evaluacion}  />
+        <HojaEvaluacionCard key={evaluacion.idHojaClinica} evaluacion={evaluacion}  />
     ))}
   </div>
   );

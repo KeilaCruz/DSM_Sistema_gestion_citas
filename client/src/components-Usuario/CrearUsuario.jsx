@@ -11,6 +11,7 @@ import { toast } from "react-hot-toast";
 import { getAllRoles } from "../api/rol.api";
 
 export function CrearUsuario() {
+  
   const [roles, setRoles] = useState([]);
   const [selectedRole, setSelectedRole] = useState("");
 
@@ -86,10 +87,10 @@ export function CrearUsuario() {
         setValue("ape_materno", data.ape_materno);
         
         const rolResponse = await fetch(
-          `http://127.0.0.1:8000/SaludPublica/api/v1/roles/${data.rol}`
+          `http://127.0.0.1:8000/SaludPublica/api/v1/roles/${data.idRol}`
         );
         const rolData = await rolResponse.json();
-        setValue("rol", rolData.id);
+        setValue("idRol", rolData.idRol);
       }
     }
     loadUsuarios();
@@ -143,19 +144,19 @@ export function CrearUsuario() {
         <label>Selecciona un rol:</label>
         <select
           value={selectedRole}
-          name="rol"
-          {...register("rol", { required: true })}
+          name="idRol"
+          {...register("idRol", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
           onChange={(e) => setSelectedRole(e.target.value)}
         >
           <option value="">Selecciona un rol</option>
           {roles.map((rol) => (
-            <option key={rol.id} value={rol.id}>
+            <option key={rol.idRol} value={rol.idRol}>
               {rol.nombre_rol}
             </option>
           ))}
         </select>
-        {errors.rol && <span>Este campo es requerido</span>}
+        {errors.idRol && <span>Este campo es requerido</span>}
 
         <button className=" bg-indigo-500 p-3 rounded-lg block w-full mt-3">
           Save

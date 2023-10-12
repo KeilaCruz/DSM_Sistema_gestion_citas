@@ -32,7 +32,7 @@ export function EventoCard({ evento }) {
         Evento: {evento.nom_evento}
       </h1>
       <p className="text-sm">
-        Creado por: {usuarioNombre} {usuarioApePaterno}{usuarioApeMaterno}
+        Creado por: {usuarioNombre} {usuarioApePaterno} {usuarioApeMaterno}
       </p>
       <p className="text-sm">
         Fecha: {evento.fecha} 

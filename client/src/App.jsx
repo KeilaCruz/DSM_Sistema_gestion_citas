@@ -10,7 +10,7 @@ import { CrearUsuario } from "./components-Usuario/CrearUsuario";
 import { UsuarioPage } from "./pages/UsuarioPage";
 import { CrearHojaEvaluacion } from "./components-HojaEvaluacion/CrearHojaEvaluacion";
 import { HojaEvaluacionPage } from "./pages/HojaEvaluacionPage";
-import { CrearNotaEnfermeria } from "./components-ExamenMedico/CrearExamenMedico";
+import { CrearExamenMedico } from "./components-ExamenMedico/CrearExamenMedico";
 import {ExamenMedicoPage} from "./pages/ExamenMedicoPage";
 import { CrearEvento } from "./components-Evento/CrearEvento";
 import { EventoPage } from "./pages/EventoPage";
@@ -43,9 +43,9 @@ function App(){
         <Route path="/hojaEvaluacion" element={<HojaEvaluacionPage />} />
         <Route path="/hojaEvaluacion-create/:id" element={<CrearHojaEvaluacion />} />
 
-        <Route path="/examenMedico-create" element={<CrearNotaEnfermeria />} />
+        <Route path="/examenMedico-create" element={<CrearExamenMedico />} />
         <Route path="/examenMedico" element={<ExamenMedicoPage />} />
-        <Route path="/examenMedico-create/:id" element={<CrearNotaEnfermeria />} />
+        <Route path="/examenMedico-create/:id" element={<CrearExamenMedico />} />
 
         <Route path="/evento-create" element={<CrearEvento />} />
         <Route path="/evento" element={<EventoPage />} />

@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Paciente, Hoja_evaluacion_clinica
+from .models import Paciente, HojaEvaluacionClinica
 
 # Register your models here.
 admin.site.register(Paciente)
-admin.site.register(Hoja_evaluacion_clinica)
+admin.site.register(HojaEvaluacionClinica)
 # Register your models here.

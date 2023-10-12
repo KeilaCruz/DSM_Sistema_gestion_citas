@@ -17,7 +17,7 @@ export function UsuarioList() {
   return (
   <div className="grid grid-cols-3 gap-3">
     {usuarios.map(usuario => (
-        <UsuarioCard key={usuario.id} usuario={usuario} />
+        <UsuarioCard key={usuario.idUsuario} usuario={usuario} />
     ))}
   </div>
   );

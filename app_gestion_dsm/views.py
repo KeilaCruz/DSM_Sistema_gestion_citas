@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import PacienteSerializer, HojaClinicaSerializer, RolSerializer, UsuarioSerializer, NotaEnfermeriaSerializer, PruebaSerializer, EventoSerializer
-from .models import Paciente, Hoja_evaluacion_clinica, Rol, Usuario, Nota_Enfermeria, Prueba, Evento
+from .serializers import PacienteSerializer, HojaClinicaSerializer, RolSerializer, UsuarioSerializer, ExamenMedicoSerializer, EventoSerializer, CitaSerializer, HistoriaNutricionSerializer, FichaPsiAdultoSerializer, FichaPsiNiñoSerializer
+from .models import Rol, Usuario, Paciente, Cita, HistoriaNutricion, FichaPsicologicaAdulto, FichaPsicologicaNiño, HojaEvaluacionClinica, ExamenMedico, Evento
 # Create your views here.
 
 class PacienteView(viewsets.ModelViewSet):
@@ -10,7 +10,7 @@ class PacienteView(viewsets.ModelViewSet):
     
 class HojaClinicaView(viewsets.ModelViewSet):
     serializer_class = HojaClinicaSerializer
-    queryset = Hoja_evaluacion_clinica.objects.all()
+    queryset = HojaEvaluacionClinica.objects.all()
 
 class RolView(viewsets.ModelViewSet):
     serializer_class = RolSerializer
@@ -22,14 +22,26 @@ class UsuarioView(viewsets.ModelViewSet):
     
 
 
-class NotaEnfermeriaView(viewsets.ModelViewSet):
-    serializer_class = NotaEnfermeriaSerializer
-    queryset = Nota_Enfermeria.objects.all()
-    
-class PruebaView(viewsets.ModelViewSet):
-    serializer_class = PruebaSerializer
-    queryset = Prueba.objects.all()
-    
+class ExamenMedicoView(viewsets.ModelViewSet):
+    serializer_class = ExamenMedicoSerializer
+    queryset = ExamenMedico.objects.all()
+        
 class EventoView(viewsets.ModelViewSet):
     serializer_class = EventoSerializer
     queryset = Evento.objects.all()
+    
+class CitaView(viewsets.ModelViewSet):
+    serializer_class = CitaSerializer
+    queryset = Cita.objects.all()
+    
+class HistoriaNutricionView(viewsets.ModelViewSet):
+    serializer_class = HistoriaNutricionSerializer
+    queryset = HistoriaNutricion.objects.all()
+    
+class FichaPsiAdultoView(viewsets.ModelViewSet):
+    serializer_class = FichaPsiAdultoSerializer
+    queryset = FichaPsicologicaAdulto.objects.all()
+    
+class FichaPsiNiñoView(viewsets.ModelViewSet):
+    serializer_class = FichaPsiNiñoSerializer
+    queryset = FichaPsicologicaNiño.objects.all()
