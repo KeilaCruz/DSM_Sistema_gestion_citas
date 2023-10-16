@@ -5,6 +5,9 @@ import { GetCitaPage } from './pages/GetCitaPage'
 import { CitaForm } from './pages/CitaForm'
 import {HistoriaNutricionForm} from './pages/HistoriaNutricionForm'
 import { HistoriaNutricionPage } from './pages/HistoriaNutricionPage'
+import { FichaPAForm } from './pages/FichaPAForm'
+import { FichaPNForm } from './pages/FichaPNForm'
+import { GetFichaPA } from './pages/GetFichaPA'
 function App() {
 
   return (
@@ -18,6 +21,9 @@ function App() {
           <Route path='/registrar-cita' element={<CitaForm />} />
           <Route path='/registrar-historialnutricion' element={<HistoriaNutricionForm/>} />
           <Route path='/get-historialnutricion' element={<HistoriaNutricionPage/>} />
+          <Route path='/registrar-fichapsico-adulto' element={<FichaPAForm/>}/>
+          <Route path='/get-fichapsico-adulto' element={<GetFichaPA/>}/>
+          <Route path='/registrar-fichapsico-niño' element={<FichaPNForm/>}/>
         </Routes>
       </BrowserRouter>
     </>

@@ -5,8 +5,9 @@ export function AddFichaPsiAdulto() {
     const { register, handleSubmit } = useForm()
 
     const onSubmit = handleSubmit(async (data) => {
-        //const res = await addFichaPsiAdulto(data)
+        const res = await addFichaPsiAdulto(data)
         console.log(data)
+        console.log(res)
     })
 
     return (
