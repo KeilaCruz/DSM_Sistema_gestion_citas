@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createHojaEvaluaciones, deleteHojaEvaluaciones, updateHojaEvaluaciones, getAllHojaEvaluaciones, getHojaEvaluaciones } from "../api/hojaEvaluacion.api";
+import {
+  createHojaEvaluaciones,
+  deleteHojaEvaluaciones,
+  updateHojaEvaluaciones,
+  getAllHojaEvaluaciones,
+  getHojaEvaluaciones,
+} from "../api/hojaEvaluacion.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { getAllPacientes } from "../api/paciente.api";
 import { getAllCitas } from "../api/cita.api";
 
 export function CrearHojaEvaluacion() {
-
   const [pacientes, setPacientes] = useState([]);
   const [selectedPacientes, setSelectedPacientes] = useState("");
 
-  const[citas, setCitas] = useState([]);
-  const[selectedCitas, setSelectedCitas] = useState("");
+  const [citas, setCitas] = useState([]);
+  const [selectedCitas, setSelectedCitas] = useState("");
 
-  
- 
   useEffect(() => {
     // Hacer la solicitud para obtener la lista desde la API
     getAllPacientes()
@@ -26,17 +29,14 @@ export function CrearHojaEvaluacion() {
         console.error("Error al obtener la lista de Pacientes:", error);
       });
 
-      getAllCitas()
+    getAllCitas()
       .then((response) => {
         setCitas(response.data);
       })
       .catch((error) => {
         console.error("Error al obtener la lista de Citas:", error);
-      }); 
+      });
   }, []);
-
-  
-
 
   const {
     register,
@@ -51,7 +51,6 @@ export function CrearHojaEvaluacion() {
   const onSubmit = handleSubmit(async (data) => {
     // Función para manejar el envío del formulario
 
-    
     if (params.id) {
       // Si hay un ID en los parámetros (modo edición), actualiza la hoja de evaluacion
       await updateHojaEvaluaciones(params.id, data);
@@ -83,53 +82,49 @@ export function CrearHojaEvaluacion() {
   });
 
   useEffect(() => {
-        async function loadHojaEvaluacion() {
-          if (params.id) {
-            const { data } = await getHojaEvaluaciones(params.id);
+    async function loadHojaEvaluacion() {
+      if (params.id) {
+        const { data } = await getHojaEvaluaciones(params.id);
 
-            setValue("fecha_revision", data.fecha_revision);
-            setValue("tension_arterial", data.tension_arterial);
-            setValue("frecuencia_cardiaca", data.frecuencia_cardiaca);
-            setValue("frecuencia_respiratoria", data.frecuencia_respiratoria);
-            setValue("temperatura", data.temperatura);
-            setValue("imc", data.imc);
-            setValue("saturacion_oxigeno", data.saturacion_oxigeno);
-            setValue("glucosa", data.glucosa);
-            setValue("peso", data.peso);
-            setValue("talla", data.talla);
-            setValue("cintura", data.cintura);
-            setValue("nota_medica", data.nota_medica);
+        setValue("fecha_revision", data.fecha_revision);
+        setValue("tension_arterial", data.tension_arterial);
+        setValue("frecuencia_cardiaca", data.frecuencia_cardiaca);
+        setValue("frecuencia_respiratoria", data.frecuencia_respiratoria);
+        setValue("temperatura", data.temperatura);
+        setValue("imc", data.imc);
+        setValue("saturacion_oxigeno", data.saturacion_oxigeno);
+        setValue("glucosa", data.glucosa);
+        setValue("peso", data.peso);
+        setValue("talla", data.talla);
+        setValue("cintura", data.cintura);
+        setValue("nota_medica", data.nota_medica);
 
-            const pacienteResponse = await fetch(
-              `http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${data.idPaciente}`
-            );
-            const pacienteData = await pacienteResponse.json();
-            setValue("idPaciente", pacienteData.CURP);
+        const pacienteResponse = await fetch(
+          `http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${data.idPaciente}`
+        );
+        const pacienteData = await pacienteResponse.json();
+        setValue("idPaciente", pacienteData.CURP);
 
-            const citaResponse = await fetch(
-              `http://localhost:8000/SaludPublica/api/v1/citas/${data.idCita}`
-            );
-            const citaData = await citaResponse.json();
-            setValue("idCita", citaData.idCita);
-
-            
-          }
-        }
-        loadHojaEvaluacion();
-      }, []);
+        const citaResponse = await fetch(
+          `http://localhost:8000/SaludPublica/api/v1/citas/${data.idCita}`
+        );
+        const citaData = await citaResponse.json();
+        setValue("idCita", citaData.idCita);
+      }
+    }
+    loadHojaEvaluacion();
+  }, []);
 
   return (
     <div className="max-w-xl mx-auto">
-      <form onSubmit={onSubmit}
-       >
-
+      <form onSubmit={onSubmit}>
         <input
           type="date"
           placeholder="Fecha de revision"
           {...register("fecha_revision", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.fecha_revision  && <span>Este campo es requerido</span>}
+        {errors.fecha_revision && <span>Este campo es requerido</span>}
 
         <input
           type="number"
@@ -137,7 +132,7 @@ export function CrearHojaEvaluacion() {
           {...register("tension_arterial", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.tension_arterial  && <span>Este campo es requerido</span>}
+        {errors.tension_arterial && <span>Este campo es requerido</span>}
 
         <input
           type="number"
@@ -145,7 +140,7 @@ export function CrearHojaEvaluacion() {
           {...register("frecuencia_cardiaca", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.frecuencia_cardiaca  && <span>Este campo es requerido</span>}
+        {errors.frecuencia_cardiaca && <span>Este campo es requerido</span>}
 
         <input
           type="number"
@@ -153,7 +148,7 @@ export function CrearHojaEvaluacion() {
           {...register("frecuencia_respiratoria", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.frecuencia_respiratoria  && <span>Este campo es requerido</span>}
+        {errors.frecuencia_respiratoria && <span>Este campo es requerido</span>}
 
         <input
           type="text"
@@ -161,7 +156,7 @@ export function CrearHojaEvaluacion() {
           {...register("temperatura", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.temperatura  && <span>Este campo es requerido</span>}
+        {errors.temperatura && <span>Este campo es requerido</span>}
 
         <input
           type="text"
@@ -169,7 +164,7 @@ export function CrearHojaEvaluacion() {
           {...register("imc", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.imc  && <span>Este campo es requerido</span>}
+        {errors.imc && <span>Este campo es requerido</span>}
 
         <input
           type="number"
@@ -177,7 +172,7 @@ export function CrearHojaEvaluacion() {
           {...register("saturacion_oxigeno", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.saturacion_oxigeno  && <span>Este campo es requerido</span>}
+        {errors.saturacion_oxigeno && <span>Este campo es requerido</span>}
 
         <input
           type="text"
@@ -185,7 +180,7 @@ export function CrearHojaEvaluacion() {
           {...register("glucosa", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.glucosa  && <span>Este campo es requerido</span>}
+        {errors.glucosa && <span>Este campo es requerido</span>}
 
         <input
           type="text"
@@ -201,7 +196,7 @@ export function CrearHojaEvaluacion() {
           {...register("talla", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.talla  && <span>Este campo es requerido</span>}
+        {errors.talla && <span>Este campo es requerido</span>}
 
         <input
           type="text"
@@ -209,25 +204,23 @@ export function CrearHojaEvaluacion() {
           {...register("cintura", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.cintura  && <span>Este campo es requerido</span>}
+        {errors.cintura && <span>Este campo es requerido</span>}
 
         <textarea
           placeholder="Nota medica"
           {...register("nota_medica", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         ></textarea>
-        {errors.nota_medica  && <span>Este campo es requerido</span>}
+        {errors.nota_medica && <span>Este campo es requerido</span>}
 
-         {/* <input
+        {/* <input
           type="file" id="archivo" name="archivo" accept=".pdf, .doc, .docx"
           {...register("archivo_medico", { required: false })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
         {errors.archivo_medico  && <span>Este campo es requerido</span>}  */}
 
-
-        
-<select
+        <select
           value={selectedPacientes}
           name="idPaciente"
           {...register("idPaciente", { required: true })}
@@ -248,7 +241,7 @@ export function CrearHojaEvaluacion() {
           name="idCita"
           {...register("idCita", { required: true })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
-          onChange={(e) => setSelectedRoles(e.target.value)}
+          onChange={(e) => setSelectedCitas(e.target.value)}
         >
           <option value="">Selecciona una cita</option>
           {citas.map((cita) => (
@@ -257,10 +250,7 @@ export function CrearHojaEvaluacion() {
             </option>
           ))}
         </select>
-        {errors.idCita && <span>Este campo es requerido</span>} 
-
-        
-       
+        {errors.idCita && <span>Este campo es requerido</span>}
 
         <button className=" bg-indigo-500 p-3 rounded-lg block w-full mt-3">
           Save

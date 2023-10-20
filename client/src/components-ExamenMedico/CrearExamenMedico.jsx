@@ -107,13 +107,13 @@ export function CrearExamenMedico() {
 
             setValue("sexo", data.sexo);
             setValue("fecha", data.fecha);
-            setValue("madre_viva", data.madre_viva);
+            setValue("madre_viva", data.madre_viva.toString());
             setValue("madre_finada", data.madre_finada);
-            setValue("padre_vivo", data.padre_vivo);
+            setValue("padre_vivo", data.padre_vivo.toString());
             setValue("padre_finado", data.padre_finado);
-            setValue("hermano_vivo", data.hermano_vivo);
+            setValue("hermano_vivo", data.hermano_vivo.toString());
             setValue("hermano_finado", data.hermano_finado);
-            setValue("hijos_vivos", data.hijos_vivos);
+            setValue("hijos_vivos", data.hijos_vivos.toString());
             setValue("hijos_finados", data.hijos_finados);
             setValue("agudeza_visual", data.agudeza_visual);
             setValue("hiper_tension", data.hiper_tension);
@@ -130,12 +130,12 @@ export function CrearExamenMedico() {
             setValue("fecha_nacimiento", data.fecha_nacimiento);
             setValue("escolaridad", data.escolaridad);
             setValue("trabajo_actual", data.trabajo_actual);
-            setValue("practica_ejercicio", data.practica_ejercicio);
+            setValue("practica_ejercicio", data.practica_ejercicio.toString());
             setValue("ejercicio_cual", data.ejercicio_cual);
-            setValue("tabaquismo", data.tabaquismo);
+            setValue("tabaquismo", data.tabaquismo.toString());
             setValue("tabaquismo_edad", data.tabaquismo_edad);
             setValue("tabaquismo_cantidad", data.tabaquismo_cantidad);
-            setValue("alcoholismo", data.alcoholismo);
+            setValue("alcoholismo", data.alcoholismo.toString());
             setValue("alcoholismo_edad", data.alcoholismo_edad);
             setValue("inmunizaciones", data.inmunizaciones);
             setValue("habitos_higienicos", data.habitos_higienicos);
@@ -150,7 +150,7 @@ export function CrearExamenMedico() {
             setValue("num_abortos", data.num_abortos);
             setValue("ultimo_parto", data.ultimo_parto);
             setValue("ultimo_aborto", data.ultimo_aborto);
-            setValue("planificacion_familiar", data.planificacion_familiar);
+            setValue("planificacion_familiar", data.planificacion_familiar.toString());
             setValue("metodo_planificacion", data.metodo_planificacion);
             setValue("traumatismos", data.traumatismos);
             setValue("quirurgicos", data.quirurgicos);

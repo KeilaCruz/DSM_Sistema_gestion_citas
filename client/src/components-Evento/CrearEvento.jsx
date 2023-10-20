@@ -4,6 +4,8 @@ import { createEventos, deleteEventos, updateEventos, getAllEventos, getEventos 
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { getAllUsuarios } from "../api/usuario.api";
+import { Footer } from "../components/Footer";
+import {NavBar}   from "../components/NavBar";
 
 
 export function CrearEvento() {
@@ -89,7 +91,147 @@ export function CrearEvento() {
       }, []);
 
   return (
-    <div className="max-w-xl mx-auto">
+    <div>
+      <NavBar />
+
+
+<div className="container-fluid" style={{marginTop:'20px'}}>
+  
+  <form className="row g-3" onSubmit={onSubmit}>
+
+    {/* Todo el cuerpo del formulario */}
+    <div className="col-md-9 offset-md-1">
+    <label htmlFor="evento" className="form-label">Nombre del evento:</label>
+    <input
+          type="text"
+          id="evento"
+          name="nom_evento"
+          className= "form-control"
+          placeholder="Nombre del Evento"
+          {...register("nom_evento", { required: true })}
+        />
+        {errors.nom_evento && <span>Este campo es requerido</span>}
+    </div>
+
+    <div className="col-md-2 offset-md-1">
+      <label htmlFor="fecha" className="form-label">Fecha del evento:</label>
+      <input
+          type="date"
+          id="fecha"
+          name="fecha"
+          {...register("fecha", { required: true })}
+          className="form-control"
+        />
+        {errors.fecha && <span>Este campo es requerido</span>}
+    </div>
+
+    <div className="col-md-2 offset-md-1">
+      <label htmlFor="hora" className="form-label">Hora del evento:</label>
+      <input
+          type="time"
+          id="hora"
+          name="hora"
+          {...register("hora", { required: true })}
+          className="form-control"
+        />
+        {errors.hora && <span>Este campo es requerido</span>}
+    </div>
+
+    <div className="col-md-9 offset-md-1">
+      <label htmlFor="ubicacion" className="form-label">Lugar del evento:</label>
+      <input
+          type="text"
+          placeholder="Lugar"
+          id="ubicacion"
+          name="Ubicación"
+          {...register("lugar", { required: true })}
+          className="form-control"
+        />
+        {errors.lugar && <span>Este campo es requerido</span>}
+    </div>
+
+    <div className="col-md-9 offset-md-1">
+      <label htmlFor="notas" className="form-label">Notas adicionales:</label>
+      <textarea
+          placeholder="Notas"
+          id="notas"
+          name="notas"
+          {...register("notas", { required: false })}
+          className="form-control"
+        ></textarea>
+        {errors.notas && <span>Este campo es requerido</span>}
+    </div>
+
+    <div className="col-md-9 offset-md-1">
+      <label htmlFor="usuario" className="form-label">Creador del evento:</label>
+      <select
+          value={selectedUsuarios}
+          name="idUsuario"
+          id="usuario"
+          {...register("idUsuario", { required: true })}
+          className="form-select"
+          onChange={(e) => setSelectedUsuarios(e.target.value)}
+        >
+          <option value="">Selecciona un Usuario</option>
+          {usuarios.map((usuario) => (
+            <option key={usuario.idUsuario} value={usuario.idUsuario}>
+              {`${usuario.nombre} ${usuario.ape_paterno} ${usuario.ape_materno}`}
+            </option>
+          ))}
+        </select>
+        {errors.idUsuario && <span>Este campo es requerido</span>}
+    </div>
+
+    <div className="col-md-9 offset-md-1">
+      <button className="btn btn-success btn-lg mb-4">
+          Guardar
+        </button>
+    </div>
+    
+  </form>
+
+  {params.id && (
+        <div className="row g-3">
+          <div className="col-md-9 offset-md-1">
+          <button
+            className="btn btn-danger"
+            onClick={async () => {
+              const accepted = window.confirm("¿Estás seguro?");
+              if (accepted) {
+                await deleteEventos(params.id);
+                navigate("/evento");
+                toast.success("Evento eliminado exitosamente", {
+                  duration: 4000,
+                  style: {
+                    backgroundColor: "#101010",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                  },
+                });
+              }
+            }}
+          >
+            Delete
+          </button>
+          </div>
+        </div>
+      )}
+</div>
+<Footer />
+</div>
+
+    
+);
+}
+
+
+
+
+
+
+
+   {/*  <div className="max-w-xl mx-auto">
       <form onSubmit={onSubmit}>
 
       <select
@@ -153,14 +295,14 @@ export function CrearEvento() {
 
         
 
-        <button className=" bg-indigo-500 p-3 rounded-lg block w-full mt-3">
+        <button className="btn btn-primary">
           Save
         </button>
       </form>
       {params.id && (
         <div className="flex justify-center">
           <button
-            className=" bg-red-500 p-3 rounded-lg w-48 mt-3"
+            className="btn btn-danger"
             onClick={async () => {
               const accepted = window.confirm("¿Estás seguro?");
               if (accepted) {
@@ -182,6 +324,5 @@ export function CrearEvento() {
           </button>
         </div>
       )}
-    </div>
-  );
-}
+    </div> */}
+

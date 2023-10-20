@@ -307,6 +307,7 @@ class HojaEvaluacionClinica(models.Model):
     idCita = models.ForeignKey(Cita, on_delete=models.DO_NOTHING)
     idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     """ archivo_medico = models.FileField(upload_to='archivos_medicos/', null=True, blank=True)    """
+    imagenRecetaMedica = models.ImageField(upload_to='recetasMedicas', null=True)
 
     def __str__(self):
         return self.idPaciente.nombre + " " + self.idPaciente.apePaterno + " " + self.idPaciente.apeMaterno + " --- " + self.fecha_revision.strftime("%d/%m/%Y")
