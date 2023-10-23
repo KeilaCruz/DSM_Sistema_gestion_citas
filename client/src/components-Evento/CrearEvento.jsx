@@ -95,7 +95,7 @@ export function CrearEvento() {
       <NavBar />
 
 
-<div className="container-fluid" style={{marginTop:'20px'}}>
+<div className="container-fluid" >
   
   <form className="row g-3" onSubmit={onSubmit}>
 

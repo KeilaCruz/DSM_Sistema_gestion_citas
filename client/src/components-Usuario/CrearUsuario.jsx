@@ -22,7 +22,16 @@ export function CrearUsuario() {
         setRoles(response.data);
       })
       .catch((error) => {
-        console.error("Error al obtener la lista de roles:", error);
+        toast.error("Error al obtener la lista de roles", {
+          // Muestra una notificación de éxito
+          duration: 4000,
+          style: {
+            backgroundColor: "#101010",
+            color: "#fff",
+            fontWeight: "bold",
+            fontSize: "20px",
+          },
+        });
       });
   }, []);
 

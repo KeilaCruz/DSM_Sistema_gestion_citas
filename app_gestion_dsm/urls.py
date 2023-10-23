@@ -17,4 +17,8 @@ router.register(r"examenMedico", views.ExamenMedicoView, "examenMedico")
 router.register(r"eventos", views.EventoView, "eventos")
 
 
-urlpatterns = [path("api/v1/", include(router.urls))]
+urlpatterns = [
+    path("api/v1/", include(router.urls)),
+   
+]
+               

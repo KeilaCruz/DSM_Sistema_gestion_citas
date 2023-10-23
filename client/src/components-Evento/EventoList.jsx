@@ -16,7 +16,7 @@ export function EventoList() {
   return (
     <div className="container-fluid">
       {/* Titulo */}
-      <div className="container" style={{ marginTop: "20px" }}>
+      <div className="container" >
         <div className="text-with-lines">
           <div className="line line-top"></div>
           <p className="display-5 fw-bold">LISTA DE EVENTOS</p>

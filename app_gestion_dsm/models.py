@@ -49,6 +49,7 @@ class Paciente(models.Model):
     programa_gobierno_municipal = models.BooleanField(default=False)
     cual_programa_municipal = models.CharField(max_length=70, default="")
     numero_personas_vive = models.PositiveIntegerField(default="")
+    fechaRegistro = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.nombre + " " + self.apePaterno + " " + self.apeMaterno + " -- " + self.CURP
@@ -306,8 +307,7 @@ class HojaEvaluacionClinica(models.Model):
     nota_medica = models.TextField(default="")
     idCita = models.ForeignKey(Cita, on_delete=models.DO_NOTHING)
     idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    """ archivo_medico = models.FileField(upload_to='archivos_medicos/', null=True, blank=True)    """
-    imagenRecetaMedica = models.ImageField(upload_to='recetasMedicas', null=True)
+    imagenRecetaMedica = models.ImageField(upload_to='recetasMedicas', null=True, blank=True)
 
     def __str__(self):
         return self.idPaciente.nombre + " " + self.idPaciente.apePaterno + " " + self.idPaciente.apeMaterno + " --- " + self.fecha_revision.strftime("%d/%m/%Y")

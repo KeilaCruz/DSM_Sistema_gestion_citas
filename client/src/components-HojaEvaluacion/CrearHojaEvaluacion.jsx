@@ -98,6 +98,7 @@ export function CrearHojaEvaluacion() {
         setValue("talla", data.talla);
         setValue("cintura", data.cintura);
         setValue("nota_medica", data.nota_medica);
+        setValue("imagenReceta", data.imagenRecetaMedica);
 
         const pacienteResponse = await fetch(
           `http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${data.idPaciente}`
@@ -115,9 +116,10 @@ export function CrearHojaEvaluacion() {
     loadHojaEvaluacion();
   }, []);
 
+
   return (
     <div className="max-w-xl mx-auto">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}  enctype="multipart/form-data">
         <input
           type="date"
           placeholder="Fecha de revision"
@@ -213,12 +215,13 @@ export function CrearHojaEvaluacion() {
         ></textarea>
         {errors.nota_medica && <span>Este campo es requerido</span>}
 
-        {/* <input
-          type="file" id="archivo" name="archivo" accept=".pdf, .doc, .docx"
-          {...register("archivo_medico", { required: false })}
+        <input
+          type="file" id="imagen" name="file" 
+          {...register("imagenRecetaMedica", { required: false })}
           className="bg-zinc-700 p-3 rounded-lg w-full block mb-3"
         />
-        {errors.archivo_medico  && <span>Este campo es requerido</span>}  */}
+        {errors.imagenRecetaMedica  && <span>Este campo es requerido</span>} 
+
 
         <select
           value={selectedPacientes}
