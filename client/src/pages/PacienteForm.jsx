@@ -1,9 +1,9 @@
-import { AddPaciente } from "../components/Paciente/AddPaciente";
+import { RegisterPaciente } from "../components/Paciente/RegisterPaciente"
 
 export function PacienteForm() {
   return (
     <>
-      <AddPaciente/>
+      <RegisterPaciente />
     </>
   )
 }

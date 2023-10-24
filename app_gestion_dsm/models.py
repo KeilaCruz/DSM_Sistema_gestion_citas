@@ -5,7 +5,7 @@ from django.db import models
 class Rol(models.Model):
     idRol = models.BigAutoField(primary_key=True)
     nombre_rol = models.CharField(max_length=30, default="")
-    descripcion = models.TextField(default="")
+    descripcion = models.CharField(max_length=30, default="")
 
     def __str__(self):
         return self.idRol
@@ -26,6 +26,7 @@ class Usuario(models.Model):
 
 # Create your models here.
 class Paciente(models.Model):
+    fecha_registro = models.DateField(default=datetime.date.today)
     nombre = models.CharField(max_length=45, default="")
     apePaterno = models.CharField(max_length=45, default="")
     apeMaterno = models.CharField(max_length=45, default="")
@@ -43,11 +44,11 @@ class Paciente(models.Model):
     unidad_salud = models.CharField(max_length=150, default="")
     ultima_visita_medico = models.DateField(null=True, default=None)
     programa_gobierno_federal = models.BooleanField(default=False)
-    cual_programa_federal = models.CharField(max_length=70, default="")
+    cual_programa_federal = models.CharField(max_length=70, default=None, null=True)
     programa_gobierno_estatal = models.BooleanField(default=False)
-    cual_programa_estatal = models.CharField(max_length=70, default="")
+    cual_programa_estatal = models.CharField(max_length=70, default=None, null=True)
     programa_gobierno_municipal = models.BooleanField(default=False)
-    cual_programa_municipal = models.CharField(max_length=70, default="")
+    cual_programa_municipal = models.CharField(max_length=70, default=None, null=True)
     numero_personas_vive = models.PositiveIntegerField(default="")
 
     def __str__(self):
@@ -187,9 +188,9 @@ class FichaPsicologicaAdulto(models.Model):
     otros_datos = models.TextField(default="")
     recibido_atencion_medica_adecuada = models.BooleanField(default=False)
     especificar = models.TextField(default="")
-    cuando_diferencia_genero = models.CharField(max_length=70, default="")
+    cuando_diferencia_genero = models.PositiveIntegerField(default="")
     como_diferencia_genero = models.CharField(max_length=70, default="")
-    genero_asignaron_niño = models.CharField(max_length=50, default="")
+    genero_asignaron_niño = models.CharField(max_length=30, default="")
     experiencia_abuso_sexual = models.BooleanField(default=False)
     edad_abuso_sexual = models.PositiveIntegerField(default="", null=True)
     por_quien_abuso_sexual = models.CharField(max_length=40, default="", null=True)
@@ -427,6 +428,7 @@ class Evento(models.Model):
     idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
     fecha = models.DateField()
     hora = models.TimeField(default="")
+    nombre_evento = models.CharField(max_length=80, default="")
     lugar = models.CharField(max_length=60, default="")
 
     def __str__(self):

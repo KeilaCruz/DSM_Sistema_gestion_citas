@@ -9,3 +9,5 @@ export const getPaciente = (idPaciente) => pacienteAPI.get(`/${idPaciente}/`)
 export const addPaciente = (paciente) => pacienteAPI.post('/', paciente)
 export const deletePaciente = (idPaciente) => pacienteAPI.delete(`/${idPaciente}`)
 export const updatePaciente = (idPaciente, paciente) => pacienteAPI.put(`/${idPaciente}/`,paciente)
+
+

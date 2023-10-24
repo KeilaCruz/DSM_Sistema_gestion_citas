@@ -15,7 +15,7 @@ export function GetAllPacientes() {
     return (
         <>
             {pacientes.map(paciente => (
-                <PacienteCard paciente={paciente} key={paciente.id}/>
+                <PacienteCard paciente={paciente} key={paciente.CURP}/>
             ))}
         </>
     )

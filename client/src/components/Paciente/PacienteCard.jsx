@@ -8,8 +8,8 @@ export function PacienteCard({paciente}) {
 
     return (
         <>
-            <div key={paciente.id} style={{background: "gray"}} onClick={deleteClick}>
-                <h1>{paciente.id}</h1>
+            <div key={paciente.CURP} style={{background: "gray"}} onClick={deleteClick}>
+                <h1>{paciente.CURP}</h1>
                 <p>{paciente.nombre}</p>
                 <p>{paciente.apePaterno}</p>
             </div>
