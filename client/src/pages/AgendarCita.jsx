@@ -1,5 +1,5 @@
 import { AddCita } from "../components/Cita/AddCita"
-export function CitaForm() {
+export function AgendarCita() {
     return (
         <>
             <AddCita />
