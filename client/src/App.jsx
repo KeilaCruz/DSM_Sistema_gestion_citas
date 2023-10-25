@@ -9,6 +9,7 @@ import { FichaPAForm } from './pages/FichaPAForm'
 import { FichaPNForm } from './pages/FichaPNForm'
 import { GetFichaPA } from './pages/GetFichaPA'
 import { ResultBusqueda } from './pages/ResultBusqueda'
+import { VisualizarPaciente } from './pages/VisualizarPaciente'
 function App() {
 
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path='/get-pacientes' element={<GetPacientePage />} />
           <Route path='/registrar-paciente' element={<PacienteForm />} />
           <Route path='/buscar-paciente' element={<ResultBusqueda />} />
-          <Route path='/paciente/:id' element={<PacienteForm />} />
+          <Route path='/paciente/:idPaciente' element={<VisualizarPaciente/>}/>
           <Route path='/get-citas' element={<GetCitaPage />} />
           <Route path='/registrar-cita' element={<AgendarCita />} />
           <Route path='/registrar-historialnutricion' element={<HistoriaNutricionForm />} />

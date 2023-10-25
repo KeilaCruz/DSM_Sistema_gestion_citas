@@ -1,4 +1,4 @@
-import { GetAllHistoriaNutricion } from "../components/Paciente/GetAllHistoriaNutricion";
+import { GetAllHistoriaNutricion } from "../components/Nutricion/GetAllHistoriaNutricion";
 
 export function HistoriaNutricionPage() {
   return (

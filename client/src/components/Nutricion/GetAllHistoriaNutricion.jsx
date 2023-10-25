@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllHistorialNutricion } from "../../api/Nutricion.api"
-import { HistoriaCard } from "./HistoriaCard"
+import { HistoriaCard } from "../Paciente/HistoriaCard"
 
 export function GetAllHistoriaNutricion() {
     const [historiaClinica, setHistoriaClinica] = useState([])

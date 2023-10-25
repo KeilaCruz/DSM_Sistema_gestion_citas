@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAllPacientes } from "../../api/Pacientes.api";
 import { PacienteCard } from "./PacienteCard";
 
 export function SearchPaciente() {
-    /*FALTA COLOCAR CUANDO NO HAY RESULTADOS*/ 
+    /*FALTA COLOCAR CUANDO NO HAY RESULTADOS*/
     //obtener los pacientes con el criterio del nombre 
     //obtener el paciente con el curp en especifico
     const [criterio_search, setCriterioSearch] = useState("")
     const [pacientes, setPacientes] = useState([])
     const [resultados, setResultados] = useState([])
     let regCurp = /^\D{1,4}\d{1,6}/;
+    const navigate = useNavigate()
     //cargar los pacientes que ya tenemos registrados
     useEffect(() => {
         async function loadPacientes() {
@@ -37,12 +39,13 @@ export function SearchPaciente() {
             setResultados(resultado)
         }
     }
+
     return (
         <>
             <input id="barra_busqueda" type="text" placeholder="CURP o nombre completo" onChange={handleBarraChange} />
             <button onClick={handleSearchPaciente}>Buscar</button>
             {resultados.map(resultado => (
-                <PacienteCard paciente={resultado}/>
+                <PacienteCard paciente={resultado} onClick={ navigate(`/paciente/${resultado.CURP}`)} key={resultado.CURP} />
             ))}
         </>
     )

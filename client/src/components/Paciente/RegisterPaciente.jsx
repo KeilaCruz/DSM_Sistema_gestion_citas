@@ -1,26 +1,31 @@
 import { useForm } from "react-hook-form"
-import { addPaciente } from "../../api/Pacientes.api"
+import { addPaciente, getAllPacientes } from "../../api/Pacientes.api"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export function RegisterPaciente() {
     const { register, handleSubmit } = useForm()
+    const [pacientes, setPacientes] = useState([])
     const [showCualEstatal, setShowEstatal] = useState(false)
     const [showCualFederal, setShowFederal] = useState(false)
     const [showCualMunicipal, setShowMunicipal] = useState(false)
     const navigate = useNavigate()
-    //Al definir la curp como unica en el back ya se valida si existe o no
+
+    async function loadPacientes() {
+        const res = await getAllPacientes()
+        setPacientes(res.data)
+    }
+    loadPacientes()
+    //Validar curp si existe o no antes de guardar
     const onSubmit = handleSubmit(async (data) => {
-        try {
+        let existe = pacientes.some((paciente) => paciente.CURP === data.CURP)
+        console.log(existe)
+        if (existe) {
+            alert("Ya se encuentra registrada esa CURP")
+        } else {
             const res = await addPaciente(data)
             console.log(res)
             navigate('/get-pacientes')
-        } catch (error) {
-            if (error.response && error.response.status === 400) {
-                alert("El paciente que desea registrar ya se encuentra registrado")
-            } else {
-                console.log("Error de solicitud")
-            }
         }
     })
     //activar campo para ingresar nombre de programa en el cuál es beneficiario

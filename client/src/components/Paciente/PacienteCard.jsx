@@ -8,7 +8,7 @@ export function PacienteCard({paciente}) {
 
     return (
         <>
-            <div key={paciente.CURP} style={{background: "gray"}} onClick={deleteClick}>
+            <div key={paciente.CURP} style={{background: "gray"}}>
                 <h1>{paciente.CURP}</h1>
                 <p>{paciente.nombre}</p>
                 <p>{paciente.apePaterno}</p>
