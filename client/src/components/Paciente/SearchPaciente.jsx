@@ -22,7 +22,6 @@ export function SearchPaciente() {
     }, [])
     const handleBarraChange = (evt) => {
         setCriterioSearch(evt.target.value)
-        console.log(criterio_search)
     }
     const handleSearchPaciente = async () => {
         //revisar si el criterio de busqueda es por CURP
@@ -45,7 +44,7 @@ export function SearchPaciente() {
             <input id="barra_busqueda" type="text" placeholder="CURP o nombre completo" onChange={handleBarraChange} />
             <button onClick={handleSearchPaciente}>Buscar</button>
             {resultados.map(resultado => (
-                <PacienteCard paciente={resultado} onClick={ navigate(`/paciente/${resultado.CURP}`)} key={resultado.CURP} />
+                <PacienteCard paciente={resultado} onClick={navigate(`/paciente/${resultado.CURP}`)} key={resultado.CURP} />
             ))}
         </>
     )

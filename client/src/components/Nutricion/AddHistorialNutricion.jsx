@@ -1,8 +1,44 @@
 import { useForm } from "react-hook-form"
 import { addHistoriaNutricion } from "../../api/Nutricion.api"
-
+import { useEffect, useState } from "react";
+import { getAllPacientes } from "../../api/Pacientes.api";
+import { PacienteCard } from "../Paciente/PacienteCard"
 export function AddHistorialNutricion() {
+    const [criterio_search, setCriterioSearch] = useState("")
+    const [pacientes, setPacientes] = useState([])
+    const [pacienteResult, setPacienteResult] = useState([])
+    let regCurp = /^\D{1,4}\d{1,6}/;
     const { register, handleSubmit } = useForm()
+
+    useEffect(() => {
+        async function loadPacientes() {
+            const res = await getAllPacientes()
+            setPacientes(res.data)
+        }
+        loadPacientes()
+    }, [])
+    const handleBarraChange = (evt) => {
+        setCriterioSearch(evt.target.value)
+        console.log(evt.target.value)
+    }
+    //Realizar la busqueda para el paciente a registrar su historia de nutricion
+    const handleSearchPaciente = async () => {
+        //revisar si el criterio de busqueda es por CURP
+        const revisarCurp = regCurp.test(criterio_search)
+
+        if (revisarCurp) {
+            // busca el paciente por curp
+            let resultado = pacientes.filter((paciente) => paciente.CURP === criterio_search)
+            console.log(resultado)
+            setPacienteResult(resultado)
+        } else {
+            //separa el nombre si el criterio es por nombre
+            const criterio_nombre = criterio_search.split(" ")
+            let resultado = pacientes.filter((paciente) => paciente.nombre === criterio_nombre[0] && paciente.apePaterno === criterio_nombre[1])
+            console.log(resultado)
+            setPacienteResult(resultado)
+        }
+    }
     const onSubmit = handleSubmit(async (data) => {
         const res = await addHistoriaNutricion(data);
         console.log(data)
@@ -10,6 +46,12 @@ export function AddHistorialNutricion() {
     })
     return (
         <>
+            <input id="barra_busqueda" type="text" placeholder="Buscar por CURP o nombre" onChange={handleBarraChange} />
+            <button onClick={handleSearchPaciente}>Buscar</button>
+            <label>Datos personales</label>
+            {pacienteResult.map(resultado => (
+                <PacienteCard paciente={resultado} key={resultado.CURP} />
+            ))}
             <form onSubmit={onSubmit}>
                 <textarea placeholder="Motivo de consulta" {...register("motivo_consulta", { required: true })}></textarea>
                 <label>AHF</label>
