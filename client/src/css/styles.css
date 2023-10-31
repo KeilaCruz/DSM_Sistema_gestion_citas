@@ -1,0 +1,41 @@
+.title {
+    color: #902829;
+    font-family: Gotham;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 3px;
+    
+}
+
+.input-form {
+    width: 700px;
+    height: 40px;
+    background: #f3eded;
+    border-radius: 3px;
+    font-family: Gotham;
+    font-size: 20px;
+    font-style: normal;
+    color: #545454;
+    line-height: normal;
+}
+
+.label-form {
+    color: #000;
+    font-family: Gotham;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button-form {
+    width: 200px;
+    height: 60px;
+    border-radius: 5px;
+    border: 1px solid #FFF;
+    background: #902829;
+    font-style: Gotham;
+    font-size: 28px;
+    color: #FFF;
+}
