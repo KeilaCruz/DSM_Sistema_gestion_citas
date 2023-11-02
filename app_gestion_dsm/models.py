@@ -69,6 +69,12 @@ class Cita(models.Model):
 
 class HistoriaNutricion(models.Model):
     idHistoriaNutricion = models.BigAutoField(primary_key=True)
+    fecha_registro = models.DateField(default=datetime.date.today)
+    num_expediente = models.PositiveIntegerField(default="")
+    sexo = models.CharField(max_length=3, default="")
+    fecha_nacimiento = models.DateField(null=True, default=None)
+    municipio_nacimiento = models.CharField(max_length=50, default="")
+    estado_nacimiento = models.CharField(max_length=50, default="")
     motivo_consulta = models.TextField(default="")
     AHF_diabetes = models.BooleanField(default=False)
     quien_diabetes = models.CharField(max_length=20, default="")
@@ -128,7 +134,7 @@ class HistoriaNutricion(models.Model):
     r24_cena = models.TextField(default="")
     diagnostico_nutricio = models.TextField(default="")
     tratamiento_nutricional = models.TextField(default="")
-    idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
+    idPaciente = models.ForeignKey(Paciente, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.idHistoriaNutricion
