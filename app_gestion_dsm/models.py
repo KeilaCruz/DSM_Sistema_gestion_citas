@@ -390,8 +390,13 @@ class ExamenMedico(models.Model):
     dengue_paludismo = models.CharField(max_length=50, default="")
     tatuajes = models.CharField(max_length=70, default="")
 
-    tension_arterial = models.PositiveIntegerField(default="")
-    frecuencia_cardiaca = models.PositiveIntegerField(default="")
+    tension_arterial = models.PositiveIntegerField(default=0)
+    frecuencia_cardiaca = models.PositiveIntegerField(default=0)
+    frecuencia_respiratoria =models.PositiveIntegerField(default=0)
+    oxigenacion = models.PositiveIntegerField(default=0)
+    temperatura = models.PositiveIntegerField(default=0)
+    
+    peso_actual = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     talla = models.DecimalField(max_digits=5, decimal_places=2, default="")
     imc = models.DecimalField(max_digits=5, decimal_places=2, default="")
     circunferencia_abd = models.DecimalField(max_digits=5, decimal_places=2, default="")

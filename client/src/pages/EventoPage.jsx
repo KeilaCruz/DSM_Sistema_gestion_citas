@@ -7,7 +7,6 @@ export function EventoPage() {
         <div>
             <NavBar />
 
-            
             <EventoList  />
             
             <Footer />

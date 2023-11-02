@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function ExamenMedicoCard({ examenMedico }) {
 
@@ -40,17 +41,34 @@ export function ExamenMedicoCard({ examenMedico }) {
   }, [examenMedico]);
 
   return (
-    <div
-      className="bg-zinc-800 p-3 hover:bg-zinc-700 cursor-pointer"
-      onClick={() => {
-        navigate(`/examenMedico-create/${examenMedico.idExamenMedico}`);
-      }}
+<div className="col-md-4 mb-4">
+<div className="card ">
+  <div className="card-body">
+    <h4 className="card-title">{pacienteNombre} {pacienteApePaterno} {pacienteApeMaterno}</h4>
+    <p className="card-text">
+      {" "}
+      <b>Especialista:</b> {usuarioNombre} {usuarioApePaterno} {usuarioApeMaterno}
+    </p>
+    <p className="card-text">
+      <b>Fecha:</b> {examenMedico.fecha}{" "}
+    </p>
+    {/* <Link
+      href=""
+      className="btn btn-primary me-3"
+      to={`/evento-create/visualizar/${examenMedico.idExamenMedico}`}
     >
-      <h1 className="font-bold uppercase">
-        Paciente: {pacienteNombre} {pacienteApePaterno} {pacienteApeMaterno}
-      </h1>
-      <p className="text-sm">Especialista: {usuarioNombre} {usuarioApePaterno} {usuarioApeMaterno}</p>
-      <p className="text-sm">Fecha: {examenMedico.fecha}</p>
-    </div>
+      Visualizar
+    </Link> */}
+    <Link
+      href=""
+      className="btn btn-primary"
+      to={`/examenMedico-create/${examenMedico.idExamenMedico}`}
+    >
+      Editar
+    </Link>
+  </div>
+</div>
+</div>
+
   );
 }

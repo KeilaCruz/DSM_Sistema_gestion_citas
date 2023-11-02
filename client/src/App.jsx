@@ -16,6 +16,8 @@ import { CrearEvento } from "./components-Evento/CrearEvento";
 import { EventoPage } from "./pages/EventoPage";
 import { CrearPaciente } from "./components-paciente/CrearPaciente";
 import { PacientePage } from "./pages/PacientePage";
+import { ReportePage } from "./pages/ReportePage";
+import { VerEvento } from "./components-Evento/VerEvento";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -27,6 +29,8 @@ function App(){
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reporte" element={<ReportePage />} />
+
         
 
         <Route path="/prueba-create" element={<CrearPrueba />} />
@@ -52,6 +56,7 @@ function App(){
         <Route path="/evento-create" element={<CrearEvento />} />
         <Route path="/evento" element={<EventoPage />} />
         <Route path="/evento-create/:id" element={<CrearEvento />} />
+        <Route path="/evento-create/visualizar/:id" element={<VerEvento />} />
 
         <Route path="/paciente-create" element={<CrearPaciente />} />
         <Route path="/paciente" element={<PacientePage />} />

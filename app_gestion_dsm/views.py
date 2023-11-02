@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from django.db.models import Q
 from rest_framework import viewsets, permissions, generics
 from .serializers import PacienteSerializer, HojaClinicaSerializer, RolSerializer, UsuarioSerializer, ExamenMedicoSerializer, EventoSerializer, CitaSerializer, HistoriaNutricionSerializer, FichaPsiAdultoSerializer, FichaPsiNiñoSerializer
@@ -8,13 +9,9 @@ from .models import Rol, Usuario, Paciente, Cita, HistoriaNutricion, FichaPsicol
 from rest_framework.permissions import IsAuthenticated
 
 
-""" class BuscarPacientePorNombre(generics.ListAPIView):
-    serializer_class = PacienteSerializer
-
-    def get_queryset(self):
-        nombre = self.request.query_params.get('nombre', '')
-        queryset = Paciente.objects.filter(Q(nombre__icontains=nombre))
-        return queryset """
+def get_cantidad_pacientes(request):
+    cantidad = Paciente.objects.count()
+    return JsonResponse({'cantidad_pacientes': cantidad})
     
     
 class PacienteView(viewsets.ModelViewSet):

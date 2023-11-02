@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createEventos, deleteEventos, updateEventos, getAllEventos, getEventos } from "../api/evento.api";
-import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import { getEventos } from "../api/evento.api";
+import {  useParams } from "react-router-dom";
 import { getAllUsuarios } from "../api/usuario.api";
 import { Footer } from "../components/Footer";
 import {NavBar}   from "../components/NavBar";
 
 
-export function CrearEvento() {
+export function VerEvento() {
 
   const [usuarios, setUsuarios] = useState([]);
   const [selectedUsuarios, setSelectedUsuarios] = useState("");
@@ -27,47 +26,13 @@ export function CrearEvento() {
 
   const {
     register,
-    handleSubmit,
     setValue,
     formState: { errors },
   } = useForm(); // Configuración y registro de formularios
 
-  const navigate = useNavigate(); // Función para navegar entre páginas
   const params = useParams(); // Parámetros de la URL
 
-  const onSubmit = handleSubmit(async (data) => {
-    // Función para manejar el envío del formulario
-
-
-    if (params.id) {
-      // Si hay un ID en los parámetros (modo edición), actualiza el rol
-      await updateEventos(params.id, data);
-      toast.success("Evento actualizado exitosamente", {
-        // Muestra una notificación de éxito
-        duration: 4000,
-        style: {
-          backgroundColor: "#101010",
-          color: "#fff",
-          fontWeight: "bold",
-          fontSize: "20px",
-        },
-      });
-    } else {
-      // Si no hay un ID en los parámetros (modo creación), crea un nuevo Rol
-      await createEventos(data);
-      toast.success("Evento creado exitosamente", {
-        // Muestra una notificación de éxito
-        duration: 4000,
-        style: {
-          backgroundColor: "#101010",
-          color: "#fff",
-          fontWeight: "bold",
-          fontSize: "20px",
-        },
-      });
-    }
-    navigate("/evento"); // Navega a la página de registro
-  });
+  
 
   useEffect(() => {
         async function loadEventos() {
@@ -94,7 +59,6 @@ export function CrearEvento() {
         window.history.back();
       };
 
-
   return (
     <div>
       <NavBar />
@@ -102,8 +66,7 @@ export function CrearEvento() {
 
 <div className="container-fluid" >
   
-  <form className="row g-3" onSubmit={onSubmit}>
-
+  <form className="row g-3">
 
     {/* Todo el cuerpo del formulario */}
     <div className="col-md-9 offset-md-1">
@@ -115,8 +78,8 @@ export function CrearEvento() {
           className= "form-control"
           placeholder="Nombre del Evento"
           {...register("nom_evento", { required: true })}
+          readOnly
         />
-        {errors.nom_evento && <span>Este campo es requerido</span>}
     </div>
 
     <div className="col-md-2 offset-md-1">
@@ -127,8 +90,8 @@ export function CrearEvento() {
           name="fecha"
           {...register("fecha", { required: true })}
           className="form-control"
+          readOnly
         />
-        {errors.fecha && <span>Este campo es requerido</span>}
     </div>
 
     <div className="col-md-2 offset-md-1">
@@ -139,8 +102,8 @@ export function CrearEvento() {
           name="hora"
           {...register("hora", { required: true })}
           className="form-control"
+          readOnly
         />
-        {errors.hora && <span>Este campo es requerido</span>}
     </div>
 
     <div className="col-md-9 offset-md-1">
@@ -152,8 +115,8 @@ export function CrearEvento() {
           name="Ubicación"
           {...register("lugar", { required: true })}
           className="form-control"
+          readOnly
         />
-        {errors.lugar && <span>Este campo es requerido</span>}
     </div>
 
     <div className="col-md-9 offset-md-1">
@@ -164,8 +127,8 @@ export function CrearEvento() {
           name="notas"
           {...register("notas", { required: false })}
           className="form-control"
+          readOnly
         ></textarea>
-        {errors.notas && <span>Este campo es requerido</span>}
     </div>
 
     <div className="col-md-9 offset-md-1">
@@ -174,6 +137,7 @@ export function CrearEvento() {
           value={selectedUsuarios}
           name="idUsuario"
           id="usuario"
+          disabled
           {...register("idUsuario", { required: true })}
           className="form-select"
           onChange={(e) => setSelectedUsuarios(e.target.value)}
@@ -185,65 +149,19 @@ export function CrearEvento() {
             </option>
           ))}
         </select>
-        {errors.idUsuario && <span>Este campo es requerido</span>}
-    </div>
-
-    <div className="col-md-9 offset-md-1">
-      {/* <button className="btn btn-success btn-lg mb-4">
-          Guardar
-        </button> */}
-
-        {params.id ? (
-        <button className="btn btn-success btn-lg mb-4">Guardar cambios</button>
-      ) : (
-        
-          <button className="btn btn-success btn-lg mb-4">Crear evento</button>
-        
-      )}
     </div>
     
   </form>
 
-  {params.id ? (
-  <div className="row g-3">
-    <div className="col-md-1 offset-md-1">
-      <button onClick={volverAtras} className="btn btn-primary">
-        Volver
-      </button>
-    </div>
-    <div className="col-md-1">
-      <button
-        className="btn btn-danger"
-        onClick={async () => {
-          const accepted = window.confirm("¿Estás seguro?");
-          if (accepted) {
-            await deleteEventos(params.id);
-            navigate("/evento");
-            toast.success("Evento eliminado exitosamente", {
-              duration: 4000,
-              style: {
-                backgroundColor: "#101010",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: "20px",
-              },
-            });
-          }
-        }}
-      >
-        Delete
-      </button>
-    </div>
-  </div>
-) : (
-  <div className="row g-3">
-    <div className="col-md-1 offset-md-1">
-      <button onClick={volverAtras} className="btn btn-primary">
-        Volver
-      </button>
-    </div>
-  </div>
-)}
+  
+        <div className="row g-3">
+          <div className="col-md-2 offset-1 ">
+          <button onClick={volverAtras} className="btn btn-primary mt-3">
+            Volver
+          </button>
+          </div>
+        </div>
+      
 </div>
 <Footer />
 </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function EventoCard({ evento }) {
   const navigate = useNavigate();
@@ -39,15 +40,23 @@ export function EventoCard({ evento }) {
           <p className="card-text">
             <b>Hora:</b> {evento.hora}{" "}
           </p>
-          <a
+          <Link
+            href=""
+            className="btn btn-primary me-3"
+            to={`/evento-create/visualizar/${evento.idEvento}`}
+          >
+            Visualizar
+          </Link>
+          <Link
             href=""
             className="btn btn-primary"
-            onClick={() => {
+            to={`/evento-create/${evento.idEvento}`}
+            /* onClick={() => {
               navigate(`/evento-create/${evento.idEvento}`);
-            }}
+            }} */
           >
             Editar
-          </a>
+          </Link>
         </div>
       </div>
     </div>

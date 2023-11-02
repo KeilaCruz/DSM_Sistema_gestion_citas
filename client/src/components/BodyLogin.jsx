@@ -2,7 +2,7 @@ export function BodyLogin() {
   return (
     <div>
       {/* Img grande de la página */}
-      <section className="main mt-3">
+      <section className="main ">
         <div className="container-fluid">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-md-9 col-lg-6 col-xl-5">
@@ -15,11 +15,11 @@ export function BodyLogin() {
 
             {/* Formulario */}
             <div
-              className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 mb-150"
+              className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 "
               
             >
               <form action="" method="POST">
-                <div className="divider d-flex align-items-center my-4">
+                <div className="divider d-flex align-items-center my-2">
                   <p className="text-center fw-bold mx-2  display-4">
                     Inicio de sesión
                   </p>
