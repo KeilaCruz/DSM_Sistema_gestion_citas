@@ -1,22 +1,26 @@
 import { useForm } from "react-hook-form"
 import { addCita, getAllCitas } from "../../api/Cita.api"
-import { getPaciente } from "../../api/Pacientes.api"
+import { getAllPacientes } from "../../api/Pacientes.api"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Header from "../partials/Header"
 export function AddCita() {
-    const [paciente, setPaciente] = useState([])
+    const [pacientes, setPacientes] = useState([])
     const [citas, setCitas] = useState([])
     const [criteria_paciente, setCriteriaPaciente] = useState("")
+    const [pacienteResultado, setPacienteResult] = useState([])
     const navigate = useNavigate("")
+    let regCurp = /^\D{1,4}\d{1,6}/;
+
     const { register, handleSubmit } = useForm()
     //cargar el arreglo del paciente
     useEffect(() => {
         async function loadPacientes() {
-            const res = await getPaciente(criteria_paciente)
-            setPaciente(res.data)
+            const res = await getAllPacientes()
+            setPacientes(res.data)
         }
         loadPacientes()
-    }, [criteria_paciente])
+    }, [])
     //cargar el objeto de citas
     useEffect(() => {
         async function loadCitas() {
@@ -25,7 +29,30 @@ export function AddCita() {
         }
         loadCitas()
     })
+
+    const handleBarraBusqueda = (evt) => {
+        setCriteriaPaciente(evt.target.value)
+    }
+    const handleBusquedaPaciente = () => {
+        //revisar si el criterio de busqueda es por CURP
+        const revisarCurp = regCurp.test(criteria_paciente)
+
+        if (revisarCurp) {
+            // busca el paciente por curp
+            let resultado = pacientes.filter((paciente) => paciente.CURP === criteria_paciente)
+            setPacienteResult(resultado)
+        } else {
+            //separa el nombre si el criterio es por nombre
+            const criterio_nombre = criteria_paciente.split(" ")
+            let resultado = pacientes.filter((paciente) => paciente.nombre === criterio_nombre[0] && paciente.apePaterno === criterio_nombre[1])
+            setPacienteResult(resultado)
+        }
+    }
     const onSubmit = handleSubmit(async (data) => {
+        //agregar el curp del paciente que se agendara la cita
+        if (pacienteResultado.length > 0) {
+            data.idPaciente = pacienteResultado[0].CURP
+        }
         //validacion de citas que no tengan la misma fecha, hora y especialidad antes de agendar
         const disponibleCita = citas.some((cita) => cita.fecha_cita === data.fecha_cita && cita.horario_cita === data.horario_cita &&
             cita.especialidad === data.especialidad)
@@ -43,30 +70,57 @@ export function AddCita() {
         }
     })
 
-    const handleBarraBusqueda = (evt) => {
-        //Una cita se tiene busca verificar que exista el paciente 
-        setCriteriaPaciente(evt.target.value)
-        console.log(criteria_paciente)
-    }
     return (
         <>
-            <input type="text" id="busqueda_paciente" onChange={handleBarraBusqueda} />
-            <form onSubmit={onSubmit}>
-                <input id="fecha_cita" type="date" placeholder="fecha de cita" {...register('fecha_cita', { required: true })} />
-                <input id="horario_cita" type="time" placeholder="hora_cita" {...register('hora_cita', { required: true })} />
-                <input id="curp_paciente" type="text" value={paciente.CURP} {...register('idPaciente', { required: true })} />
-                <select id="especialidad" {...register("especialidad", { required: true })}>
-                    <option value="Nutricion">Nutrición</option>
-                    <option value="Medico-general">Medico general</option>
-                    <option value="Odontología">Odontología</option>
-                    <option value="Psicologia">Psicologia</option>
-                </select>
-                <p>{paciente.nombre}</p>
-                <p>{paciente.apePaterno}</p>
-                <p>{paciente.apeMaterno}</p>
-                <p>{paciente.edad}</p>
-                <button>Guardar</button>
-            </form>
+            <div>
+                <Header />
+                <div className="container">
+                    <input className="input-barra-busqueda" type="text" id="busqueda_paciente" placeholder="Buscar por CURP o nombre" onChange={handleBarraBusqueda} />
+                    <button onClick={handleBusquedaPaciente}>Buscar</button>
+                    <form onSubmit={onSubmit}>
+                        <div className="container-options">
+                            <input className="input-option" id="fecha_cita" type="date" placeholder="fecha de cita" {...register('fecha_cita', { required: true })} />
+                            <input className="input-option" id="horario_cita" type="time" placeholder="hora_cita" {...register('hora_cita', { required: true })} />
+                            <select className="input-option" id="especialidad" {...register("especialidad", { required: true })}>
+                                <option value="Nutricion">Nutrición</option>
+                                <option value="Medico-general">Medico general</option>
+                                <option value="Odontologia">Odontología</option>
+                                <option value="Psicologia">Psicologia</option>
+                            </select>
+                        </div>
+                        <div className="container-table">
+                            <table className="table">
+                                <thead className="cabecera">
+                                    <tr>
+                                        <th>Sl.</th>
+                                        <th>CURP</th>
+                                        <th>Nombre</th>
+                                        <th>Edad</th>
+                                        <th>Dirección</th>
+                                        <th>Telefono</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="tbody">
+                                    {pacienteResultado.map(paciente => (
+                                        <tr key={paciente.CURP}>
+                                            <td>#</td>
+                                            <td>{paciente.CURP}</td>
+                                            <td>{`${paciente.nombre} ${paciente.apePaterno} ${paciente.apeMaterno}`}</td>
+                                            <td>{paciente.edad}</td>
+                                            <td>{`${paciente.colonia} ${paciente.calle} #${paciente.numero_exterior}`}</td>
+                                            <td>{paciente.telefono}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="container-button">
+                            <button className="button-cancelar">Cancelar</button>
+                            <button className="button-guardar">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </>
     )
 }
