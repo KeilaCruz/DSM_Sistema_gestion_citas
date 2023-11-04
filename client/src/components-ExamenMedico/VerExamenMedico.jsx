@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  getAllExamenMedico,
-  getExamenMedico,
-  createExamenMedico,
-  deleteExamenMedico,
-  updateExamenMedcio,
-} from "../api/examenMedico.api";
+import {getExamenMedico,} from "../api/examenMedico.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { getAllPacientes } from "../api/paciente.api";
@@ -15,14 +9,12 @@ import { getAllRoles } from "../api/rol.api";
 import { NavBar } from "../components/NavBar";
 import { Footer } from "../components/Footer";
 
-export function CrearExamenMedico() {
+export function VerExamenMedico() {
   const [pacientes, setPacientes] = useState([]);
   const [selectedPacientes, setSelectedPacientes] = useState("");
 
   const [usuarios, setUsuarios] = useState([]);
   const [selectedUsuarios, setSelectedUsuarios] = useState("");
-
-  
 
   const [showmadreViva, setShowMadreViva] = useState(false);
   const [showpadreVivo, setShowPadreVivo] = useState(false);
