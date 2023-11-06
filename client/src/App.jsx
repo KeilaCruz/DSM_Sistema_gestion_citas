@@ -10,6 +10,9 @@ import { FichaPNForm } from './pages/FichaPNForm'
 import { GetFichaPA } from './pages/GetFichaPA'
 import { ResultBusqueda } from './pages/ResultBusqueda'
 import { VisualizarPaciente } from './pages/VisualizarPaciente'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 function App() {
 
   return (
