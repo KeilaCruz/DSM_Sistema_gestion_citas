@@ -23,8 +23,9 @@ export function VerExamenMedico() {
   const [showPracticaEjercicio, setShowPracticaEjercicio] = useState(false);
   const [showTabaquismo, setShowTabaquismo] = useState(false);
   const [showAlcoholismo, setShowAlcoholismo] = useState(false);
-  const [showPlanificacionFamiliar, setShowPlanificacionFamiliar] =
-    useState(false);
+  const [showPlanificacionFamiliar, setShowPlanificacionFamiliar] = useState(false);
+
+  
 
   const handleRadioMadreChange = (evt) => {
     const optionSeleccionada = evt.target.value;
@@ -298,7 +299,7 @@ export function VerExamenMedico() {
               value={selectedUsuarios}
               name="idUsuario"
               id="especialista"
-              className="form-select"
+              className="form-select" disabled
               {...register("idUsuario", { required: true })}
               onChange={(e) => setSelectedUsuarios(e.target.value)}
             >
@@ -320,7 +321,7 @@ export function VerExamenMedico() {
               value={selectedPacientes}
               name="idPaciente"
               id="paciente"
-              className="form-select"
+              className="form-select" disabled 
               {...register("idPaciente", { required: true })}
               onChange={(e) => setSelectedPacientes(e.target.value)}
             >
@@ -341,7 +342,7 @@ export function VerExamenMedico() {
             <select
               id="sexo"
               name="sexo"
-              className="form-select"
+              className="form-select" disabled
               {...register("sexo", { required: true })}
             >
               <option value="masculino">Masculino</option>
@@ -360,7 +361,7 @@ export function VerExamenMedico() {
               placeholder="Fecha"
               id="fecha"
               {...register("fecha", { required: true })}
-              className="form-control"
+              className="form-control"disabled
             />
             {errors.fecha && <span>Este campo es requerido</span>}
           </div>
@@ -374,13 +375,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="madre-viva"
                 name="opcion-madre"
                 value={true}
                 {...register("madre_viva", { required: true })}
-                onChange={handleRadioMadreChange}
               />
               <label class="form-check-label" htmlFor="madre-viva">
                 {" "}
@@ -392,13 +392,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="madre-muerta"
                 name="opcion-madre"
                 value={false}
                 {...register("madre_viva", { required: true })}
-                onChange={handleRadioMadreChange}
               />
               <label class="form-check-label" htmlFor="madre-muerta">
                 {" "}
@@ -408,7 +407,7 @@ export function VerExamenMedico() {
             </div>
           </div>
 
-          {showmadreViva && (
+          
             <div className="col-md-2">
               <label className="form-label" htmlFor="madre-causa">
                 ¿Cómo fallecio?
@@ -416,12 +415,12 @@ export function VerExamenMedico() {
               <input
                 type="text"
                 placeholder="Causas de muerte"
-                className="form-control"
+                className="form-control"disabled
                 id="madre-causa"
                 {...register("madre_finada", { required: false })}
               />
             </div>
-          )}
+          
           <div className="col-md-11"></div>
 
           <div class="col-md-1 offset-md-1 fw-bold">
@@ -431,13 +430,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="padre-vivo"
                 name="opcion-padre"
                 value={true}
                 {...register("padre_vivo", { required: true })}
-                onChange={handleRadioPadreChange}
               />
               <label class="form-check-label" htmlFor="padre-vivo">
                 {" "}
@@ -449,13 +447,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="padre-muerto"
                 name="opcion-padre"
                 value={false}
                 {...register("padre_vivo", { required: true })}
-                onChange={handleRadioPadreChange}
               />
               <label class="form-check-label" htmlFor="padre-muerto">
                 {" "}
@@ -465,7 +462,7 @@ export function VerExamenMedico() {
             </div>
           </div>
 
-          {showpadreVivo && (
+          
             <div className="col-md-2">
               <label className="form-label" htmlFor="padre-causa">
                 ¿Cómo fallecio?
@@ -475,10 +472,10 @@ export function VerExamenMedico() {
                 placeholder="Causas de muerte"
                 id="padre-causa"
                 {...register("padre_finado", { required: false })}
-                className="form-control"
+                className="form-control"disabled
               />
             </div>
-          )}
+          
 
           <div className="col-md-11"></div>
 
@@ -489,13 +486,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="hermano-vivo"
                 name="opcion-hermano"
                 value={true}
                 {...register("hermano_vivo", { required: true })}
-                onChange={handleRadioHermanoChange}
               />
               <label class="form-check-label" htmlFor="hermano-vivo">
                 {" "}
@@ -507,13 +503,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="hermano-muerto"
                 name="opcion-hermano"
                 value={false}
                 {...register("hermano_vivo", { required: true })}
-                onChange={handleRadioHermanoChange}
               />
               <label class="form-check-label" htmlFor="hermano-muerto">
                 {" "}
@@ -523,7 +518,6 @@ export function VerExamenMedico() {
             </div>
           </div>
 
-          {showhermanoVivo && (
             <div className="col-md-2">
               <label className="form-label" htmlFor="hermano-causa">
                 ¿Cómo fallecio?
@@ -533,10 +527,10 @@ export function VerExamenMedico() {
                 placeholder="Causas de muerte"
                 id="hermano-causa"
                 {...register("hermano_finado", { required: false })}
-                className="form-control"
+                className="form-control"disabled
               />
             </div>
-          )}
+          
 
           <div className="col-md-11"></div>
 
@@ -547,13 +541,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="hijos-vivos"
                 name="opcion-hijos"
                 value={true}
                 {...register("hijos_vivos", { required: true })}
-                onChange={handleRadioHijosChange}
               />
               <label class="form-check-label" htmlFor="hijos-vivos">
                 {" "}
@@ -565,13 +558,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="hijos-muertos"
                 name="opcion-hijos"
                 value={false}
                 {...register("hijos_vivos", { required: true })}
-                onChange={handleRadioHijosChange}
               />
               <label class="form-check-label" htmlFor="hijos-muertos">
                 {" "}
@@ -581,7 +573,7 @@ export function VerExamenMedico() {
             </div>
           </div>
 
-          {showhijosVivos && (
+          
             <div className="col-md-2">
               <label className="form-label" htmlFor="hijo-causa">
                 ¿Cómo fallecio?
@@ -591,10 +583,10 @@ export function VerExamenMedico() {
                 placeholder="Causas de muerte"
                 id="hijo-causa"
                 {...register("hijos_finados", { required: false })}
-                className="form-control"
+                className="form-control"disabled
               />
             </div>
-          )}
+          
 
           <div className="col-md-11"></div>
 
@@ -609,7 +601,7 @@ export function VerExamenMedico() {
               placeholder="Agudeza visual"
               id="agudeza-visual"
               {...register("agudeza_visual", { required: true })}
-              className="form-control"
+              className="form-control"disabled
             />
             {errors.agudeza_visual && <span>Este campo es requerido</span>}
           </div>
@@ -623,7 +615,7 @@ export function VerExamenMedico() {
               placeholder="Hipertension"
               id="hipertension"
               {...register("hiper_tension", { required: true })}
-              className="form-control"
+              className="form-control"disabled
             />
             {errors.hiper_tension && <span>Este campo es requerido</span>}
           </div>
@@ -637,7 +629,7 @@ export function VerExamenMedico() {
               placeholder="Diabetes"
               id="diabetes"
               {...register("diabetes_mellitus", { required: true })}
-              className="form-control"
+              className="form-control"disabled
             />
             {errors.diabetes_mellitus && <span>Este campo es requerido</span>}
           </div>
@@ -651,7 +643,7 @@ export function VerExamenMedico() {
               placeholder="Obesidad"
               id="obesidad"
               {...register("obesidad", { required: true })}
-              className="form-control"
+              className="form-control"disabled
             />
             {errors.obesidad && <span>Este campo es requerido</span>}
           </div>
@@ -665,7 +657,7 @@ export function VerExamenMedico() {
               placeholder="Asma"
               id="asma"
               {...register("asma", { required: true })}
-              className="form-control"
+              className="form-control"disabled
             />
             {errors.asma && <span>Este campo es requerido</span>}
           </div>
@@ -679,7 +671,7 @@ export function VerExamenMedico() {
             placeholder="Epilépsia"
             id="epilepsia"
             {...register("epilepsia", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.epilepsia && <span>Este campo es requerido</span>}
           </div>
@@ -693,7 +685,7 @@ export function VerExamenMedico() {
             placeholder="Lupus"
             id="lupus"
             {...register("lupus", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.lupus && <span>Este campo es requerido</span>}
           </div>
@@ -707,7 +699,7 @@ export function VerExamenMedico() {
             placeholder="Nefropatias"
             id="nefropatias"
             {...register("nefropatias", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.nefropatias && <span>Este campo es requerido</span>}
           </div>
@@ -721,7 +713,7 @@ export function VerExamenMedico() {
             placeholder="Artropatias"
             id="artropatias"
             {...register("artropatias", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.artropatias && <span>Este campo es requerido</span>}
           </div>
@@ -735,7 +727,7 @@ export function VerExamenMedico() {
             placeholder="Otras enfermedades"
             id="otras-enfermedades"
             {...register("otras_enfermedades", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.otras_enfermedades && <span>Este campo es requerido</span>}
           </div>
@@ -748,7 +740,7 @@ export function VerExamenMedico() {
             placeholder="Observaciones"
             id="observaciones"
             {...register("observaciones_enfermedades", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           ></textarea>
           {errors.observaciones_enfermedades && (
             <span>Este campo es requerido</span>
@@ -768,7 +760,7 @@ export function VerExamenMedico() {
             id="nacimiento"
             placeholder="Lugar de nacimiento"
             {...register("lugar_nacimiento", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.lugar_nacimiento && <span>Este campo es requerido</span>}
           </div>
@@ -782,7 +774,7 @@ export function VerExamenMedico() {
             placeholder="Fecha de nacimiento"
             id="fecha-nacimiento"
             {...register("fecha_nacimiento", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.fecha_nacimiento && <span>Este campo es requerido</span>}
           </div>
@@ -796,7 +788,7 @@ export function VerExamenMedico() {
             placeholder="Escolaridad"
             id="escolaridad"
             {...register("escolaridad", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.escolaridad && <span>Este campo es requerido</span>}
           </div>
@@ -810,7 +802,7 @@ export function VerExamenMedico() {
             placeholder="Trabajo actual"
             id="trabajo-actual"
             {...register("trabajo_actual", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.trabajo_actual && <span>Este campo es requerido</span>}
           </div>
@@ -824,13 +816,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled 
                 type="radio"
                 id="ejercicio-si"
                 name="opcion-ejercicio"
                 value={true}
                 {...register("practica_ejercicio", { required: true })}
-                onChange={handleRadioEjercicioChange}
               />
               <label class="form-check-label" htmlFor="ejercicio-si">
                 {" "}
@@ -844,13 +835,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="ejercicio-no"
                 name="opcion-ejercicio"
                 value={false}
                 {...register("practica_ejercicio", { required: true })}
-                onChange={handleRadioEjercicioChange}
               />
               <label class="form-check-label" htmlFor="ejercicio-no">
                 {" "}
@@ -862,7 +852,6 @@ export function VerExamenMedico() {
             </div>
           </div>
 
-          {showPracticaEjercicio && (
             <div className="col-md-2">
               <label className="form-label" htmlFor="cual-ejercicio">
                 ¿Cual ejercicio?
@@ -870,12 +859,12 @@ export function VerExamenMedico() {
               <input
                 type="text"
                 id="cual-ejercicio"
-                placeholder="¿Cual ejercicio?"
+                placeholder="Ejercicio"
                 {...register("ejercicio_cual", { required: false })}
-                className="form-control"
+                className="form-control" disabled
               />
             </div>
-          )}
+          
           
               <div className="col-md-11">
 
@@ -888,13 +877,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="tabaquismo-si"
                 name="opcion-tabaco"
                 value={true}
                 {...register("tabaquismo", { required: true })}
-                onChange={handleRadioTabaquismoChange}
               />
               <label class="form-check-label" htmlFor="tabaquismo-si">
                 {" "}
@@ -906,13 +894,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled 
                 type="radio"
                 id="tabaquismo-no"
                 name="opcion-tabaco"
                 value={false}
                 {...register("tabaquismo", { required: true })}
-                onChange={handleRadioTabaquismoChange}
               />
               <label class="form-check-label" htmlFor="tabaquismo-no">
                 {" "}
@@ -933,7 +920,7 @@ export function VerExamenMedico() {
                 id="tabaco-edad"
                 defaultValue={0}
                 {...register("tabaquismo_edad", { required: false })}
-                className="form-control"
+                className="form-control"disabled
               />
 
               <label className="form-label" htmlFor="tabaco-cantidad">
@@ -945,7 +932,7 @@ export function VerExamenMedico() {
                 defaultValue={0}
                 placeholder="¿Cuantos al día u ocasional?"
                 {...register("tabaquismo_cantidad", { required: false })}
-                className="form-control"
+                className="form-control"disabled
               />
             </div>
           )}
@@ -961,13 +948,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="toma-si"
                 name="opcion-alcoholismo"
                 value={true}
                 {...register("alcoholismo", { required: true })}
-                onChange={handleRadioAlcoholismoChange}
               />
               <label class="form-check-label" htmlFor="toma-si">
                 {" "}
@@ -979,13 +965,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="toma-no"
                 name="opcion-alcoholismo"
                 value={false}
                 {...register("alcoholismo", { required: true })}
-                onChange={handleRadioAlcoholismoChange}
               />
               <label class="form-check-label" htmlFor="toma-no">
                 {" "}
@@ -995,7 +980,6 @@ export function VerExamenMedico() {
             </div>
           </div>
 
-          {showAlcoholismo && (
             <div className="col-md-2">
               <label className="form-label" htmlFor="alcoholico-edad">
                 ¿Desde cuando? (Edad aprox)
@@ -1006,10 +990,10 @@ export function VerExamenMedico() {
                 defaultValue={0}
                 placeholder="¿Desde cuando? (Edad aprox)"
                 {...register("alcoholismo_edad", { required: false })}
-                className="form-control"
+                className="form-control"disabled 
               />
             </div>
-          )}
+          
 
 <div className="col-md-11">
 
@@ -1025,7 +1009,7 @@ export function VerExamenMedico() {
             placeholder="Inmunizaciones"
             id="inmunizaciones"
             {...register("inmunizaciones", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
 
@@ -1038,7 +1022,7 @@ export function VerExamenMedico() {
             placeholder="Habitos higienicos"
             id="habitos-higienicos"
             {...register("habitos_higienicos", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
 
@@ -1051,7 +1035,7 @@ export function VerExamenMedico() {
             placeholder="Habitos alimenticios"
             id="alimenticios"
             {...register("habitos_alimenticios", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
 
@@ -1064,7 +1048,7 @@ export function VerExamenMedico() {
             placeholder="Especifique habitos"
             id="habitos"
             {...register("especifique_habitos", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
 
@@ -1080,7 +1064,7 @@ export function VerExamenMedico() {
             id="edad-menarca"
             placeholder="Edad menarca"
             {...register("edad_menarca", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
 
@@ -1093,7 +1077,7 @@ export function VerExamenMedico() {
             id="duración"
             placeholder="Frecuencia y duracion"
             {...register("frecuencia_duracion", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
 
@@ -1107,7 +1091,7 @@ export function VerExamenMedico() {
             id="ultima-menstruacion"
             placeholder="Ultima menstruacion"
             {...register("ultima_menstruacion", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
 </div>
           
@@ -1120,7 +1104,7 @@ export function VerExamenMedico() {
             id="num-embarazos"
             placeholder="Numero de embarazos"
             {...register("num_embarazos", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
           
@@ -1133,7 +1117,7 @@ export function VerExamenMedico() {
             id="num-partos"
             placeholder="Numero de partos"
             {...register("num_partos", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
 </div>
           
@@ -1147,7 +1131,7 @@ export function VerExamenMedico() {
             id="num-cesareas"
             placeholder="Numero de cesareas"
             {...register("num_cesareas", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
 </div>
 
@@ -1160,7 +1144,7 @@ export function VerExamenMedico() {
             id="num-abortos"
             placeholder="Numero de abortos"
             {...register("num_abortos", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
           
@@ -1173,7 +1157,7 @@ export function VerExamenMedico() {
             id="ultimo-parto"
             placeholder="Ultimo parto"
             {...register("ultimo_parto", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
 
@@ -1186,7 +1170,7 @@ export function VerExamenMedico() {
             id="ultimo-aborto"
             placeholder="Ultimo aborto"
             {...register("ultimo_aborto", { required: false })}
-            className="form-control"
+            className="form-control"disabled
           />
           </div>
 
@@ -1200,13 +1184,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="plan-si"
                 name="opcion-planificacion"
                 value={true}
                 {...register("planificacion_familiar", { required: true })}
-                onChange={handleRadioPlanFamiliarChange}
               />
               <label class="form-check-label" htmlFor="plan-si">
                 {" "}
@@ -1220,13 +1203,12 @@ export function VerExamenMedico() {
           <div class="col-md-1">
             <div class="form-check">
               <input
-                class="form-check-input"
+                class="form-check-input" disabled
                 type="radio"
                 id="plan-no"
                 name="opcion-planificacion"
                 value={false}
                 {...register("planificacion_familiar", { required: true })}
-                onChange={handleRadioPlanFamiliarChange}
               />
               <label class="form-check-label" htmlFor="plan-no">
                 {" "}
@@ -1238,7 +1220,6 @@ export function VerExamenMedico() {
             </div>
           </div>
 
-          {showPlanificacionFamiliar && (
             <div className="col-md-4">
               <label htmlFor="metodo-familiar" className="form-label">
                 Especifique:
@@ -1248,10 +1229,10 @@ export function VerExamenMedico() {
                 id="metodo-familiar"
                 placeholder="Método"
                 {...register("metodo_planificacion", { required: false })}
-                className="form-control"
+                className="form-control"disabled
               />
             </div>
-          )}
+          
 
           <div className="col-md-11"></div>
 
@@ -1266,7 +1247,7 @@ export function VerExamenMedico() {
             placeholder="Luxación y Fracturas"
             id="traumaticos"
             {...register("traumatismos", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.traumatismos && <span>Este campo es requerido</span>}
           </div>
@@ -1280,7 +1261,7 @@ export function VerExamenMedico() {
             placeholder="Quirurgicos"
             id="quirurgicos"
             {...register("quirurgicos", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.quirurgicos && <span>Este campo es requerido</span>}
           </div>
@@ -1293,7 +1274,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Transfusiones"
             {...register("transfusiones", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.transfusiones && <span>Este campo es requerido</span>}
           </div>
@@ -1304,7 +1285,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Grupo sanguineo"
             {...register("grupo_sanguineo", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.grupo_sanguineo && <span>Este campo es requerido</span>}
           </div>
@@ -1317,7 +1298,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Factor RH"
             {...register("factor_rh", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.factor_rh && <span>Este campo es requerido</span>}
           </div>
@@ -1330,7 +1311,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Alergias"
             {...register("alergias", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.alergias && <span>Este campo es requerido</span>}
           </div>
@@ -1343,7 +1324,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Infecciones"
             {...register("infecciones", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.infecciones && <span>Este campo es requerido</span>}
           </div>
@@ -1356,7 +1337,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Dengue Paludismo"
             {...register("dengue_paludismo", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.dengue_paludismo && <span>Este campo es requerido</span>}
 
@@ -1370,7 +1351,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Tatuajes"
             {...register("tatuajes", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.tatuajes && <span>Este campo es requerido</span>}
           </div>
@@ -1387,7 +1368,7 @@ export function VerExamenMedico() {
             type="number"
             placeholder="Tension arterial mmHg"
             {...register("tension_arterial", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.tension_arterial && <span>Este campo es requerido</span>}
             </div>
@@ -1400,7 +1381,7 @@ export function VerExamenMedico() {
             type="number"
             placeholder="FC"
             {...register("frecuencia_cardiaca", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.frecuencia_cardiaca && <span>Este campo es requerido</span>}
             </div>
@@ -1413,7 +1394,7 @@ export function VerExamenMedico() {
             type="number"
             placeholder="FR"
             {...register("frecuencia_respiratoria", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.frecuencia_respiratoria && (
             <span>Este campo es requerido</span>
@@ -1428,7 +1409,7 @@ export function VerExamenMedico() {
             type="number"
             placeholder="Oxigenación %"
             {...register("oxigenacion", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.oxigenacion && <span>Este campo es requerido</span>}
             </div>
@@ -1441,7 +1422,7 @@ export function VerExamenMedico() {
             type="number"
             placeholder="Temperatura °C"
             {...register("temperatura", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.temperatura && <span>Este campo es requerido</span>}
             </div>
@@ -1458,7 +1439,7 @@ export function VerExamenMedico() {
             type="number"
             placeholder="peso actual en Kg"
             {...register("peso_actual", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.peso_actual && <span>Este campo es requerido</span>}
           </div>
@@ -1469,7 +1450,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Talla"
             {...register("talla", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.talla && <span>Este campo es requerido</span>}
 
@@ -1481,7 +1462,7 @@ export function VerExamenMedico() {
             type="number"
             placeholder="IMC"
             {...register("imc", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.imc && <span>Este campo es requerido</span>}
             </div>
@@ -1492,7 +1473,7 @@ export function VerExamenMedico() {
             type="number"
             placeholder="Circunferencia del abdomen"
             {...register("circunferencia_abd", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.circunferencia_abd && <span>Este campo es requerido</span>}
             </div>
@@ -1503,7 +1484,7 @@ export function VerExamenMedico() {
             type="number"
             placeholder="Circunferencia cadera"
             {...register("circunferencia_cadera", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.circunferencia_cadera && <span>Este campo es requerido</span>}
             </div>
@@ -1513,7 +1494,7 @@ export function VerExamenMedico() {
           <textarea
             placeholder="Observaciones"
             {...register("observaciones_antropometria", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           ></textarea>
           {errors.observaciones_antropometria && (
             <span>Este campo es requerido</span>
@@ -1531,7 +1512,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Cabeza"
             {...register("EF_cabeza", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.EF_cabeza && <span>Este campo es requerido</span>}
             </div>
@@ -1542,7 +1523,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Cuello"
             {...register("EF_cuello", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.EF_cuello && <span>Este campo es requerido</span>}
             </div>
@@ -1554,7 +1535,7 @@ export function VerExamenMedico() {
             placeholder="Torax"
             {...register("EF_torax", { required: true })}
             class
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.EF_torax && <span>Este campo es requerido</span>}
             </div>
@@ -1565,7 +1546,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Abdomen"
             {...register("EF_abdomen", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.EF_abdomen && <span>Este campo es requerido</span>}
             </div>
@@ -1579,7 +1560,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Superiores"
             {...register("EF_EXT_sup", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.EF_EXT_sup && <span>Este campo es requerido</span>}
           </div>
@@ -1590,7 +1571,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Inferiores"
             {...register("EF_EXT_inf", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.EF_EXT_inf && <span>Este campo es requerido</span>}
           </div>
@@ -1601,7 +1582,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Rodillas"
             {...register("EF_EXT_rodillas", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.EF_EXT_rodillas && <span>Este campo es requerido</span>}
             </div>
@@ -1612,7 +1593,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Pelvis"
             {...register("EF_EXT_pelvis", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.EF_EXT_pelvis && <span>Este campo es requerido</span>}
  
@@ -1624,7 +1605,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Pies"
             {...register("EF_EXT_pies", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.EF_EXT_pie && <span>Este campo es requerido</span>} 
             </div>
@@ -1642,7 +1623,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Biometria hematica"
             {...register("biometria_hematica", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.biometria_hematica && <span>Este campo es requerido</span>}
             </div>
@@ -1653,7 +1634,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Quimica sanguinea"
             {...register("quimica_sanguinea", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.quimica_sanguinea && <span>Este campo es requerido</span>}
             </div>
@@ -1664,7 +1645,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="VDRL"
             {...register("vdrl", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.vdrl && <span>Este campo es requerido</span>}
             </div>
@@ -1675,7 +1656,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Prueba VIH"
             {...register("prueba_vih", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.prueba_vih && <span>Este campo es requerido</span>}
 
@@ -1688,7 +1669,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Antidoping"
             {...register("antidoping", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.antidoping && <span>Este campo es requerido</span>}
             </div>
@@ -1700,7 +1681,7 @@ export function VerExamenMedico() {
             type="text"
             placeholder="Examen de orina"
             {...register("examen_orina", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           />
           {errors.examen_orina && <span>Este campo es requerido</span>}
             </div>
@@ -1710,57 +1691,18 @@ export function VerExamenMedico() {
           <textarea
             placeholder="Diagnostico"
             {...register("diagnostico", { required: true })}
-            className="form-control"
+            className="form-control"disabled
           ></textarea>
           {errors.diagnostico && <span>Este campo es requerido</span>}
             </div>
 
-            <div className="col-md-3 offset-md-1">
-            {params.id ? (
-        <button className="btn btn-success btn-lg mb-4">Guardar cambios</button>
-      ) : (
-        
-          <button className="btn btn-success btn-lg mb-4">Crear exámen médico</button>
-        
-      )}
-            </div>
+            
         </form>
 
-        {params.id ? (
+        {params.id && (
   <div className="row g-3">
     <div className="col-md-1 offset-md-1">
-      <button onClick={volverAtras} className="btn btn-primary">
-        Volver
-      </button>
-    </div>
-    <div className="col-md-1">
-      <button
-        className="btn btn-danger"
-        onClick={async () => {
-          const accepted = window.confirm("¿Estás seguro?");
-          if (accepted) {
-            await deleteExamenMedico(params.id);
-            navigate("/examenMedico");
-            toast.success("Examen medico eliminado exitosamente", {
-              duration: 4000,
-              style: {
-                backgroundColor: "#101010",
-                color: "#fff",
-                fontWeight: "bold",
-                fontSize: "20px",
-              },
-            });
-          }
-        }}
-      >
-        Eliminar
-      </button>
-    </div>
-  </div>
-) : (
-  <div className="row g-3">
-    <div className="col-md-1 offset-md-1">
-      <button onClick={volverAtras} className="btn btn-primary">
+      <button onClick={volverAtras} className="btn btn-primary mt-3">
         Volver
       </button>
     </div>

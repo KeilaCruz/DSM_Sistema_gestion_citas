@@ -51,9 +51,6 @@ export function EventoCard({ evento }) {
             href=""
             className="btn btn-primary"
             to={`/evento-create/${evento.idEvento}`}
-            /* onClick={() => {
-              navigate(`/evento-create/${evento.idEvento}`);
-            }} */
           >
             Editar
           </Link>

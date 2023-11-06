@@ -8,10 +8,13 @@ import { CrearRol } from "./components-Rol/CrearRol";
 import { RolPage } from "./pages/RolPage";
 import { CrearUsuario } from "./components-Usuario/CrearUsuario";
 import { UsuarioPage } from "./pages/UsuarioPage";
+import { VerUsuario } from "./components-Usuario/VerUsuario";
 import { CrearHojaEvaluacion } from "./components-HojaEvaluacion/CrearHojaEvaluacion";
 import { HojaEvaluacionPage } from "./pages/HojaEvaluacionPage";
+import { VerHojaEvaluacion } from "./components-HojaEvaluacion/VerHojaEvaluacion";
 import { CrearExamenMedico } from "./components-ExamenMedico/CrearExamenMedico";
 import {ExamenMedicoPage} from "./pages/ExamenMedicoPage";
+import {VerExamenMedico} from "./components-ExamenMedico/VerExamenMedico";
 import { CrearEvento } from "./components-Evento/CrearEvento";
 import { EventoPage } from "./pages/EventoPage";
 import { CrearPaciente } from "./components-paciente/CrearPaciente";
@@ -44,14 +47,17 @@ function App(){
         <Route path="/usuario-create" element={<CrearUsuario />} />
         <Route path="/usuario" element={<UsuarioPage />} />
         <Route path="/usuario-create/:id" element={<CrearUsuario />} />
+        <Route path="/usuario-create/visualizar/:id" element={<VerUsuario />} />
 
         <Route path="/hojaEvaluacion-create" element={<CrearHojaEvaluacion />} />
         <Route path="/hojaEvaluacion" element={<HojaEvaluacionPage />} />
         <Route path="/hojaEvaluacion-create/:id" element={<CrearHojaEvaluacion />} />
+        <Route path="/hojaEvaluacion-create/visualizar/:id" element={<VerHojaEvaluacion />} />
 
         <Route path="/examenMedico-create" element={<CrearExamenMedico />} />
         <Route path="/examenMedico" element={<ExamenMedicoPage />} />
         <Route path="/examenMedico-create/:id" element={<CrearExamenMedico />} />
+        <Route path="/examenMedico-create/visualizar/:id" element={<VerExamenMedico />} />
 
         <Route path="/evento-create" element={<CrearEvento />} />
         <Route path="/evento" element={<EventoPage />} />

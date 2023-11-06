@@ -152,8 +152,6 @@ export function VerEvento() {
     </div>
     
   </form>
-
-  
         <div className="row g-3">
           <div className="col-md-2 offset-1 ">
           <button onClick={volverAtras} className="btn btn-primary mt-3">

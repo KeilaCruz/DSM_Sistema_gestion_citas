@@ -52,13 +52,13 @@ export function ExamenMedicoCard({ examenMedico }) {
     <p className="card-text">
       <b>Fecha:</b> {examenMedico.fecha}{" "}
     </p>
-    {/* <Link
+    <Link
       href=""
       className="btn btn-primary me-3"
-      to={`/evento-create/visualizar/${examenMedico.idExamenMedico}`}
+      to={`/examenMedico-create/visualizar/${examenMedico.idExamenMedico}`}
     >
       Visualizar
-    </Link> */}
+    </Link>
     <Link
       href=""
       className="btn btn-primary"
