@@ -51,9 +51,9 @@ export function AddHistorialNutricion() {
         console.log(res)
     })
     return (
-        <>
-            <div className="container">
-                <div className="row">
+        <div>
+            <div className="container-fluid">
+                <div className="row g-3">
                     <div className="col-md-12 text-center title">
                         <hr className="line"></hr>
                         <h3>HISTORIA CLINICA-NUTRICIÓN</h3>
@@ -65,161 +65,155 @@ export function AddHistorialNutricion() {
                             <button onClick={handleSearchPaciente}>Buscar</button>
                         </div>
                     </div>
-                    <div className="mt-4">
+                    <div className="col-md-12">
                         <label className="title-secondary">Datos personales</label>
                         {pacienteResult.map(resultado => (
                             <PacienteCard paciente={resultado} key={resultado.CURP} />
                         ))}
                     </div>
                     <form onSubmit={onSubmit}>
-                        <div className="row">
-                            <div className="col-md-5">
-                                <label className="label-form">Número expediente</label>
-                                <input className="input-form mt-1" id="num_expediente" placeholder="numero_expediente" type="number" {...register("num_expediente", { required: true })} />
-                            </div>
-                            <div className="col-md-5">
-                                <label className="label-form">Motivo de consulta</label>
-                                <textarea className="input-form mt-1" placeholder="Motivo de consulta" {...register("motivo_consulta", { required: true })}></textarea>
-                            </div>
-                            <div className="col-md-1">
-                                <label className="label-form mt-1">Sexo</label>
-                                <label className="label-form">Femenino
-                                    <input type="radio" id="sexo_femenino" name="option_sexo" value="F" {...register("sexo", { required: true })} onChange={handleCampusFemenino} />
-                                </label>
-                                <label className="label-form">Masculino
-                                    <input type="radio" id="sexo_masculino" name="option_sexo" value="M" {...register("sexo", { required: true })} onChange={handleCampusFemenino} />
-                                </label>
-                            </div>
+                        <div className="col-md-5">
+                            <label className="form-label">Número expediente</label>
+                            <input className="form-control mt-1" id="num_expediente" placeholder="numero_expediente" type="number" {...register("num_expediente", { required: true })} />
+                        </div>
+                        <div className="col-md-4">
+                            <label className="form-label">Motivo de consulta</label>
+                            <textarea className="form-control mt-1" placeholder="Motivo de consulta" {...register("motivo_consulta", { required: true })}></textarea>
+                        </div>
+                        <div className="col-md-1">
+                            <label className="label-form mt-1">Sexo</label>
+                            <label className="form-label">Femenino
+                                <input type="radio" id="sexo_femenino" name="option_sexo" value="F" {...register("sexo", { required: true })} onChange={handleCampusFemenino} />
+                            </label>
+                            <label className="label-form">Masculino
+                                <input type="radio" id="sexo_masculino" name="option_sexo" value="M" {...register("sexo", { required: true })} onChange={handleCampusFemenino} />
+                            </label>
+                        </div>
+
+                        <div className="col-md-3 ml-2">
+                            <label className="label-form">Fecha de nacimiento</label>
+                            <input className="input-form" type="date" id="fecha_nacimiento" placeholder="Fecha de nacimiento" {...register("fecha_nacimiento", { required: true })} />
+                        </div>
+                        <div className="col-md-4">
+                            <label className="label-form">Municipio de nacimiento</label>
+                            <input className="input-form" type="text" id="municipio_nacimiento" placeholder="Municipio de nacimiento" {...register("municipio_nacimiento", { required: true })} />
+                        </div>
+                        <div className="col-md-5 mr-2">
+                            <label className="label-form">Estado de nacimiento</label>
+                            <input className="input-form" type="text" id="estado_nacimiento" placeholder="Estado de nacimiento" {...register("estado_nacimiento", { required: true })} />
+                        </div>
+
+
+                        <label className="title-secondary">Indicadores clínicos</label>
+                        <label className="label-form">AHF</label>
+                        <div className="mt-1">
+                            <label className="label-form">Diabetes</label>
+                            <label className="mx-4">Si
+                                <input type="radio" id="diabetes_si" name="option_diabetes" value={true} {...register("AHF_diabetes", { required: true })} />
+                            </label>
+                            <label className="mx-4">No
+                                <input type="radio" id="diabetes_no" name="option_diabetes" value={false} {...register("AHF_diabetes", { required: true })} />
+                            </label>
+                            <input className="input-form" type="text" placeholder="¿Quién?" {...register("quien_diabetes", { required: true })} />
+                        </div>
+                        <div className="mt-1">
+                            <label className="label-form">Hipertensión</label>
+                            <label className="mx-4">Si
+                                <input type="radio" id="hipertension_si" name="option_hipertension" value={true} {...register("AHF_hipertension", { required: true })} />
+                            </label>
+                            <label className="mx-4">No
+                                <input type="radio" id="hipertension_no" name="option_hipertension" value={false} {...register("AHF_hipertension", { required: true })} />
+                            </label>
+                            <input className="input-form" type="text" placeholder="¿Quién?" {...register("quien_hipertension", { required: true })} />
+                        </div>
+                        <div className="mt-1">
+                            <label className="label-form">Dislipidemias</label>
+                            <label className="mx-4">Si
+                                <input type="radio" id="dislipidemias_si" name="option_dislipidemias" value={true} {...register("AHF_dislipidemias", { required: true })} />
+                            </label>
+                            <label className="mx-4">No
+                                <input type="radio" id="dislipidemias_no" name="option_dislipidemias" value={false} {...register("AHF_dislipidemias", { required: true })} />
+                            </label>
+                            <input className="input-form" type="text" placeholder="¿Quién?" {...register("quien_dislipidemias", { required: true })} />
+                        </div>
+
+                        <label className="title-secondary mt-2 mb-2">Antecedentes patológicos</label>
+                        <div>
+                            <label className="label-form">Diabetes mellitus</label>
+                            <label className="mx-4">Si
+                                <input type="radio" id="diabetesmellitus_si" name="option_diabetesmellitus" value={true} {...register("AP_diabetes_mellitus", { required: true })} />
+                            </label>
+                            <label className="mx-4">No
+                                <input type="radio" id="diabetesmellitus_no" name="option_diabetesmellitus" value={false} {...register("AP_diabetes_mellitus", { required: true })} />
+                            </label>
+                        </div>
+                        <div>
+                            <label className="label-form">Hipertensión</label>
+                            <label className="mx-4">Si
+                                <input type="radio" id="ap_hipertension_si" name="option_ap_hipertension" value={true} {...register("AP_hipertension", { required: true })} />
+                            </label>
+                            <label className="mx-4">No
+                                <input type="radio" id="ap_hipertension-no" name="option_ap_hipertension" value={false} {...register("AP_hipertension", { required: true })} />
+                            </label>
+                        </div>
+                        <div>
+                            <label className="label-form">Dislipidemias</label>
+                            <label className="mx-4">Si
+                                <input type="radio" id="ap_dislipidemias_si" name="option_ap_dislipidemias" value={true} {...register("AP_dislipidemias", { required: true })} />
+                            </label>
+                            <label className="mx-4">No
+                                <input type="radio" id="ap_dislipidemias_no" name="option_ap_dislipidemias" value={false} {...register("AP_dislipidemias", { required: true })} />
+                            </label>
+                        </div>
+                        <div>
+                            <label className="label-form mt-2">¿Presenta problemas gastrointestinales como diarrea, gastritis, colitis, estreñimiento, ulceras, diarrea?</label>
+                            <label className="mx-4" >Si
+                                <input type="radio" id="problema_gastro_si" name="option_gastro" value={true} {...register("problema_gastrointestinal", { required: true })} />
+                            </label>
+                            <label className="mx-4">No
+                                <input type="radio" id="problema_gastro_no" name="option_gastro" value={false} {...register("problema_gastrointestinal", { required: true })} />
+                            </label>
                         </div>
                         <div className="row">
-                            <div className="col-md-3 ml-2">
-                                <label className="label-form">Fecha de nacimiento</label>
-                                <input className="input-form" type="date" id="fecha_nacimiento" placeholder="Fecha de nacimiento" {...register("fecha_nacimiento", { required: true })} />
-                            </div>
-                            <div className="col-md-4">
-                                <label className="label-form">Municipio de nacimiento</label>
-                                <input className="input-form" type="text" id="municipio_nacimiento" placeholder="Municipio de nacimiento" {...register("municipio_nacimiento", { required: true })} />
-                            </div>
-                            <div className="col-md-5 mr-2">
-                                <label className="label-form">Estado de nacimiento</label>
-                                <input className="input-form" type="text" id="estado_nacimiento" placeholder="Estado de nacimiento" {...register("estado_nacimiento", { required: true })} />
-                            </div>
+                            <input className="input-form col-md-5" type="text" placeholder="¿Cuál" {...register("cual_problema_gastrointestinal", { required: true })} />
+                            <textarea className="input-form col-md-5" placeholder="Observaciones" {...register("observaciones_patologicas", { required: true })}></textarea>
                         </div>
-                        <div className="row">
-                            <label className="title-secondary">Indicadores clínicos</label>
-                            <label className="label-form">AHF</label>
-                            <div className="mt-1">
-                                <label className="label-form">Diabetes</label>
-                                <label className="mx-4">Si
-                                    <input type="radio" id="diabetes_si" name="option_diabetes" value={true} {...register("AHF_diabetes", { required: true })} />
-                                </label>
-                                <label className="mx-4">No
-                                    <input type="radio" id="diabetes_no" name="option_diabetes" value={false} {...register("AHF_diabetes", { required: true })} />
-                                </label>
-                                <input className="input-form" type="text" placeholder="¿Quién?" {...register("quien_diabetes", { required: true })} />
-                            </div>
-                            <div className="mt-1">
-                                <label className="label-form">Hipertensión</label>
-                                <label className="mx-4">Si
-                                    <input type="radio" id="hipertension_si" name="option_hipertension" value={true} {...register("AHF_hipertension", { required: true })} />
-                                </label>
-                                <label className="mx-4">No
-                                    <input type="radio" id="hipertension_no" name="option_hipertension" value={false} {...register("AHF_hipertension", { required: true })} />
-                                </label>
-                                <input className="input-form" type="text" placeholder="¿Quién?" {...register("quien_hipertension", { required: true })} />
-                            </div>
-                            <div className="mt-1">
-                                <label className="label-form">Dislipidemias</label>
-                                <label className="mx-4">Si
-                                    <input type="radio" id="dislipidemias_si" name="option_dislipidemias" value={true} {...register("AHF_dislipidemias", { required: true })} />
-                                </label>
-                                <label className="mx-4">No
-                                    <input type="radio" id="dislipidemias_no" name="option_dislipidemias" value={false} {...register("AHF_dislipidemias", { required: true })} />
-                                </label>
-                                <input className="input-form" type="text" placeholder="¿Quién?" {...register("quien_dislipidemias", { required: true })} />
-                            </div>
+
+                        <div className="mt-1">
+                            <label>Intervenciones quirurgicas</label>
+                            <label className="mx-4">Si
+                                <input type="radio" id="inter_quirurgica_si" name="option_quirurgica" value={true} {...register("intervencion_quirurgica", { required: true })} />
+                            </label>
+                            <label className="mx-4">No
+                                <input type="radio" id="inter_quirurgica_no" name="option_quirurgica" value={false} {...register("intervencion_quirurgica", { required: true })} />
+                            </label>
+                            <input className="input-form" type="text" placeholder="¿Cuál" {...register("cual_intervencion_quirurgica", { required: true })} />
                         </div>
-                        <div className="row mt-2">
-                            <label className="title-secondary mt-2 mb-2">Antecedentes patológicos</label>
-                            <div>
-                                <label className="label-form">Diabetes mellitus</label>
-                                <label className="mx-4">Si
-                                    <input type="radio" id="diabetesmellitus_si" name="option_diabetesmellitus" value={true} {...register("AP_diabetes_mellitus", { required: true })} />
-                                </label>
-                                <label className="mx-4">No
-                                    <input type="radio" id="diabetesmellitus_no" name="option_diabetesmellitus" value={false} {...register("AP_diabetes_mellitus", { required: true })} />
-                                </label>
-                            </div>
-                            <div>
-                                <label className="label-form">Hipertensión</label>
-                                <label className="mx-4">Si
-                                    <input type="radio" id="ap_hipertension_si" name="option_ap_hipertension" value={true} {...register("AP_hipertension", { required: true })} />
-                                </label>
-                                <label className="mx-4">No
-                                    <input type="radio" id="ap_hipertension-no" name="option_ap_hipertension" value={false} {...register("AP_hipertension", { required: true })} />
-                                </label>
-                            </div>
-                            <div>
-                                <label className="label-form">Dislipidemias</label>
-                                <label className="mx-4">Si
-                                    <input type="radio" id="ap_dislipidemias_si" name="option_ap_dislipidemias" value={true} {...register("AP_dislipidemias", { required: true })} />
-                                </label>
-                                <label className="mx-4">No
-                                    <input type="radio" id="ap_dislipidemias_no" name="option_ap_dislipidemias" value={false} {...register("AP_dislipidemias", { required: true })} />
-                                </label>
-                            </div>
-                            <div>
-                                <label className="label-form mt-2">¿Presenta problemas gastrointestinales como diarrea, gastritis, colitis, estreñimiento, ulceras, diarrea?</label>
-                                <label className="mx-4" >Si
-                                    <input type="radio" id="problema_gastro_si" name="option_gastro" value={true} {...register("problema_gastrointestinal", { required: true })} />
-                                </label>
-                                <label className="mx-4">No
-                                    <input type="radio" id="problema_gastro_no" name="option_gastro" value={false} {...register("problema_gastrointestinal", { required: true })} />
-                                </label>
-                            </div>
-                            <div className="row">
-                                <input className="input-form col-md-5" type="text" placeholder="¿Cuál" {...register("cual_problema_gastrointestinal", { required: true })} />
-                                <textarea className="input-form col-md-5" placeholder="Observaciones" {...register("observaciones_patologicas", { required: true })}></textarea>
-                            </div>
+                        <div className="mt-1">
+                            <label>Alergia/Intolerancia a un alimento</label>
+                            <label className="mx-4">Si
+                                <input type="radio" id="aler_alimento_si" name="option_aler_alimento" value={true} {...register("alergia_alimento", { required: true })} />
+                            </label>
+                            <label className="mx-4">No
+                                <input type="radio" id="aler_alimento_no" name="option_aler_alimento" value={false} {...register("alergia_alimento", { required: true })} />
+                            </label>
+                            <input className="input-form" type="text" placeholder="¿Cuál" {...register("cual_alergia_alimento", { required: true })} />
                         </div>
-                        <div className="row">
-                            <div className="mt-1">
-                                <label>Intervenciones quirurgicas</label>
-                                <label className="mx-4">Si
-                                    <input type="radio" id="inter_quirurgica_si" name="option_quirurgica" value={true} {...register("intervencion_quirurgica", { required: true })} />
-                                </label>
-                                <label className="mx-4">No
-                                    <input type="radio" id="inter_quirurgica_no" name="option_quirurgica" value={false} {...register("intervencion_quirurgica", { required: true })} />
-                                </label>
-                                <input className="input-form" type="text" placeholder="¿Cuál" {...register("cual_intervencion_quirurgica", { required: true })} />
-                            </div>
-                            <div className="mt-1">
-                                <label>Alergia/Intolerancia a un alimento</label>
-                                <label className="mx-4">Si
-                                    <input type="radio" id="aler_alimento_si" name="option_aler_alimento" value={true} {...register("alergia_alimento", { required: true })} />
-                                </label>
-                                <label className="mx-4">No
-                                    <input type="radio" id="aler_alimento_no" name="option_aler_alimento" value={false} {...register("alergia_alimento", { required: true })} />
-                                </label>
-                                <input className="input-form" type="text" placeholder="¿Cuál" {...register("cual_alergia_alimento", { required: true })} />
-                            </div>
+
+                        <div className="col-md-3 mt-2">
+                            <label className="label-form">¿Consume algún farmáco?</label>
+                            <label className="label-form mx-4">Si
+                                <input type="radio" id="consume_farmaco_si" name="option_consume_farmaco" value={true} {...register("consume_farmaco_alergia", { required: true })} />
+                            </label>
+                            <label className="label-form">No
+                                <input type="radio" id="consume_farmaco_no" name="option-consume-farmaco" value={false} {...register("consume_farmaco_alergia", { required: true })} />
+                            </label>
                         </div>
-                        <div className="row">
-                            <div className="col-md-3 mt-2">
-                                <label className="label-form">¿Consume algún farmáco?</label>
-                                <label className="label-form mx-4">Si
-                                    <input type="radio" id="consume_farmaco_si" name="option_consume_farmaco" value={true} {...register("consume_farmaco_alergia", { required: true })} />
-                                </label>
-                                <label className="label-form">No
-                                    <input type="radio" id="consume_farmaco_no" name="option-consume-farmaco" value={false} {...register("consume_farmaco_alergia", { required: true })} />
-                                </label>
-                            </div>
-                            <div className="col-md-4 mt-2">
-                                <input className="input-form" type="text" placeholder="¿Cuál" {...register("cual_alergia_farmaco", { required: true })} />
-                            </div>
-                            <div className="col-md-5 mt-2">
-                                <input className="input-form" type="text" placeholder="¿Desde cuándo?" {...register("desde_cuando_farmaco", { required: true })} />
-                            </div>
+                        <div className="col-md-4 mt-2">
+                            <input className="input-form" type="text" placeholder="¿Cuál" {...register("cual_alergia_farmaco", { required: true })} />
+                        </div>
+                        <div className="col-md-5 mt-2">
+                            <input className="input-form" type="text" placeholder="¿Desde cuándo?" {...register("desde_cuando_farmaco", { required: true })} />
                         </div>
 
                         <div className="row">
@@ -376,7 +370,7 @@ export function AddHistorialNutricion() {
                     </form>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

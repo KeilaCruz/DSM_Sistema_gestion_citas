@@ -72,16 +72,27 @@ export function AddCita() {
 
     return (
         <>
-            <div>
-                <Header />
-                <div className="container">
-                    <input className="input-barra-busqueda" type="text" id="busqueda_paciente" placeholder="Buscar por CURP o nombre" onChange={handleBarraBusqueda} />
-                    <button onClick={handleBusquedaPaciente}>Buscar</button>
-                    <form onSubmit={onSubmit}>
-                        <div className="container-options">
-                            <input className="input-option" id="fecha_cita" type="date" placeholder="fecha de cita" {...register('fecha_cita', { required: true })} />
-                            <input className="input-option" id="horario_cita" type="time" placeholder="hora_cita" {...register('hora_cita', { required: true })} />
-                            <select className="input-option" id="especialidad" {...register("especialidad", { required: true })}>
+            <div className="container-fluid">
+                <div className="row g-3">
+                    <div className="col-md-9 offset-md-1">
+                        <hr />
+                        <h3 className="title">AGENDAR CITA</h3>
+                        <hr />
+                    </div>
+                    <input className="col-md-5 offset-md-1" nput-barra-bus type="text" id="busqueda_paciente" placeholder="Buscar por CURP o nombre" onChange={handleBarraBusqueda} />
+                    <button className="col-md-1" onClick={handleBusquedaPaciente}>Buscar</button>
+                    <form onSubmit={onSubmit} className="row g-3">
+                        <div className="col-md-3 offset-md-1">
+                            <label htmlFor="fecha_cita" className="form-label">Fecha de cita</label>
+                            <input className="form-control" id="fecha_cita" type="date" placeholder="fecha de cita" {...register('fecha_cita', { required: true })} />
+                        </div>
+                        <div className="col-md-3 offset-md-0.8">
+                            <label htmlFor="horario_cita" className="form-label">Horario de cita</label>
+                            <input className="form-control" id="horario_cita" type="time" placeholder="hora_cita" {...register('hora_cita', { required: true })} />
+                        </div>
+                        <div className="col-md-3 offset-md-0.8">
+                            <label htmlFor="especialidad_cita" className="form-label">Especialidad de cita</label>
+                            <select className="form-control" id="especialidad" {...register("especialidad", { required: true })}>
                                 <option value="Nutricion">Nutrición</option>
                                 <option value="Medico-general">Medico general</option>
                                 <option value="Odontologia">Odontología</option>
