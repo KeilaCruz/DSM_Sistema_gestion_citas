@@ -49,6 +49,7 @@ class Migration(migrations.Migration):
                 ('programa_gobierno_municipal', models.BooleanField(default=False)),
                 ('cual_programa_municipal', models.CharField(default='', max_length=70)),
                 ('numero_personas_vive', models.PositiveIntegerField(default='')),
+                ('idUsuario', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='app_gestion_dsm.usuario')),
             ],
         ),
         migrations.CreateModel(

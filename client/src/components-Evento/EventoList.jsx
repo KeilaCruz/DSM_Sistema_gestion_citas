@@ -3,6 +3,7 @@ import { EventoCard } from "./EventoCard";
 import { getAllEventos } from "../api/evento.api";
 
 export function EventoList() {
+  
   const [eventos, setEventos] = useState([]);
 
   useEffect(() => {

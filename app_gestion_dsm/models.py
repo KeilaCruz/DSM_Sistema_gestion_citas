@@ -58,9 +58,9 @@ class Paciente(models.Model):
 class Cita(models.Model):
     idCita = models.BigAutoField(primary_key=True)
     idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
     fecha_cita = models.DateField()
     hora_cita = models.TimeField(default="")
-    especialidad = models.CharField(max_length=15, default="")
     estado = models.BooleanField(default=False)
 
     def __str__(self):

@@ -3,7 +3,7 @@ import { BarraDeBusqueda } from "../Buscar-Paciente/BarraDeBusqueda";
 import { ListaDeResultados } from "../Buscar-Paciente/ListaDeResultados";
 import { useState } from 'react';
 
-export function PacientePage({resultado}) {
+export function PacientePage() {
 
 
   const [resultados, setResultados] = useState([]);

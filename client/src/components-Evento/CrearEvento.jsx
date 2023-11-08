@@ -80,6 +80,7 @@ export function CrearEvento() {
           `http://127.0.0.1:8000/SaludPublica/api/v1/usuarios/${data.idUsuario}`
         );
         const usuarioData = await usuarioResponse.json();
+        
         setValue("idUsuario", usuarioData.idUsuario);
 
         setValue("fecha", data.fecha);

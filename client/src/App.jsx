@@ -21,8 +21,9 @@ import { CrearPaciente } from "./components-paciente/CrearPaciente";
 import { PacientePage } from "./pages/PacientePage";
 import { ReportePage } from "./pages/ReportePage";
 import { VerEvento } from "./components-Evento/VerEvento";
+import { Calendario } from "./components-Calendario/Calendario";
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+/* import 'bootstrap/dist/js/bootstrap.bundle.min.js'; */
 
 function App(){
   return (
@@ -33,6 +34,7 @@ function App(){
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reporte" element={<ReportePage />} />
+        <Route path="/calendario" element={<Calendario />} />
 
         
 
