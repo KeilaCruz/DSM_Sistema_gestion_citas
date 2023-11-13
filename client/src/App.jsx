@@ -30,7 +30,6 @@ function App() {
           <Route path='/registrar-fichapsico-adulto' element={<FichaPAForm />} />
           <Route path='/get-fichapsico-adulto' element={<GetFichaPA />} />
           <Route path='/registrar-fichapsico-niño' element={<FichaPNForm />} />
-          <Route path='/registrar-fichapsico-niño' element={<FichaPNForm />} />
         </Routes>
       </BrowserRouter>
     </>

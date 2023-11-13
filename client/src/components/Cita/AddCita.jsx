@@ -3,7 +3,7 @@ import { addCita, getAllCitas } from "../../api/Cita.api"
 import { getAllPacientes } from "../../api/Pacientes.api"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Header from "../partials/Header"
+import "../../css/styles.css"
 export function AddCita() {
     const [pacientes, setPacientes] = useState([])
     const [citas, setCitas] = useState([])
@@ -74,63 +74,71 @@ export function AddCita() {
         <>
             <div className="container-fluid">
                 <div className="row g-3">
-                    <div className="col-md-9 offset-md-1">
+                    <div className="col-md-10 offset-1">
                         <hr />
                         <h3 className="title">AGENDAR CITA</h3>
                         <hr />
                     </div>
-                    <input className="col-md-5 offset-md-1" nput-barra-bus type="text" id="busqueda_paciente" placeholder="Buscar por CURP o nombre" onChange={handleBarraBusqueda} />
-                    <button className="col-md-1" onClick={handleBusquedaPaciente}>Buscar</button>
-                    <form onSubmit={onSubmit} className="row g-3">
-                        <div className="col-md-3 offset-md-1">
-                            <label htmlFor="fecha_cita" className="form-label">Fecha de cita</label>
-                            <input className="form-control" id="fecha_cita" type="date" placeholder="fecha de cita" {...register('fecha_cita', { required: true })} />
-                        </div>
-                        <div className="col-md-3 offset-md-0.8">
-                            <label htmlFor="horario_cita" className="form-label">Horario de cita</label>
-                            <input className="form-control" id="horario_cita" type="time" placeholder="hora_cita" {...register('hora_cita', { required: true })} />
-                        </div>
-                        <div className="col-md-3 offset-md-0.8">
-                            <label htmlFor="especialidad_cita" className="form-label">Especialidad de cita</label>
-                            <select className="form-control" id="especialidad" {...register("especialidad", { required: true })}>
-                                <option value="Nutricion">Nutrición</option>
-                                <option value="Medico-general">Medico general</option>
-                                <option value="Odontologia">Odontología</option>
-                                <option value="Psicologia">Psicologia</option>
-                            </select>
-                        </div>
-                        <div className="container-table">
-                            <table className="table">
-                                <thead className="cabecera">
-                                    <tr>
-                                        <th>Sl.</th>
-                                        <th>CURP</th>
-                                        <th>Nombre</th>
-                                        <th>Edad</th>
-                                        <th>Dirección</th>
-                                        <th>Telefono</th>
+                    <div className="col-md-6 offset-1 mt-5">
+                        <input className="form-control input-form" nput-barra-bus type="text" id="busqueda_paciente" placeholder="Buscar por CURP o nombre" onChange={handleBarraBusqueda} />
+                    </div>
+                    <div className="col-md-2 mt-5">
+                        <button onClick={handleBusquedaPaciente}>Buscar</button>
+                    </div>
+                </div>
+                <form onSubmit={onSubmit} className="row g-3 mt-2">
+                    <div className="col-md-3 offset-1">
+                        <label htmlFor="fecha_cita" className="form-label">Fecha de cita</label>
+                        <input className="form-control input-form" id="fecha_cita" type="date" placeholder="fecha de cita" {...register('fecha_cita', { required: true })} />
+                    </div>
+                    <div className="col-md-3 offset-0.8">
+                        <label htmlFor="horario_cita" className="form-label">Horario de cita</label>
+                        <input className="form-control input-form" id="horario_cita" type="time" placeholder="hora_cita" {...register('hora_cita', { required: true })} />
+                    </div>
+                    <div className="col-md-3 offset-1">
+                        <label htmlFor="especialidad_cita" className="form-label">Especialidad de cita</label>
+                        <select className="form-control input-form" id="especialidad" {...register("especialidad", { required: true })}>
+                            <option value="Nutricion">Nutrición</option>
+                            <option value="Medico-general">Medico general</option>
+                            <option value="Odontologia">Odontología</option>
+                            <option value="Psicologia">Psicologia</option>
+                        </select>
+                    </div>
+                    <div className="col-md-10 offset-md-1 mt-5">
+                        <table >
+                            <thead className="cabecera">
+                                <tr>
+                                    <th className="colum">Sl.</th>
+                                    <th className="colum">CURP</th>
+                                    <th className="colum">Nombre</th>
+                                    <th className="colum">Edad</th>
+                                    <th className="colum">Dirección</th>
+                                    <th className="colum">Telefono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {pacienteResultado.map(paciente => (
+                                    <tr key={paciente.CURP}>
+                                        <td className="fila">#</td>
+                                        <td className="fila">{paciente.CURP}</td>
+                                        <td className="fila">{`${paciente.nombre} ${paciente.apePaterno} ${paciente.apeMaterno}`}</td>
+                                        <td className="fila">{paciente.edad}</td>
+                                        <td className="fila">{`${paciente.colonia} ${paciente.calle} #${paciente.numero_exterior}`}</td>
+                                        <td className="fila">{paciente.telefono}</td>
                                     </tr>
-                                </thead>
-                                <tbody className="tbody">
-                                    {pacienteResultado.map(paciente => (
-                                        <tr key={paciente.CURP}>
-                                            <td>#</td>
-                                            <td>{paciente.CURP}</td>
-                                            <td>{`${paciente.nombre} ${paciente.apePaterno} ${paciente.apeMaterno}`}</td>
-                                            <td>{paciente.edad}</td>
-                                            <td>{`${paciente.colonia} ${paciente.calle} #${paciente.numero_exterior}`}</td>
-                                            <td>{paciente.telefono}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div className="container-button">
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="row g-3 mt-10">
+                        <div className="col-md-1 offset-md-1">
                             <button className="button-cancelar">Cancelar</button>
+                        </div>
+                        <div className="col-md-1">
                             <button className="button-guardar">Guardar</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </>
     )
