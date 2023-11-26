@@ -16,63 +16,23 @@ import { Footer } from "../components/Footer";
 import { Button, Modal } from "react-bootstrap";
 
 export function Calendario() {
-  const [citas, setCitas] = useState([]);
-  const [usuarios, setUsuarios] = useState([]);
-  const [pacientes, setPacientes] = useState([]);
-
-  /* useEffect(() => {
-    // Hacer la solicitud para obtener la lista desde la API
-    getAllUsuarios()
-      .then((response) => {
-        setUsuarios(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los usuarios:", error);
-      });
-  }, []); */
-
-  useEffect(() => {
-    // Hacer la solicitud para obtener la lista desde la API
-    getAllCitas()
-      .then((response) => {
-        setCitas(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener las citas :", error);
-      });
-  }, []);
-
- /*  useEffect(() => {
-    // Hacer la solicitud para obtener la lista desde la API
-    getAllPacientes()
-      .then((response) => {
-        setPacientes(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los pacientes:", error);
-      });
-  }, []); */
-
   const [showModal, setShowModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [eventDetails, setEventDetails] = useState({});
 
-  const handleShowModal = () => {
+  const handleShowModal = (info) => {
+    setSelectedEvent(info.event);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
+    setSelectedEvent(null);
+    setEventDetails({});
     setShowModal(false);
   };
 
   return (
     <div>
-
-      
-      {citas.map((cita) => (
-        <div key={cita.idCita} value={cita.idCita}>
-            
-        </div>
-      ))}
-
       <div className="container-fluid">
         <NavBar />
         <h1>Calendario de citas</h1>
@@ -84,47 +44,58 @@ export function Calendario() {
                 const events = [];
 
                 data.forEach((cita) => {
+                  // Obtener detalles del paciente
                   fetch(
                     `http://127.0.0.1:8000/SaludPublica/api/v1/pacientes/${cita.idPaciente}`
                   )
                     .then((response) => response.json())
                     .then((pacienteData) => {
-                      events.push({
-                        title:
-                          pacienteData.nombre +
-                          " " +
-                          pacienteData.apePaterno +
-                          " " +
-                          pacienteData.apeMaterno,
-                        start: new Date(cita.fecha_cita + "T" + cita.hora_cita),
-                        end: new Date(cita.fecha_cita),
-                      });
+                      // Obtener detalles del usuario (médico)
+                      fetch(
+                        `http://127.0.0.1:8000/SaludPublica/api/v1/usuarios/${cita.idUsuario}`
+                      )
+                        .then((response) => response.json())
+                        .then((usuarioData) => {
+                          events.push({
+                            title:
+                              pacienteData.nombre +
+                              " " +
+                              pacienteData.apePaterno +
+                              " " +
+                              pacienteData.apeMaterno,
+                            start: new Date(
+                              cita.fecha_cita + "T" + cita.hora_cita
+                            ),
+                            end: new Date(cita.fecha_cita),
+                            paciente: pacienteData,
+                            medico: usuarioData, // Agrega el campo personalizado 'medico'
+                          });
 
-                      if (events.length === data.length) {
-                        successCallback(events);
-                      }
+                          if (events.length === data.length) {
+                            successCallback(events);
+                          }
+                        })
+                        .catch(failureCallback);
                     })
                     .catch(failureCallback);
                 });
               })
               .catch(failureCallback);
           }}
-          eventContent={function (info) {
-            return (
-              <div
-                style={{
-                  overflow: "hidden",
-                  cursor: "pointer",
-                  position: "relative",
-                }}
-                onClick={handleShowModal}
-              >
-                <b>{info.timeText}</b>
-                <br />
-                <i>{info.event.title}</i>
-              </div>
-            );
-          }}
+          eventContent={(info) => (
+            <div
+              style={{
+                overflow: "hidden",
+                cursor: "pointer",
+                position: "relative",
+              }}
+              onClick={() => handleShowModal(info)}
+            >
+              <b>{info.timeText}</b>
+              <br />
+              <i>{info.event.title}</i>
+            </div>
+          )}
           timeZone="local"
           plugins={[
             dayGridPlugin,
@@ -144,6 +115,43 @@ export function Calendario() {
         />
       </div>
       <Footer />
+
+      {/* Modal */}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedEvent?.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Renderiza la información del evento seleccionado aquí */}
+          {eventDetails && (
+            <div>
+              <p>
+                Medico: {selectedEvent?.extendedProps.medico.nombre}{" "}
+                {selectedEvent?.extendedProps.medico.ape_paterno}{" "}
+                {selectedEvent?.extendedProps.medico.ape_materno}
+              </p>
+              <p>Fecha de la cita: {selectedEvent?.start?.toLocaleString()}</p>
+              <p>CURP: {selectedEvent?.extendedProps.paciente.CURP}</p>
+              <p>Edad: {selectedEvent?.extendedProps.paciente.edad}</p>
+              <p>Telefono: {selectedEvent?.extendedProps.paciente.telefono}</p>
+              <p>
+                Derecho habiencia:{" "}
+                {selectedEvent?.extendedProps.paciente.derecho_habiencia}
+              </p>
+              {/* Agrega más detalles según sea necesario */}
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cerrar
+          </Button>
+          <Button variant="primary" onClick={handleCloseModal}>
+            Guardar cambios
+          </Button>
+
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

@@ -21,23 +21,33 @@ export function NavBar() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item active">
-                  <a className="nav-link" href="/">
-                    Home
+                  <a className="nav-link" href="/hojaEvaluacion">
+                    Hojas de evaluaciones
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">
-                    Tasks
+                  <a className="nav-link" href="/calendario">
+                    Calendario
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">
-                    Create task
+                  <a className="nav-link" href="/evento">
+                    Evento
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">
-                    Logout
+                  <a className="nav-link" href="/examenMedico">
+                    Examen medico
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/paciente">
+                    Paciente
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/reporte">
+                    Reportes
                   </a>
                 </li>
               </ul>
