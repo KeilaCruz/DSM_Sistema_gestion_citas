@@ -50,6 +50,7 @@ export function ResultadosDeBusqueda({ resultado }) {
           <p>Fecha de registro: {resultado.fechaRegistro}</p>
           <p>Edad: {resultado.edad}</p>
           <p>CURP: {resultado.CURP}</p>
+          <p>Telefono {resultado.telefono}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

@@ -2,6 +2,8 @@ import { PacienteList } from "../components-paciente/PacienteList";
 import { BarraDeBusqueda } from "../Buscar-Paciente/BarraDeBusqueda";
 import { ListaDeResultados } from "../Buscar-Paciente/ListaDeResultados";
 import { useState } from 'react';
+import { NavBar } from "../components/NavBar";
+import { Footer } from "../components/Footer";
 
 export function PacientePage() {
 
@@ -16,12 +18,14 @@ export function PacientePage() {
 
   return (
     <div>
-      <h1>Buscador de Pacientes</h1>
+      <NavBar />
+      {/* <h1>Buscador de Pacientes</h1>
       
       <BarraDeBusqueda setResultados={setResultados} />
-      <ListaDeResultados resultados={resultados} />
+      <ListaDeResultados resultados={resultados} /> */}
 
         <PacienteList/>
+        
     </div>
   )
 }

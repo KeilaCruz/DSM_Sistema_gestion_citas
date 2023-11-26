@@ -12,7 +12,12 @@ export function BarraDeBusqueda({ setResultados }) {
         console.log(json);
 
         const resultados = json.filter((paciente) => {
-          const nombreCompleto = paciente.nombre + paciente.apePaterno + paciente.apeMaterno + paciente.CURP;
+          const nombreCompleto =
+            paciente.nombre +
+            paciente.apePaterno +
+            paciente.apeMaterno +
+            paciente.CURP +
+            paciente.telefono;
           return (
             value &&
             paciente &&
@@ -51,12 +56,14 @@ export function BarraDeBusqueda({ setResultados }) {
   return (
     <div>
       <input
-        type="text"
-        placeholder="Buscar paciente por nombre"
+        className="form-control me-2"
+        type="search"
+        placeholder="Buscar por nombre, CURP, teléfono"
+        aria-label="Search"
         value={terminoBusqueda}
         onChange={(e) => handleChanges(e.target.value)}
+        style={{ width: "280px" }} // Ajusta el ancho según tus necesidades
       />
-      {/* <button onClick={buscarPaciente}>Buscar</button> */}
     </div>
   );
 }
