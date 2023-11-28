@@ -12,6 +12,7 @@ import { ResultBusqueda } from './pages/ResultBusqueda'
 import { VisualizarPaciente } from './pages/VisualizarPaciente'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { Logueo } from './components/Logueo'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Logueo/>}/>
           <Route path='/get-pacientes' element={<GetPacientePage />} />
           <Route path='/registrar-paciente' element={<PacienteForm />} />
           <Route path='/buscar-paciente' element={<ResultBusqueda />} />

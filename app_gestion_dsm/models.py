@@ -8,17 +8,17 @@ class Rol(models.Model):
     descripcion = models.CharField(max_length=30, default="")
 
     def __str__(self):
-        return self.idRol
+        return str(self.idRol)
 
 
 class Usuario(models.Model):
     idUsuario = models.BigAutoField(primary_key=True)
     email = models.EmailField(max_length=60, default="")
     password = models.CharField(max_length=60, default="")
-    nombre = models.CharField(max_length=50, default="")
-    ape_paterno = models.CharField(max_length=30, default="")
-    ape_materno = models.CharField(max_length=30, default="")
-    idRol = models.ForeignKey(Rol, on_delete=models.CASCADE)
+    # nombre = models.CharField(max_length=50, default="")
+    # ape_paterno = models.CharField(max_length=30, default="" null=True)
+    # ape_materno = models.CharField(max_length=30, default="", null=True)
+    #  idRol = models.ForeignKey(Rol, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.idUsuario
@@ -141,7 +141,7 @@ class HistoriaNutricion(models.Model):
 
 
 class FichaPsicologicaAdulto(models.Model):
-    expedienteFicha = models.CharField(max_length=20,primary_key=True)
+    expedienteFicha = models.CharField(max_length=20, primary_key=True)
     idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
     fecha_registro = models.DateField()
@@ -227,7 +227,7 @@ class FichaPsicologicaAdulto(models.Model):
 
 
 class FichaPsicologicaNiño(models.Model):
-    expedienteFicha = models.CharField(max_length=20,primary_key=True)
+    expedienteFicha = models.CharField(max_length=20, primary_key=True)
     idPaciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     idUsuario = models.ForeignKey(Usuario, on_delete=models.DO_NOTHING)
     fecha_registro = models.DateField()
