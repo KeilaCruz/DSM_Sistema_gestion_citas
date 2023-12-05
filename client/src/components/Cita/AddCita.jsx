@@ -87,16 +87,16 @@ export function AddCita() {
                     </div>
                 </div>
                 <form onSubmit={onSubmit} className="row g-3 mt-2">
-                    <div className="col-md-3 offset-1">
-                        <label htmlFor="fecha_cita" className="form-label">Fecha de cita</label>
+                    <div className="col-md-2 offset-1">
+                        <label htmlFor="fecha_cita" className="form-label label-form">Fecha de cita</label>
                         <input className="form-control input-form" id="fecha_cita" type="date" placeholder="fecha de cita" {...register('fecha_cita', { required: true })} />
                     </div>
-                    <div className="col-md-3 offset-0.8">
-                        <label htmlFor="horario_cita" className="form-label">Horario de cita</label>
+                    <div className="col-md-3 offset-1">
+                        <label htmlFor="horario_cita" className="form-label label-form">Horario de cita</label>
                         <input className="form-control input-form" id="horario_cita" type="time" placeholder="hora_cita" {...register('hora_cita', { required: true })} />
                     </div>
                     <div className="col-md-3 offset-1">
-                        <label htmlFor="especialidad_cita" className="form-label">Especialidad de cita</label>
+                        <label htmlFor="especialidad_cita" className="form-label label-form">Especialidad de cita</label>
                         <select className="form-control input-form" id="especialidad" {...register("especialidad", { required: true })}>
                             <option value="Nutricion">Nutrición</option>
                             <option value="Medico-general">Medico general</option>
