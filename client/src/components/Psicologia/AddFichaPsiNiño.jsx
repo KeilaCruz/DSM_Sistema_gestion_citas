@@ -1,27 +1,83 @@
 import { useForm } from "react-hook-form";
 import { addFichaPsiNiño } from "../../api/Psico.Niño.api";
+import { getAllPacientes } from "../../api/Pacientes.api";
+import { useEffect, useState } from "react";
+import { PacienteCard } from "../Paciente/PacienteCard"
+import { NavBar } from "../partials/NavBar"
+
 export function AddFichaPsiNiño() {
     const { register, handleSubmit } = useForm();
+    const [criterio_search, setCriterioSearch] = useState("")
+    const [pacientes, setPacientes] = useState([])
+    const [pacienteResult, setPacienteResult] = useState([])
+    const [curpPaciente, setCURP] = useState("")
+    let regCurp = /^\D{1,4}\d{1,6}/;
+    useEffect(() => {
+        async function loadPacientes() {
+            const res = await getAllPacientes()
+            setPacientes(res.data)
+        }
+        loadPacientes()
+    }, [])
+    const handleBarraChange = (evt) => {
+        setCriterioSearch(evt.target.value)
+    }
+    const handleSearchPaciente = async () => {
+        //revisar si el criterio de busqueda es por CURP
+        const revisarCurp = regCurp.test(criterio_search)
+
+        if (revisarCurp) {
+            // busca el paciente por curp
+            let resultado = pacientes.filter((paciente) => paciente.CURP === criterio_search)
+            setPacienteResult(resultado)
+        } else {
+            //separa el nombre si el criterio es por nombre
+            const criterio_nombre = criterio_search.split(" ")
+            let resultado = pacientes.filter((paciente) => paciente.nombre === criterio_nombre[0] && paciente.apePaterno === criterio_nombre[1])
+            setPacienteResult(resultado)
+        }
+    }
+    const handleSelectPaciente = (curp) => {
+        setCURP(curp);
+    }
     const onSubmit = handleSubmit(async (data) => {
-        const res = await addFichaPsiNiño(data)
-        console.log(data)
-        console.log(res)
+        try {
+            data.idPaciente = curpPaciente;
+            const res = await addFichaPsiNiño(data)
+        } catch (error) {
+            console.log(error)
+        }
     })
     return (
         <>
+            <NavBar />
             <div className="container-fluid">
-                <div className="row g-3">
-                    <div className="col-md-10 offset-1">
+                <div className="row g-3 mt-5">
+                    <div className="col-md-10 offset-md-1 text-center mt-5">
                         <hr />
                         <h3 className="title">FICHA DE IDENTIFICACIÓN PARA NIÑOS</h3>
                         <hr />
                     </div>
+                    <div>
+                        <div className="row">
+                            <div className="col-md-6 offset-1">
+                                <input className="form-control input-form" id="barra_busqueda" type="text" placeholder="Buscar por CURP o nombre" onChange={handleBarraChange} />
+                            </div>
+                            <div className="col-md-3 mt-1">
+                                <button onClick={handleSearchPaciente} className="button-buscar">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-md-9 offset-md-1">
+                <div className="col-md-9 offset-md-1 mt-2">
                     <label htmlFor="datos_generales" className="form-label label-section">DATOS GENERALES</label>
                 </div>
-                <form onSubmit={onSubmit} className="row g-3">
-
+                <div className="col-md-9 offset-1">
+                    {pacienteResult.map(resultado => (
+                        <PacienteCard paciente={resultado} key={resultado.CURP} onClick={() => handleSelectPaciente(resultado.CURP)} />
+                    ))}
+                </div>
+                <form onSubmit={onSubmit} className="row g-3 mt-2">
                     <div className="col-md-4 offset-md-1">
                         <label htmlFor="fecha_registro" className="form-label label-form">Fecha de registro</label>
                         <input id="fecha_registro" className="form-control input-form" type="date" placeholder="Fecha de registo" {...register("fecha_registro", { required: true })} />
@@ -30,8 +86,6 @@ export function AddFichaPsiNiño() {
                         <label htmlFor="codigo_expediente" className="form-label label-form">Expediente</label>
                         <input id="codigo_expediente" className="form-control input-form" type="text" placeholder="Número de expediente" {...register("expedienteFicha", { required: true })} />
                     </div>
-                    {/*  <input type="text" placeholder="Curp del paciente" {...register("idPaciente", { required: true })} />
-<input type="number" placeholder="numero de usuario" {...register("idUsuario", { required: true })} />*/}
                     <div className="col-md-4 offset-md-1">
                         <label htmlFor="años_edad" className="form-label label-form">Años de edad</label>
                         <input id="años_edad" className="form-control input-form" type="number" placeholder="Años" {...register("años", { required: true })} />

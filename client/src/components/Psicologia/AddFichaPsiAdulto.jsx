@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form"
+import { useState, useEffect } from "react"
 import { addFichaPsiAdulto } from "../../api/Psico.Adulto.api"
-import { useState } from "react"
+import { getAllPacientes } from "../../api/Pacientes.api";
+import { PacienteCard } from "../Paciente/PacienteCard"
+import { NavBar } from "../partials/NavBar"
 
 export function AddFichaPsiAdulto() {
     const { register, handleSubmit } = useForm()
@@ -14,6 +17,47 @@ export function AddFichaPsiAdulto() {
     const [showMetodoConceptivo, setMetodoConceptivo] = useState(false)
     const [isFemenino, setFemenino] = useState(false)
     const [isMasculino, setMasculino] = useState(false)
+    const [criterio_search, setCriterioSearch] = useState("")
+    const [pacientes, setPacientes] = useState([])
+    const [pacienteResult, setPacienteResult] = useState([])
+    const [curpPaciente, setCURP] = useState("")
+    let regCurp = /^\D{1,4}\d{1,6}/;
+    useEffect(() => {
+        async function loadPacientes() {
+            const res = await getAllPacientes()
+            setPacientes(res.data)
+        }
+        loadPacientes()
+    }, [])
+    const handleBarraChange = (evt) => {
+        setCriterioSearch(evt.target.value)
+    }
+    const handleSearchPaciente = async () => {
+        //revisar si el criterio de busqueda es por CURP
+        const revisarCurp = regCurp.test(criterio_search)
+
+        if (revisarCurp) {
+            // busca el paciente por curp
+            let resultado = pacientes.filter((paciente) => paciente.CURP === criterio_search)
+            setPacienteResult(resultado)
+        } else {
+            //separa el nombre si el criterio es por nombre
+            const criterio_nombre = criterio_search.split(" ")
+            let resultado = pacientes.filter((paciente) => paciente.nombre === criterio_nombre[0] && paciente.apePaterno === criterio_nombre[1])
+            setPacienteResult(resultado)
+        }
+    }
+    const handleSelectPaciente = (curp) => {
+        setCURP(curp);
+    }
+    const onSubmit = handleSubmit(async (data) => {
+        try {
+            data.CURP = curpPaciente;
+            const res = await addFichaPsiAdulto(data)
+        } catch (error) {
+            console.log(error)
+        }
+    })
     const handleAtencionPsico = (evt) => {
         const opcion = evt.target.value;
         if (opcion === 'true') {
@@ -94,26 +138,36 @@ export function AddFichaPsiAdulto() {
             setFemenino(false)
         }
     }
-    const onSubmit = handleSubmit(async (data) => {
-        const res = await addFichaPsiAdulto(data)
-        console.log(res)
-    })
-
     return (
         <>
+            <NavBar />
             <div className="container-fluid">
-                <div className="row g-3">
-                    <div className="col-md-10 offset-md-1">
+                <div className="row g-3 mt-5">
+                    <div className="col-md-10 offset-md-1 text-center mt-5">
                         <hr />
                         <h3 className="title">FICHA DE IDENTIFICACIÓN PARA ADULTOS</h3>
                         <hr />
+                    </div>
+                    <div>
+                        <div className="row">
+                            <div className="col-md-6 offset-1">
+                                <input className="form-control input-form" id="barra_busqueda" type="text" placeholder="Buscar por CURP o nombre" onChange={handleBarraChange} />
+                            </div>
+                            <div className="col-md-3 mt-1">
+                                <button onClick={handleSearchPaciente} className="button-buscar">Buscar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="col-md-9 offset-md-1">
                     <label htmlFor="datos_generales" className="form-label label-section">DATOS GENERALES</label>
                 </div>
+                <div className="col-md-9 offset-1">
+                    {pacienteResult.map(resultado => (
+                        <PacienteCard paciente={resultado} key={resultado.CURP} onClick={() => handleSelectPaciente(resultado.CURP)} />
+                    ))}
+                </div>
                 <form onSubmit={onSubmit} className="row g-3">
-
                     <div className="col-md-4 offset-md-1">
                         <label htmlFor="code_expediente" className="form-label label-form">Número de expediente</label>
                         <input id="code_expediente " type="text" placeholder="Número de expediente" className="form-control input-form" {...register("expedienteFicha", { required: true })} />
@@ -527,9 +581,6 @@ export function AddFichaPsiAdulto() {
                             </div>
                         </div>
                     )}
-                    {/*<input type="text" placeholder="curp del paciente" {...register("idPaciente", { required: true })} />
-                    <input type="number" placeholder="num de usuario" {...register("idUsuario", { required: true })} />
-                    */ }
                     <div className="col-md-4 offset-md-1">
                         <label htmlFor="relaciones_diferentes" className="form-label label-form">¿Ha tenido relaciones distintas a las heterosexuales?</label>
                         <input id="cual_relacion" className="form-control input-form" type="text" placeholder="¿Cuál relación?" {...register("tenido_relaciones_distintas_heterosexuales")} />

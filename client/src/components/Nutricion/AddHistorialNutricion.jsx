@@ -3,6 +3,8 @@ import { addHistoriaNutricion } from "../../api/Nutricion.api"
 import { useEffect, useState } from "react";
 import { getAllPacientes } from "../../api/Pacientes.api";
 import { PacienteCard } from "../Paciente/PacienteCard"
+import { NavBar } from "../partials/NavBar"
+
 export function AddHistorialNutricion() {
     const [criterio_search, setCriterioSearch] = useState("")
     const [pacientes, setPacientes] = useState([])
@@ -46,18 +48,21 @@ export function AddHistorialNutricion() {
         }
     }
     const onSubmit = handleSubmit(async (data) => {
-        const res = await addHistoriaNutricion(data);
-        console.log(data)
-        console.log(res)
+        try {
+            const res = await addHistoriaNutricion(data);
+        } catch (error) {
+            console.log(error);
+        }
     })
     return (
         <div>
+            <NavBar />
             <div className="container-fluid">
-                <div className="row g-3">
-                    <div className="col-md-12 text-center title">
-                        <hr className="line"></hr>
-                        <h3>HISTORIA CLINICA-NUTRICIÓN</h3>
-                        <hr className="line"></hr>
+                <div className="row g-3 mt-5">
+                    <div className="col-md-10 offset-md-1 text-center mt-5">
+                        <hr />
+                        <h3 className="title">HISTORIA CLINICA-NUTRICIÓN</h3>
+                        <hr />
                     </div>
                     <div>
                         <div className="row">
@@ -65,7 +70,7 @@ export function AddHistorialNutricion() {
                                 <input className="form-control input-form" id="barra_busqueda" type="text" placeholder="Buscar por CURP o nombre" onChange={handleBarraChange} />
                             </div>
                             <div className="col-md-3 mt-1">
-                                <button onClick={handleSearchPaciente}>Buscar</button>
+                                <button onClick={handleSearchPaciente} className="button-buscar">Buscar</button>
                             </div>
                         </div>
                     </div>

@@ -45,10 +45,12 @@ export function ViewPaciente() {
   }
   //Actualizar la información del paciente
   const onSubmit = handleSubmit(async (data) => {
-    const res = await updatePaciente(idPaciente, data)
-    console.log(res)
+    try {
+      const res = await updatePaciente(idPaciente, data)
+    } catch (error) {
+      console.log(error)
+    }
   })
-  //Falta permitir cargar el valor en los radio y poner modificarlos
   return (
     <>
       <h2>Ficha de identidad del paciente</h2>

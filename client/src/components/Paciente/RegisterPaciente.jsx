@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { addPaciente, getAllPacientes } from "../../api/Pacientes.api"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { NavBar } from "../partials/NavBar"
 import "../../css/styles.css"
 export function RegisterPaciente() {
     const { register, handleSubmit } = useForm()
@@ -17,18 +18,21 @@ export function RegisterPaciente() {
         }
         loadPacientes()
     })
-   
+
     //Validar curp si existe o no antes de guardar
     const onSubmit = handleSubmit(async (data) => {
         let existe = pacientes.some((paciente) => paciente.CURP === data.CURP)
         console.log(existe)
-
-        if (existe) {
-            alert("YA EXISTE ESA CURP")
-        } else {
-            const res = await addPaciente(data)
-            console.log(res)
-            navigate('/get-pacientes')
+        try {
+            if (existe) {
+                alert("YA EXISTE ESA CURP")
+            } else {
+                const res = await addPaciente(data)
+                console.log(res)
+                navigate('/get-pacientes')
+            }
+        } catch (error) {
+            console.log(error);
         }
     })
     //activar campo para ingresar nombre de programa en el cuál es beneficiario
@@ -48,7 +52,6 @@ export function RegisterPaciente() {
             setShowEstatal(false)
         }
     }
-
     const handleRadioMunicipalChange = (evt) => {
         const optionSeleccionada = evt.target.value;
         if (optionSeleccionada == 'true') {
@@ -59,11 +62,14 @@ export function RegisterPaciente() {
     }
     return (
         <>
+            <NavBar />
             <div className="container-fluid">
-                <div>
-                    <hr />
-                    <h3 className="title">FICHA DE IDENTIDAD DEL PACIENTE</h3>
-                    <hr />
+                <div className="row g-2 mt-5">
+                    <div className="col-md-10 offset-md-1 text-center mt-5">
+                        <hr />
+                        <h3 className="title">FICHA DE IDENTIDAD DEL PACIENTE</h3>
+                        <hr />
+                    </div>
                 </div>
                 <form onSubmit={onSubmit} className="row g-3">
                     <div className="col-md-4 offset-md-1">
@@ -85,18 +91,20 @@ export function RegisterPaciente() {
                     <div className="col-md-2 offset-md-0.6">
                         <label htmlFor="estado_civil" className="form-label label-form" >Estado civil</label>
                         <select className="form-control input-form" name="estado_civil" {...register("estado_civil", { required: true })}>
+                            <option value="" disabled selected>Elija estado civil</option>
                             <option value="Soltero">Soltero</option>
                             <option value="Casado">Casado</option>
                             <option value="Divorciado">Divorciado</option>
                         </select>
                     </div>
                     <div className="col-md-4 offset-md-1">
-                        <label htmlFor="curp" className="form-label label-form" >CURP</label>
+                        <label htmlFor="curp" className="form-label label-form">CURP</label>
                         <input className="form-control input-form" type="text" placeholder="CURP" {...register("CURP", { required: true })} />
                     </div>
                     <div className="col-md-4 offset-md-1">
                         <label htmlFor="escolaridad" className="form-label label-form">Escolaridad</label>
                         <select className="form-control input-form" name="escolaridad" {...register("escolaridad", { required: true })}>
+                            <option value="" disabled selected>Elija escolaridad</option>
                             <option value="Primaria">Primaria</option>
                             <option value="Secundaria">Secundaria</option>
                             <option value="Bachillerato">Bachillerato</option>
@@ -130,6 +138,7 @@ export function RegisterPaciente() {
                     <div className="col-md-2 offset-md-0.8">
                         <label htmlFor="derecho_habiencia" className="form-label label-form" >Derechohabiencia</label>
                         <select className="form-control input-form" name="derecho_habiencia" {...register("derecho_habiencia", { required: true })}>
+                            <option value="" disabled selected>Elija derechohabiencia</option>
                             <option value="IMSS">IMSS</option>
                             <option value="ISSSTE">ISSSTE</option>
                             <option value="PEMEX">PEMEX</option>
@@ -145,7 +154,6 @@ export function RegisterPaciente() {
                     <div className="col-md-4 offset-md-1">
                         <label className="form-label label-form" >Última visita al médico</label>
                         <input className="form-control input-form" type="date" placeholder="Ultima visita con su medico" {...register("ultima_visita_medico", { required: true })} />
-
                     </div>
                     <div className="col-md-4 offset-md-1">
                         <label htmlFor="num_persona_vive" className="form-label label-form">Número de personas con la que vive</label>
@@ -168,9 +176,8 @@ export function RegisterPaciente() {
                             </div>
                         )}
                     </div>
-
                     <div className="col-md-4 offset-md-1">
-                        <label htmlFor="estatal">Estatal</label>
+                        <label htmlFor="estatal" className="form-label label-form">Estatal</label>
                         <label className="form-label mx-2" for="estatal_si">Si
                             <input className="form-check-input" type="radio" id="estatal_si" name="estatal_option" value={true} {...register("programa_gobierno_estatal", { required: true })} onChange={handleRadioEstatalChange} />
                         </label>
@@ -186,8 +193,6 @@ export function RegisterPaciente() {
                             </div>
                         )}
                     </div>
-
-
                     <div className="col-md-4 offset-md-1">
                         <label htmlFor="municipal" className="form-label label-form">Municipal</label>
                         <label htmlFor="municipal_si" className="form-label mx-2" for="municipal_si">Si
